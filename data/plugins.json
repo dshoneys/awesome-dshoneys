@@ -50,6 +50,31 @@
         "content": "维护者正式审核：dsh.so Medium、critical 0、warning 3；插件路径未见出网。/import-all 与 CLI all 语义及 README 版本号待对齐。审核 commit 9aa7dfb9。",
         "from": "@维护者，2026-08-16"
       }
+    },
+    {
+      "id": "dsh-tesseract-ocr",
+      "name": "dsh-tesseract-ocr",
+      "version": "0.2.1",
+      "author": {
+        "name": "@maxwell-feng",
+        "url": "https://github.com/maxwell-feng"
+      },
+      "url": "https://github.com/maxwell-feng/dsh-tesseract-ocr",
+      "description": "本地 Tesseract OCR：文本模型可收图，仅把识别文字发给模型；默认不透传原图，视觉透传需显式开启。",
+      "category": "local",
+      "security": {
+        "provider": "dsh.so",
+        "status": "warning",
+        "reportUrl": "https://www.dsh.so/zh/plugins/dsh-tesseract-ocr/",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["OCR", "Tesseract", "图片", "隐私", "本地"],
+      "searchTerms": ["tesseract", "ocr", "看图", "image", "chi_sim"],
+      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-tesseract-ocr/",
+      "feedback": {
+        "content": "维护者正式审核通过（⚠️）：源码整改 commit 4678c8f 已关闭 6 项阻断。dsh.so high-risk/code-exec 判定为调用本机 tesseract 的必要 spawn（argv 数组、无 shell）误报，须向用户披露需安装 Tesseract CLI。",
+        "from": "@维护者，2026-08-16"
+      }
     }
   ]
 }
