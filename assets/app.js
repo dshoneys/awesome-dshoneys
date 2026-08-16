@@ -292,7 +292,10 @@ function bindEvents() {
 
 async function loadPlugins() {
   try {
-    const response = await fetch("./data/plugins.json");
+    // Bypass stale browser/CDN caches after catalog updates on GitHub Pages.
+    const response = await fetch(`./data/plugins.json?t=${Date.now()}`, {
+      cache: "no-store",
+    });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const data = await response.json();
