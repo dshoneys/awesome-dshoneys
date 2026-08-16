@@ -44,7 +44,7 @@
     "scannedAt": "2026-08-16"
   },
   "tags": ["示例"],
-  "dshUrl": "https://www.dsh.so/zh/plugins/example-plugin/",
+  "dshUrl": "https://www.dsh.so/zh/artifact/example-plugin/",
   "feedback": {
     "content": "社区复核备注。",
     "from": "@维护者，2026-08-16"

@@ -16,7 +16,7 @@
 ## 二、dsh.so 安全检测（必填）
 
 - [ ] 已在 [dsh.so](https://www.dsh.so/zh/submit/) 提交并取得扫描结果
-- **dsh.so 插件详情页（含 slug）**：`https://www.dsh.so/zh/plugins/<slug>/`
+- **dsh.so 插件详情页（含 slug）**：`https://www.dsh.so/zh/artifact/<slug>/`
 - **dsh.so 安全扫描结果**：
 - **对应插件版本/提交**：
 

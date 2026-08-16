@@ -33,7 +33,7 @@
       },
       "tags": ["Windows", "启动器", "桌面", "WebView2"],
       "searchTerms": ["launcher", "msi", "autostart", "桌面"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-launcher/",
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-launcher/",
       "feedback": {
         "content": "社区先收录（⚠️）：覆盖 Windows/桌面热需求。dsh.so 仍显示未扫描；含本机进程与依赖安装路径，请从官方 Releases 获取。",
         "from": "@维护者，2026-08-16"
@@ -65,12 +65,12 @@
       "security": {
         "provider": "community",
         "status": "warning",
-        "reportUrl": "https://www.dsh.so/zh/plugins/modsearch/",
+        "reportUrl": "https://www.dsh.so/zh/artifact/modsearch/",
         "scannedAt": "2026-08-16"
       },
       "tags": ["联网搜索", "web_search", "多引擎"],
       "searchTerms": ["modsearch", "搜索", "tavily", "exa", "agy"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/modsearch/",
+      "dshUrl": "https://www.dsh.so/zh/artifact/modsearch/",
       "feedback": {
         "content": "社区复核 ⚠️：dsh.so Low、critical 0；须披露默认 agy 权限跳过与 curl|bash 安装建议。",
         "from": "@维护者，2026-08-16"
@@ -108,7 +108,7 @@
       },
       "tags": ["OCR", "Tesseract", "图片", "隐私", "本地"],
       "searchTerms": ["tesseract", "ocr", "看图", "image", "chi_sim"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-tesseract-ocr/",
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-tesseract-ocr/",
       "feedback": {
         "content": "社区复核通过（⚠️）：源码整改 4678c8f 已关闭阻断；tesseract spawn 按必要能力披露。",
         "from": "@维护者，2026-08-16"
@@ -147,7 +147,7 @@
       },
       "tags": ["Pi", "OAuth", "生态桥", "插件"],
       "searchTerms": ["pi2dsh", "oauth", "codex", "anthropic", "vision"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/pi2dsh/",
+      "dshUrl": "https://www.dsh.so/zh/artifact/pi2dsh/",
       "feedback": {
         "content": "社区先收录（⚠️ 高披露）：覆盖模型/OAuth 热需求。dsh.so high-risk·critical 多条，使用前务必收敛依赖包集合。",
         "from": "@维护者，2026-08-16"
@@ -219,12 +219,12 @@
       "security": {
         "provider": "community",
         "status": "warning",
-        "reportUrl": "https://www.dsh.so/zh/plugins/dsh-import-agents/",
+        "reportUrl": "https://www.dsh.so/zh/artifact/dsh-import-agents/",
         "scannedAt": "2026-08-16"
       },
       "tags": ["会话迁移", "导入", "备份"],
       "searchTerms": ["import", "session", "pi", "opencode", "codex", "claude"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-import-agents/",
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-import-agents/",
       "feedback": {
         "content": "社区复核 ⚠️：dsh.so Medium；插件路径未见出网，但会读本机会话目录。",
         "from": "@维护者，2026-08-16"
@@ -265,7 +265,7 @@
       },
       "tags": ["语音", "听写", "TTS", "Web Speech", "hotfix"],
       "searchTerms": ["voice", "speech", "mic", "语音", "听写", "ModuleLoader"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-voice-input-plugin/",
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-voice-input-plugin/",
       "feedback": {
         "content": "紧急热修：npm 0.1.0 ModuleLoader id 错配会导致整页 Failed to load plugins。安装源临时指向 shinjiyu fork（对齐上游 PR #1）；作者发版后换回。",
         "from": "@维护者，2026-08-17"
@@ -337,12 +337,12 @@
       "security": {
         "provider": "community",
         "status": "passed",
-        "reportUrl": "https://www.dsh.so/zh/plugins/dsh-client-pricing/",
+        "reportUrl": "https://www.dsh.so/zh/artifact/dsh-client-pricing/",
         "scannedAt": "2026-08-16"
       },
       "tags": ["成本", "价格", "峰谷", "顶栏", "DeepSeek API"],
       "searchTerms": ["pricing", "peak", "off-peak", "单价", "高峰", "空闲", "board", "费用"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-client-pricing/",
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-client-pricing/",
       "feedback": {
         "content": "社区复核通过（✅）。与 dsh-board 功能相近（成本可见），本方案侧重顶栏当前单价/峰谷，可并存。",
         "from": "@维护者，2026-08-16"
@@ -376,12 +376,12 @@
       "security": {
         "provider": "dsh.so",
         "status": "passed",
-        "reportUrl": "https://www.dsh.so/zh/plugins/dsh-plugins-finder/",
+        "reportUrl": "https://www.dsh.so/zh/artifact/dsh-plugins-finder/",
         "scannedAt": "2026-08-16"
       },
       "tags": ["插件发现", "搜索", "find_plugin", "dsh.so"],
       "searchTerms": ["finder", "find-plugin", "找插件", "marketplace", "registry"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-plugins-finder/",
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-plugins-finder/",
       "feedback": {
         "content": "社区复核通过（✅）：Issue #7；审核 commit 43a23a42；dsh.so Pass 0/0。出网仅拉取公开索引。",
         "from": "@维护者，2026-08-16"

@@ -13,7 +13,7 @@
 | 插件名称 | （如：快捷剪贴板 v0.9.0） |
 | 版本 | （如：v0.9.0，与作者发布页一致） |
 | 插件链接 | （源码或发布页的稳定链接） |
-| dsh.so 插件详情页 | `https://www.dsh.so/zh/plugins/<slug>/` |
+| dsh.so 插件详情页 | `https://www.dsh.so/zh/artifact/<slug>/` |
 | dsh.so 扫描结果 | （公开可核验的结果链接） |
 | 检测日期 | （YYYY-MM-DD） |
 | 社区复核者 | （群昵称 / GitHub ID，可追溯） |

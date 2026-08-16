@@ -42,14 +42,18 @@ test("解析标准投稿模板", () => {
   assert.equal(submission.pluginUrl, "https://github.com/example/demo-plugin");
   assert.equal(submission.repository.owner, "example");
   assert.equal(submission.repository.repository, "demo-plugin");
-  assert.equal(submission.dshUrl, "https://www.dsh.so/zh/plugins/demo-plugin/");
+  assert.equal(submission.dshUrl, "https://www.dsh.so/zh/artifact/demo-plugin/");
   assert.deepEqual(submission.missing, []);
 });
 
-test("接受 artifact 详情页并规范化为 zh/plugins", () => {
+test("接受 plugins / artifact 详情页并规范化为 zh/artifact", () => {
   assert.equal(
     normalizeDshPluginUrl("https://www.dsh.so/artifact/dsh-plugins-finder/"),
-    "https://www.dsh.so/zh/plugins/dsh-plugins-finder/",
+    "https://www.dsh.so/zh/artifact/dsh-plugins-finder/",
+  );
+  assert.equal(
+    normalizeDshPluginUrl("https://www.dsh.so/zh/plugins/dsh-plugins-finder/"),
+    "https://www.dsh.so/zh/artifact/dsh-plugins-finder/",
   );
   const submission = parseSubmission({
     ...issue,
@@ -58,7 +62,7 @@ test("接受 artifact 详情页并规范化为 zh/plugins", () => {
       "https://www.dsh.so/artifact/demo-plugin/",
     ),
   });
-  assert.equal(submission.dshUrl, "https://www.dsh.so/zh/plugins/demo-plugin/");
+  assert.equal(submission.dshUrl, "https://www.dsh.so/zh/artifact/demo-plugin/");
   assert.deepEqual(submission.missing, []);
 });
 
@@ -99,7 +103,7 @@ test("识别 dsh.so 风险和扫描数据", () => {
   assert.equal(result.warning, 3);
   assert.equal(result.scanDate, "2026-08-16");
   assert.equal(result.hasSecurityResult, true);
-  assert.deepEqual(result.relatedPlugins, ["https://www.dsh.so/zh/plugins/another-ocr/"]);
+  assert.deepEqual(result.relatedPlugins, ["https://www.dsh.so/zh/artifact/another-ocr/"]);
 });
 
 test("静态规则返回文件与行号", () => {

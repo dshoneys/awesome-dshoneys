@@ -122,18 +122,19 @@ export function parseGitHubRepository(url) {
   }
 }
 
-/** Accept /zh/plugins|/plugins|/artifact slug pages; normalize to Chinese plugin detail URL. */
+/** Accept /zh/plugins|/plugins|/zh/artifact|/artifact slug pages; normalize to Chinese artifact detail URL. */
 export function normalizeDshPluginUrl(url) {
   try {
     const parsed = new URL(url);
     if (!["dsh.so", "www.dsh.so"].includes(parsed.hostname.toLowerCase())) return null;
     const parts = parsed.pathname.split("/").filter(Boolean);
     let slug = null;
-    if (parts[0] === "zh" && parts[1] === "plugins" && parts[2]) slug = parts[2];
-    else if (parts[0] === "plugins" && parts[1]) slug = parts[1];
+    if (parts[0] === "zh" && parts[1] === "artifact" && parts[2]) slug = parts[2];
     else if (parts[0] === "artifact" && parts[1]) slug = parts[1];
+    else if (parts[0] === "zh" && parts[1] === "plugins" && parts[2]) slug = parts[2];
+    else if (parts[0] === "plugins" && parts[1]) slug = parts[1];
     if (!slug || !/^[a-z0-9][a-z0-9-]*$/i.test(slug)) return null;
-    return `https://www.dsh.so/zh/plugins/${slug.toLowerCase()}/`;
+    return `https://www.dsh.so/zh/artifact/${slug.toLowerCase()}/`;
   } catch {
     return null;
   }
@@ -218,11 +219,18 @@ export function parseDshPage(html, url) {
   const currentPath = new URL(url).pathname.replace(/\/+$/, "");
   const relatedPlugins = [
     ...new Set(
-      [...html.matchAll(/href=["'](?:https:\/\/www\.dsh\.so)?(\/zh\/plugins\/[a-z0-9-]+\/?)["']/gi)]
+      [
+        ...html.matchAll(
+          /href=["'](?:https:\/\/www\.dsh\.so)?(\/zh\/(?:artifact|plugins)\/[a-z0-9-]+\/?)["']/gi,
+        ),
+      ]
         .map((match) => match[1].replace(/\/+$/, ""))
         .filter((path) => path !== currentPath)
         .filter((path) => !RESERVED_DSH_PLUGIN_SLUGS.has(path.split("/").filter(Boolean).at(-1)))
-        .map((path) => `https://www.dsh.so${path}/`),
+        .map((path) => {
+          const slug = path.split("/").filter(Boolean).at(-1);
+          return `https://www.dsh.so/zh/artifact/${slug}/`;
+        }),
     ),
   ].slice(0, 6);
 

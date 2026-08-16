@@ -23,13 +23,13 @@
     "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/123",
     "scannedAt": "2026-08-16"
   },
-  "dshUrl": "https://www.dsh.so/zh/plugins/<slug>/"
+  "dshUrl": "https://www.dsh.so/zh/artifact/<slug>/"
 }
 ```
 
 - `provider`：`community` 或 `dsh.so`。
 - `reportUrl`：社区复核入口（Issue）或 dsh.so 公开页；须可点击核验。
-- `dshUrl`：可选；若填写必须是 `https://www.dsh.so/zh/plugins/<slug>/`。
+- `dshUrl`：可选；若填写优先 `https://www.dsh.so/zh/artifact/<slug>/`（`/plugins/` 为早期路径，投稿时也会被规范到 artifact）。
 
 ## ③ 映射原则
 
