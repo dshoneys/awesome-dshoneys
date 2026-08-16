@@ -944,22 +944,28 @@ footer p {
   }
 }
 
-/* ── B 面：抽象区 · 区域拒绝页 ───────────────────────────────── */
+/* ── B 面：抽象区 · A 面用色反相 + 区域拒绝页 ───────────────── */
 
 body.side-b {
-  --ink: #161615;
-  --muted: #5e5e58;
-  --paper: #f4f3ef;
-  --paper-deep: #ebeae4;
-  --honey: #c94b3a;
-  --honey-dark: #9e3428;
-  --line: #dddcd4;
-  --refuse: #c94b3a;
+  /* A: paper/ink/honey → B: ink/paper/cool（蜜金反相成冷青） */
+  --ink: #fffdf7;
+  --muted: #b8a78c;
+  --paper: #201b12;
+  --paper-deep: #2c2418;
+  --honey: #3d9ecc;
+  --honey-dark: #6ec4e8;
+  --line: #3f3628;
+  --refuse: #3d9ecc;
+  --green: #e8a0c0;
+  --green-soft: #3a2430;
+  --orange-soft: #2a3a42;
   --shadow: none;
   font-family:
     "Iowan Old Style", "Palatino Linotype", "Songti SC", "Noto Serif SC", Georgia, "Times New Roman",
     serif;
-  background: var(--paper);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(61, 158, 204, 0.16), transparent 28rem),
+    var(--paper);
   color: var(--ink);
 }
 
@@ -969,12 +975,12 @@ body.side-b::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.035;
+  opacity: 0.04;
   background-image: repeating-linear-gradient(
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.4) 3px
+    rgba(255, 253, 247, 0.35) 3px
   );
 }
 
@@ -984,23 +990,67 @@ body.side-b > * {
 }
 
 body.side-b .brand-mark {
-  background: var(--paper);
-  border-color: var(--refuse);
-  color: var(--refuse);
+  background: var(--refuse);
+  border-color: var(--ink);
+  color: var(--paper);
   border-radius: 0;
   box-shadow: none;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
+body.side-b .brand small {
+  color: var(--muted);
+}
+
 body.side-b nav a:hover,
 body.side-b .footer-links a:hover {
-  color: var(--refuse);
+  color: var(--honey-dark);
 }
 
 body.side-b nav a[aria-current="page"] {
-  color: var(--refuse);
+  color: var(--honey-dark);
   text-decoration: underline;
   text-underline-offset: 6px;
+}
+
+body.side-b .button-secondary {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+body.side-b .button-secondary:hover {
+  border-color: var(--refuse);
+  background: var(--paper-deep);
+}
+
+body.side-b .security-badge.warning {
+  color: var(--paper);
+  background: var(--refuse);
+}
+
+body.side-b .demand-label {
+  color: var(--refuse);
+}
+
+body.side-b .author,
+body.side-b .description,
+body.side-b .result-count {
+  color: var(--muted);
+}
+
+body.side-b .tag {
+  border-color: var(--line);
+  background: var(--paper-deep);
+  color: var(--muted);
+}
+
+body.side-b .empty-state h3 {
+  color: var(--ink);
+}
+
+body.side-b .empty-state p {
+  color: var(--muted);
 }
 
 .refusal-hero {
@@ -1043,6 +1093,7 @@ body.side-b .refusal-hero h1 {
   line-height: 1.22;
   letter-spacing: -0.02em;
   font-weight: 650;
+  color: var(--ink);
 }
 
 .refusal-en {
@@ -1057,7 +1108,7 @@ body.side-b .refusal-hero h1 {
   margin: 0 0 28px;
   padding: 14px 16px;
   border-left: 3px solid var(--refuse);
-  background: rgba(201, 75, 58, 0.06);
+  background: rgba(61, 158, 204, 0.12);
   color: var(--ink);
   font-size: 14px;
   line-height: 1.65;
@@ -1086,13 +1137,14 @@ body.side-b .refusal-hero h1 {
   border: 1px solid var(--ink);
   border-radius: 0;
   background: var(--refuse);
-  color: #fff;
+  color: var(--paper);
   box-shadow: none;
   font-family: inherit;
 }
 
 .button-refuse:hover {
   background: var(--honey-dark);
+  color: var(--paper);
   box-shadow: none;
   transform: none;
 }
@@ -1147,13 +1199,13 @@ body.side-b .refusal-hero h1 {
   padding: 22px 20px 18px;
   border: 1px solid var(--line);
   border-radius: 0;
-  background: #fffcf8;
+  background: var(--paper-deep);
   transition: border-color 160ms ease, background 160ms ease;
 }
 
 .meme-card:hover {
   border-color: var(--refuse);
-  background: #fff;
+  background: #332a1c;
 }
 
 .meme-vibe {
@@ -1179,7 +1231,7 @@ body.side-b .refusal-hero h1 {
 
 .meme-warning {
   margin: 0;
-  color: var(--refuse);
+  color: var(--honey-dark);
   font-size: 12px;
   line-height: 1.55;
 }
@@ -1200,7 +1252,8 @@ body.side-b .refusal-hero h1 {
 body.side-b .command-row pre {
   border-radius: 0;
   border-color: var(--line);
-  background: var(--paper-deep);
+  background: #18140e;
+  color: var(--ink);
   font-size: 12px;
 }
 
@@ -1208,13 +1261,31 @@ body.side-b .copy-button {
   border-radius: 0;
 }
 
+body.side-b .meme-card .demand-title a {
+  color: var(--ink);
+}
+
 body.side-b .meme-card .demand-title a:hover {
-  color: var(--refuse);
+  color: var(--honey-dark);
+}
+
+body.side-b .card-footer,
+body.side-b .card-links {
+  color: var(--muted);
+}
+
+body.side-b .card-links:hover {
+  color: var(--honey-dark);
 }
 
 body.side-b footer {
   border-top: 1px solid var(--line);
   padding-block: 36px 48px;
+  color: var(--muted);
+}
+
+body.side-b footer strong {
+  color: var(--ink);
 }
 
 @media (max-width: 720px) {
