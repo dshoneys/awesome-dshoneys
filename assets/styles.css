@@ -730,8 +730,14 @@ footer p {
     min-height: 72px;
   }
 
-  nav a:not(:last-child) {
+  /* Keep 抽象区 + GitHub; hide the rest to save space. */
+  nav a:not(:last-child):not(.nav-meme):not([aria-current="page"]) {
     display: none;
+  }
+
+  nav {
+    gap: 14px;
+    font-size: 13px;
   }
 
   h1 {
