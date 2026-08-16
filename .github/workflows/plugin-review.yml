@@ -1,0 +1,48 @@
+name: Review plugin submissions
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+      - labeled
+  issue_comment:
+    types:
+      - created
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "只复审指定 Issue；留空则检查全部开放投稿"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: plugin-review-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    if: >-
+      github.event_name != 'issue_comment' ||
+      github.event.comment.body == '/recheck'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout review rules
+        uses: actions/checkout@v4
+
+      - name: Test review engine
+        run: node --test scripts/review/plugin-review.test.mjs
+
+      - name: Review submissions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number || '' }}
+        run: node scripts/review/plugin-review.mjs

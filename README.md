@@ -65,7 +65,10 @@
 ### 入口二：Issue（用于「求插件」或「不方便提 PR 的交插件」）
 
 - **求插件**：使用 [.github/ISSUE_TEMPLATE/request-plugin.md](.github/ISSUE_TEMPLATE/request-plugin.md)，写清想解决什么问题、期望的功能；想认领开发的群友请在 Issue 下的认领区回帖。
-- **交插件**：使用 [.github/ISSUE_TEMPLATE/submit-plugin.md](.github/ISSUE_TEMPLATE/submit-plugin.md)，填写插件信息、dsh.so 插件详情页与扫描结果链接；维护者核验后补入目录。
+- **交插件**：使用 [.github/ISSUE_TEMPLATE/submit-plugin.md](.github/ISSUE_TEMPLATE/submit-plugin.md)，填写插件信息、dsh.so 插件详情页与扫描结果链接；机器人会立即固定源码 commit、检查材料和安全证据，并更新评审状态。
+- **整改复审**：作者修复后在 Issue 单独回复 `/recheck`，自动评审会更新原评论，不重复刷屏。
+
+自动评审的检查范围、状态标签和安全边界见 [插件自动评审规则](docs/review-policy.md)。
 
 ---
 
@@ -85,7 +88,8 @@
 1. 提交方先在 [dsh.so](https://www.dsh.so/zh/submit/) 提交公开仓库。
 2. dsh.so 完成验证与安全扫描，生成可公开核验的插件详情页和结果。
 3. 提交方通过 Issue 或 PR 申请社区收录，并附上上述链接。
-4. 维护者依据 [徽章规范](docs/badge-spec.md) 核验并映射展示状态；合并后自动发布到在线目录。
+4. Issue 自动评审检查固定 commit、外部扫描、危险能力和供应链证据；通过后进入同类比较。
+5. 维护者依据 [徽章规范](docs/badge-spec.md) 完成最终评级；合并收录 PR 后自动发布到在线目录。
 
 **两条铁律，最后重申**：
 
