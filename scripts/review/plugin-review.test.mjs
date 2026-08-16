@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   analyzePackageJson,
   decideStatus,
+  normalizeDshPluginUrl,
   parseDshPage,
   parseSubmission,
   scanSourceFiles,
@@ -43,6 +44,41 @@ test("解析标准投稿模板", () => {
   assert.equal(submission.repository.repository, "demo-plugin");
   assert.equal(submission.dshUrl, "https://www.dsh.so/zh/plugins/demo-plugin/");
   assert.deepEqual(submission.missing, []);
+});
+
+test("接受 artifact 详情页并规范化为 zh/plugins", () => {
+  assert.equal(
+    normalizeDshPluginUrl("https://www.dsh.so/artifact/dsh-plugins-finder/"),
+    "https://www.dsh.so/zh/plugins/dsh-plugins-finder/",
+  );
+  const submission = parseSubmission({
+    ...issue,
+    body: issue.body.replace(
+      "https://www.dsh.so/zh/plugins/demo-plugin/",
+      "https://www.dsh.so/artifact/demo-plugin/",
+    ),
+  });
+  assert.equal(submission.dshUrl, "https://www.dsh.so/zh/plugins/demo-plugin/");
+  assert.deepEqual(submission.missing, []);
+});
+
+test("识别中文安全页的通过态与计数", () => {
+  const html = `
+    <main>
+      <div>已通过</div>
+      <p>自动化扫描未发现严重或警告级问题。</p>
+      <span><strong>0</strong> 严重</span>
+      <span><strong>0</strong> 警告</span>
+      <span><strong>2</strong> 提示</span>
+      <p>扫描版本 — 2026-08-16</p>
+    </main>
+  `;
+  const result = parseDshPage(html, "https://www.dsh.so/zh/plugins/demo-plugin/");
+  assert.equal(result.hasSecurityResult, true);
+  assert.equal(result.risk, "low");
+  assert.equal(result.critical, 0);
+  assert.equal(result.warning, 0);
+  assert.equal(result.scanDate, "2026-08-16");
 });
 
 test("识别 dsh.so 风险和扫描数据", () => {

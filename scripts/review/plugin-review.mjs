@@ -122,21 +122,28 @@ export function parseGitHubRepository(url) {
   }
 }
 
+/** Accept /zh/plugins|/plugins|/artifact slug pages; normalize to Chinese plugin detail URL. */
+export function normalizeDshPluginUrl(url) {
+  try {
+    const parsed = new URL(url);
+    if (!["dsh.so", "www.dsh.so"].includes(parsed.hostname.toLowerCase())) return null;
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    let slug = null;
+    if (parts[0] === "zh" && parts[1] === "plugins" && parts[2]) slug = parts[2];
+    else if (parts[0] === "plugins" && parts[1]) slug = parts[1];
+    else if (parts[0] === "artifact" && parts[1]) slug = parts[1];
+    if (!slug || !/^[a-z0-9][a-z0-9-]*$/i.test(slug)) return null;
+    return `https://www.dsh.so/zh/plugins/${slug.toLowerCase()}/`;
+  } catch {
+    return null;
+  }
+}
+
 export function parseSubmission(issue) {
   const sections = parseSections(issue.body ?? "");
   const pluginUrl = extractUrls(sections.url).find((url) => parseGitHubRepository(url));
   const securityUrls = extractUrls(sections.security);
-  const dshUrl = securityUrls.find((url) => {
-    try {
-      const parsed = new URL(url);
-      return (
-        ["dsh.so", "www.dsh.so"].includes(parsed.hostname.toLowerCase()) &&
-        parsed.pathname.startsWith("/zh/plugins/")
-      );
-    } catch {
-      return false;
-    }
-  });
+  const dshUrl = securityUrls.map(normalizeDshPluginUrl).find(Boolean) ?? null;
 
   const missing = [];
   if (!sections.name) missing.push("插件名称");
@@ -174,12 +181,40 @@ function htmlToText(html) {
 
 export function parseDshPage(html, url) {
   const text = htmlToText(html);
-  const risk = html.match(/\b(low|medium|high)-risk\b/i)?.[1]?.toLowerCase() ?? null;
-  const critical = Number(text.match(/\bcritical\s*(\d+)/i)?.[1] ?? 0);
-  const warning = Number(text.match(/\bwarning\s*(\d+)/i)?.[1] ?? 0);
-  const scanDate = text.match(/扫描时间\s*[:：]?\s*(\d{4}-\d{2}-\d{2})/)?.[1] ?? null;
+  const riskFromClass = html.match(/\b(low|medium|high)-risk\b/i)?.[1]?.toLowerCase() ?? null;
+  const riskFromZh = text.match(/(高风险|中风险|低风险)/)?.[1] ?? null;
+  const riskFromEn = text.match(/\bSecurity\b[^A-Za-z]{0,24}\b(Low|Medium|High)\b/i)?.[1]?.toLowerCase() ?? null;
+  const risk =
+    riskFromClass ??
+    (riskFromZh === "高风险"
+      ? "high"
+      : riskFromZh === "中风险"
+        ? "medium"
+        : riskFromZh === "低风险"
+          ? "low"
+          : null) ??
+    (riskFromEn === "high" ? "high" : riskFromEn === "medium" ? "medium" : riskFromEn === "low" ? "low" : null);
+
+  const critical = Number(
+    text.match(/\bcritical\s*(\d+)/i)?.[1] ??
+      text.match(/(\d+)\s*严重/)?.[1] ??
+      text.match(/严重\s*(\d+)/)?.[1] ??
+      0,
+  );
+  const warning = Number(
+    text.match(/\bwarning\s*(\d+)/i)?.[1] ??
+      text.match(/(\d+)\s*警告/)?.[1] ??
+      text.match(/警告\s*(\d+)/)?.[1] ??
+      0,
+  );
+  const scanDate =
+    text.match(/扫描时间\s*[:：]?\s*(\d{4}-\d{2}-\d{2})/)?.[1] ??
+    text.match(/扫描版本[^0-9]{0,40}(\d{4}-\d{2}-\d{2})/)?.[1] ??
+    text.match(/scanned commit[^0-9]{0,40}(\d{4}-\d{2}-\d{2})/i)?.[1] ??
+    null;
   const scanVersion = text.match(/扫描版本\s*[:：]?\s*([^\s]+|—)/)?.[1] ?? null;
   const currentVersion = text.match(/当前版本\s*[:：]?\s*([^\s]+|—)/)?.[1] ?? null;
+  const passedBadge = /已通过|\bPASSED\b/i.test(text) || /自动化扫描未发现严重/.test(text);
   const currentPath = new URL(url).pathname.replace(/\/+$/, "");
   const relatedPlugins = [
     ...new Set(
@@ -195,14 +230,14 @@ export function parseDshPage(html, url) {
     url,
     reachable: true,
     verification: text.includes("未验证") ? "未验证" : "已验证或未标注",
-    risk,
+    risk: risk ?? (passedBadge ? "low" : null),
     critical,
     warning,
     scanDate,
     scanVersion,
     currentVersion,
     relatedPlugins,
-    hasSecurityResult: Boolean(risk || critical || warning || scanDate),
+    hasSecurityResult: Boolean(risk || passedBadge || scanDate || /严重|critical/i.test(text)),
   };
 }
 
