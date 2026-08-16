@@ -46,36 +46,6 @@
       "warning": "纯 UI 文案替换，仍请确认仓库来源。",
       "tags": ["状态栏", "meme", "UI"],
       "vibe": "文案整活"
-    },
-    {
-      "id": "whale-girl",
-      "name": "whale-girl",
-      "demandTitle": "桌面上养一只会动的鲸鱼娘",
-      "punchline": "生产力？没有。陪伴值？溢出。群友星标过的那种。",
-      "author": {
-        "name": "@vlln",
-        "url": "https://github.com/vlln"
-      },
-      "url": "https://github.com/vlln/whale-girl",
-      "install": "见仓库 README",
-      "warning": "桌宠类，占用注意力远大于占用 CPU。",
-      "tags": ["桌宠", "鲸鱼", "娱乐"],
-      "vibe": "陪伴型摸鱼"
-    },
-    {
-      "id": "dsh-deep-whale",
-      "name": "dsh-deep-whale",
-      "demandTitle": "整站换成鲸鱼娘皮肤系列",
-      "punchline": "正经目录不收皮肤包；抽象区收。因为好看也是刚需——大概。",
-      "author": {
-        "name": "@Small-tailqwq",
-        "url": "https://github.com/Small-tailqwq"
-      },
-      "url": "https://github.com/Small-tailqwq/dsh-deep-whale",
-      "install": "见仓库 README",
-      "warning": "主题/皮肤，与业务插件无关。",
-      "tags": ["主题", "皮肤", "鲸鱼娘"],
-      "vibe": "换皮仪式"
     }
   ]
 }
