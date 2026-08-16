@@ -272,14 +272,14 @@
       "id": "dsh-board",
       "name": "dsh-board",
       "version": "0.1.0",
-      "demandTitle": "看清这轮 AI 花了多少钱",
+      "demandTitle": "看清 DeepSeek API 成本",
       "author": {
         "name": "@dfkai",
         "url": "https://github.com/dfkai"
       },
       "url": "https://github.com/dfkai/dsh-board",
-      "description": "侧栏用量与成本面板：官方价目、峰谷计价、推理 token 计入、图表与日热力图。",
-      "details": "补齐成本可见性：徽章常驻侧栏底部，点击展开实时仪表盘，不是定时日报。\n\n价目硬编码，用量来自宿主 sessions.history；localStorage 只存折叠状态。\n\n社区复核：源码静态面未见第三方外发；dsh.so 详情页尚未就绪，按社区复核先收录。",
+      "description": "侧栏方案：用量与已花费用仪表盘（价目、峰谷、推理 token、图表与日热力图）。同类还有顶栏单价徽标 dsh-client-pricing。",
+      "details": "与 dsh-client-pricing 同属「API 成本可见」需求：本插件偏「已经花了多少」——侧栏底部徽章展开实时仪表盘，读宿主 sessions.history。\n\n若只想在顶栏看到当前高峰/空闲单价，见同目录 dsh-client-pricing（可并存）。\n\n价目硬编码；localStorage 只存折叠状态。社区复核：源码未见第三方外发；dsh.so 详情页尚未就绪，按 ⚠️ 披露。",
       "install": {
         "summary": "通过 GitHub 安装到 web profile。",
         "commands": [
@@ -287,7 +287,8 @@
         ],
         "notes": [
           "作者计划发布 npm 时改用 @dfkai/dsh-board。",
-          "重启 dsh web 并刷新页面后，侧栏底部应出现用量入口。"
+          "重启 dsh web 并刷新页面后，侧栏底部应出现用量入口。",
+          "可与 dsh-client-pricing 同时安装：一个看已花，一个看当前单价。"
         ]
       },
       "category": "productivity",
@@ -297,10 +298,10 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/4",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["用量", "成本", "仪表盘", "侧栏"],
-      "searchTerms": ["board", "usage", "cost", "billing", "费用"],
+      "tags": ["成本", "用量", "仪表盘", "侧栏", "峰谷"],
+      "searchTerms": ["board", "usage", "cost", "billing", "费用", "pricing", "单价"],
       "feedback": {
-        "content": "社区先收录（⚠️）：源码未见外发；等待作者补齐 dsh.so 页面后可再核验。",
+        "content": "社区先收录（⚠️）：源码未见外发。与 dsh-client-pricing 功能相近（成本可见），本方案侧重已花用量面板。",
         "from": "@维护者，2026-08-16"
       }
     },
@@ -308,14 +309,14 @@
       "id": "dsh-client-pricing",
       "name": "dsh-client-pricing",
       "version": "0.1.0",
-      "demandTitle": "顶栏提醒：现在是高峰价还是空闲价",
+      "demandTitle": "看清 DeepSeek API 成本",
       "author": {
         "name": "@Miyazawai",
         "url": "https://github.com/Miyazawai"
       },
       "url": "https://github.com/Miyazawai/dsh-client-pricing",
-      "description": "会话顶栏实时显示 DeepSeek API 生效单价：flash/pro 自动切换，峰谷时段徽标，hover 看完整价目表。",
-      "details": "对应「别在高峰时段按双倍价瞎花」：显示的是官方价目表推算出的当前单价，不是本轮已花费金额。用量/成本仪表盘请看同目录的 dsh-board。\n\n价目硬编码于 src/pricing.ts（含 2026-08-17 峰谷切换点），每 30s 重算档位；只读宿主 modelDirectories，无第三方网络请求。\n\n社区复核：源码静态面未见外发；dsh.so 自动扫描 0 critical / 0 warning。包名未加 scope，安装时请认准作者仓库。",
+      "description": "顶栏方案：实时显示当前生效单价与峰谷徽标（flash/pro 自动切换）。同类还有侧栏用量面板 dsh-board。",
+      "details": "与 dsh-board 同属「API 成本可见」需求：本插件偏「现在什么价」——会话顶栏徽标 + hover 价目表，不统计本轮已花费。\n\n若要看历史用量、累计花费与热力图，见同目录 dsh-board（可并存）。\n\n价目硬编码于 src/pricing.ts（含 2026-08-17 峰谷切换），每 30s 重算；只读 modelDirectories，无外发。社区复核 ✅；dsh.so 0/0。包名未加 scope，请认准作者仓库。",
       "install": {
         "summary": "安装到 web profile 后重启 dsh web。",
         "commands": [
@@ -325,7 +326,8 @@
         "notes": [
           "也可用仓库自带 ./install.ps1。",
           "改完 loader 后必须重启 dsh web 再刷新页面。",
-          "仅 deepseek-v4-flash / deepseek-v4-pro 会显示；其他模型整块隐藏。"
+          "仅 deepseek-v4-flash / deepseek-v4-pro 会显示；其他模型整块隐藏。",
+          "可与 dsh-board 同时安装：一个看当前单价，一个看已花用量。"
         ]
       },
       "category": "productivity",
@@ -335,11 +337,11 @@
         "reportUrl": "https://www.dsh.so/zh/plugins/dsh-client-pricing/",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["价格", "峰谷", "顶栏", "DeepSeek API"],
-      "searchTerms": ["pricing", "peak", "off-peak", "单价", "高峰", "空闲"],
+      "tags": ["成本", "价格", "峰谷", "顶栏", "DeepSeek API"],
+      "searchTerms": ["pricing", "peak", "off-peak", "单价", "高峰", "空闲", "board", "费用"],
       "dshUrl": "https://www.dsh.so/zh/plugins/dsh-client-pricing/",
       "feedback": {
-        "content": "社区复核通过（✅）：无外发，价目硬编码；dsh.so 扫描 0/0。与 dsh-board（看花了多少）互补。",
+        "content": "社区复核通过（✅）。与 dsh-board 功能相近（成本可见），本方案侧重顶栏当前单价/峰谷，可并存。",
         "from": "@维护者，2026-08-16"
       }
     }
