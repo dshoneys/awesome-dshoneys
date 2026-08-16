@@ -5,7 +5,7 @@ import {
   getPluginPageUrl,
   loadCatalog,
   normalize,
-} from "./catalog.js";
+} from "./catalog.js?v=20260816-demand";
 
 const state = {
   plugins: [],
@@ -90,7 +90,12 @@ function createPluginCard(plugin) {
   security.textContent = STATUS_LABELS[plugin.security.status] ?? plugin.security.status;
   top.append(category, security);
 
+  const demand = document.createElement("p");
+  demand.className = "demand-label";
+  demand.textContent = "需求";
+
   const title = document.createElement("h3");
+  title.className = "demand-title";
   title.append(createInternalLink(plugin.demandTitle || plugin.name, detailUrl));
 
   const author = document.createElement("p");
@@ -110,7 +115,7 @@ function createPluginCard(plugin) {
     tags.append(tag);
   });
 
-  card.append(top, title, author, description, tags);
+  card.append(top, demand, title, author, description, tags);
 
   if (plugin.feedback?.content) {
     const feedback = document.createElement("blockquote");

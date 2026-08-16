@@ -481,24 +481,35 @@ kbd {
   background: var(--orange-soft);
 }
 
-.plugin-card h3 {
-  margin: 22px 0 6px;
-  font-size: 22px;
+.demand-label {
+  margin: 18px 0 0;
+  color: var(--orange, #c46b00);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.plugin-card h3,
+.plugin-card .demand-title {
+  margin: 4px 0 8px;
+  font-size: 24px;
   letter-spacing: -0.035em;
+  line-height: 1.25;
 }
 
 .author {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   color: var(--muted);
   font-size: 12px;
 }
 
 .description {
-  min-height: 72px;
-  margin-bottom: 20px;
+  min-height: 0;
+  margin-bottom: 16px;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.65;
 }
 
 .tags {

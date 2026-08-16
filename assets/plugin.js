@@ -5,7 +5,7 @@ import {
   createInternalLink,
   loadCatalog,
   paragraphsFromText,
-} from "./catalog.js";
+} from "./catalog.js?v=20260816-demand";
 
 const elements = {
   loading: document.querySelector("#plugin-loading"),
