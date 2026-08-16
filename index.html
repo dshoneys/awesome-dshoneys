@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="DeepSeek Honeys 社区维护的认证插件目录：先检测、后收录，每个插件都有安全结论与检测报告。"
+      content="DeepSeek Honeys 社区维护的插件目录：按热门需求找方案，社区复核为主，dsh.so 为参考信号。"
     />
     <meta name="theme-color" content="#fff8e7" />
-    <title>DeepSeek Honeys 认证插件目录</title>
+    <title>DeepSeek Honeys 插件目录</title>
     <link rel="stylesheet" href="./assets/styles.css" />
     <script type="module" src="./assets/app.js"></script>
   </head>
@@ -18,11 +18,11 @@
         <span class="brand-mark" aria-hidden="true">DSH</span>
         <span>
           <strong>DeepSeek Honeys</strong>
-          <small>认证插件目录</small>
+          <small>按需求找方案</small>
         </span>
       </a>
       <nav aria-label="主导航">
-        <a href="#directory">找插件</a>
+        <a href="#directory">找方案</a>
         <a href="#how-it-works">收录规则</a>
         <a href="https://github.com/dshoneys/awesome-dshoneys" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
@@ -31,43 +31,43 @@
     <main>
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">dsh.so 安全检测 · 社区精选 · 长期可查</p>
-          <h1>放心寻找真正<br /><span>经过检测的插件</span></h1>
+          <p class="eyebrow">社区复核为主 · dsh.so 作参考 · 风险必须披露</p>
+          <h1>先说清楚你要什么<br /><span>再给可用方案</span></h1>
           <p class="hero-description">
-            dsh.so 是本目录指定的安全检测服务。每个收录条目都附有其扫描结果和群友实测反馈。
+            卡片标题是需求描述，不是包名。每个方案都经社区复核；有 ⚠️ 就写明原因。dsh.so 扫描是加分参考，不是唯一门槛。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#directory">浏览插件</a>
-            <a
-              class="button button-secondary"
-              href="https://www.dsh.so/zh/submit/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              前往 dsh.so 检测
-            </a>
+            <a class="button button-primary" href="#directory">浏览热门需求</a>
             <a
               class="button button-secondary"
               href="https://github.com/dshoneys/awesome-dshoneys/issues/new/choose"
               target="_blank"
               rel="noreferrer"
             >
-              已有结果，申请收录
+              推荐插件 / 提需求
+            </a>
+            <a
+              class="button button-secondary"
+              href="https://www.dsh.so/zh/submit/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              可选：提交 dsh.so
             </a>
           </div>
         </div>
 
         <aside class="trust-panel" aria-label="目录原则">
           <div class="trust-icon" aria-hidden="true">✓</div>
-          <p>指定检测服务</p>
-          <h2>未检测，不收录</h2>
+          <p>收录原则</p>
+          <h2>社区复核优先</h2>
           <ul>
-            <li>先在 dsh.so 提交公开仓库</li>
-            <li>取得可核验的安全扫描结果</li>
-            <li>再向社区申请认证收录</li>
+            <li>维护者审源码与披露，决定能否上架</li>
+            <li>高风险必须挂 ⚠️，并写清原因</li>
+            <li>dsh.so 有结果就挂上作参考</li>
           </ul>
-          <a href="https://www.dsh.so/zh/security-reports/" target="_blank" rel="noreferrer">
-            查看 dsh.so 安全报告 →
+          <a href="https://github.com/dshoneys/awesome-dshoneys/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer">
+            阅读贡献指南 →
           </a>
         </aside>
       </section>
@@ -75,8 +75,8 @@
       <section class="directory" id="directory" aria-labelledby="directory-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">PLUGIN DIRECTORY</p>
-            <h2 id="directory-title">认证插件</h2>
+            <p class="eyebrow">DEMAND DIRECTORY</p>
+            <h2 id="directory-title">热门需求方案</h2>
           </div>
           <p id="result-count" class="result-count" aria-live="polite">正在载入目录…</p>
         </div>
@@ -88,7 +88,7 @@
               id="search-input"
               type="search"
               autocomplete="off"
-              placeholder="搜索插件名称、作者、功能或标签…"
+              placeholder="搜索需求、插件名、作者或标签…"
             />
             <kbd>/</kbd>
           </label>
@@ -126,14 +126,14 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">HOW IT WORKS</p>
-            <h2 id="process-title">从提交到收录</h2>
+            <h2 id="process-title">从推荐到上架</h2>
           </div>
         </div>
         <ol class="steps">
-          <li><span>01</span><strong>提交检测</strong><p>将公开仓库地址提交到 dsh.so，进入检测队列。</p></li>
-          <li><span>02</span><strong>取得结果</strong><p>等待 dsh.so 完成验证与安全扫描，获得插件详情页。</p></li>
-          <li><span>03</span><strong>申请收录</strong><p>通过社区 Issue 提交插件链接、dsh.so 页面和使用信息。</p></li>
-          <li><span>04</span><strong>认证展示</strong><p>社区核验结果后，展示扫描结论与真实使用反馈。</p></li>
+          <li><span>01</span><strong>提 Issue</strong><p>附上公开仓库、用途说明，以及已知权限 / 网络面。</p></li>
+          <li><span>02</span><strong>社区复核</strong><p>维护者读源码与披露，决定通过、⚠️ 或暂缓。</p></li>
+          <li><span>03</span><strong>可选扫描</strong><p>有 dsh.so 结果会一并挂上；没有也能先上架并披露风险。</p></li>
+          <li><span>04</span><strong>需求展示</strong><p>卡片以需求描述为标题，方案名与作者放在副线。</p></li>
         </ol>
       </section>
     </main>

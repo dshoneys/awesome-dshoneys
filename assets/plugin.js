@@ -116,14 +116,18 @@ function renderFeedback(feedback) {
 }
 
 function renderActions(plugin) {
+  const reportLabel =
+    plugin.security.provider === "community"
+      ? "查看社区复核"
+      : "查看 dsh.so 扫描结果";
   elements.actions.replaceChildren(
-    createExternalLink("查看 dsh.so 扫描结果", plugin.security.reportUrl, "button button-primary"),
+    createExternalLink(reportLabel, plugin.security.reportUrl, "button button-primary"),
     createExternalLink("打开原仓库", plugin.url, "button button-secondary"),
   );
 
   if (plugin.dshUrl && plugin.dshUrl !== plugin.security.reportUrl) {
     elements.actions.append(
-      createExternalLink("dsh.so 插件档案", plugin.dshUrl, "button button-secondary"),
+      createExternalLink("dsh.so 参考页", plugin.dshUrl, "button button-secondary"),
     );
   }
 
@@ -137,7 +141,8 @@ function renderActions(plugin) {
 }
 
 function renderPlugin(plugin) {
-  document.title = `${plugin.name} · DeepSeek Honeys`;
+  const demandTitle = plugin.demandTitle || plugin.name;
+  document.title = `${demandTitle} · DeepSeek Honeys`;
   elements.loading.hidden = true;
   elements.missing.hidden = true;
   elements.article.hidden = false;
@@ -145,7 +150,7 @@ function renderPlugin(plugin) {
   elements.breadcrumb.replaceChildren(
     createInternalLink("认证插件目录", "./"),
     document.createTextNode(" / "),
-    document.createTextNode(plugin.name),
+    document.createTextNode(demandTitle),
   );
 
   const category = document.createElement("span");
@@ -157,13 +162,13 @@ function renderPlugin(plugin) {
   security.textContent = STATUS_LABELS[plugin.security.status] ?? plugin.security.status;
   elements.badges.replaceChildren(category, security);
 
-  elements.title.textContent = plugin.name;
+  elements.title.textContent = demandTitle;
   elements.meta.textContent = [
+    `方案 ${plugin.name}`,
     `版本 ${plugin.version || "未注明"}`,
     `作者 ${plugin.author?.name ?? "未注明"}`,
-    `检测 ${plugin.security.scannedAt || "未注明"}`,
+    `复核 ${plugin.security.scannedAt || "未注明"}`,
   ].join(" · ");
-
   elements.description.textContent = plugin.description;
   renderParagraphs(elements.details, plugin.details || plugin.description);
 

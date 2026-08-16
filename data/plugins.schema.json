@@ -22,14 +22,14 @@
       "required": [
         "id",
         "name",
+        "demandTitle",
         "version",
         "author",
         "url",
         "description",
         "category",
         "security",
-        "tags",
-        "dshUrl"
+        "tags"
       ],
       "additionalProperties": false,
       "properties": {
@@ -40,6 +40,11 @@
         "name": {
           "type": "string",
           "minLength": 1
+        },
+        "demandTitle": {
+          "type": "string",
+          "minLength": 1,
+          "description": "首页卡片主标题：用户需求描述"
         },
         "version": {
           "type": "string"
@@ -69,8 +74,7 @@
         },
         "details": {
           "type": "string",
-          "minLength": 1,
-          "description": "详情页正文，可用空行分段"
+          "minLength": 1
         },
         "install": {
           "type": "object",
@@ -107,15 +111,14 @@
           "additionalProperties": false,
           "properties": {
             "provider": {
-              "const": "dsh.so"
+              "enum": ["community", "dsh.so"]
             },
             "status": {
               "enum": ["passed", "warning"]
             },
             "reportUrl": {
               "type": "string",
-              "format": "uri",
-              "pattern": "^https://(www\\.)?dsh\\.so/"
+              "format": "uri"
             },
             "scannedAt": {
               "type": "string",
@@ -154,7 +157,7 @@
         "dshUrl": {
           "type": "string",
           "format": "uri",
-          "pattern": "^https://(www\\.)?dsh\\.so/zh/plugins/"
+          "pattern": "^https://(www\\.)?dsh\\.so/"
         }
       }
     }

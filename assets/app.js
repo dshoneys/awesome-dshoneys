@@ -30,6 +30,7 @@ const elements = {
 function getSearchText(plugin) {
   return normalize(
     [
+      plugin.demandTitle,
       plugin.name,
       plugin.version,
       plugin.author?.name,
@@ -65,7 +66,7 @@ function createPluginCard(plugin) {
   card.className = "plugin-card";
   card.tabIndex = 0;
   card.setAttribute("role", "link");
-  card.setAttribute("aria-label", `查看 ${plugin.name} 详情`);
+  card.setAttribute("aria-label", `查看需求：${plugin.demandTitle}`);
   card.addEventListener("click", (event) => {
     if (event.target.closest("a")) return;
     location.href = detailUrl;
@@ -90,11 +91,11 @@ function createPluginCard(plugin) {
   top.append(category, security);
 
   const title = document.createElement("h3");
-  title.append(createInternalLink(plugin.name, detailUrl));
+  title.append(createInternalLink(plugin.demandTitle || plugin.name, detailUrl));
 
   const author = document.createElement("p");
   author.className = "author";
-  author.textContent = `作者：${plugin.author?.name ?? "未注明"}`;
+  author.textContent = `方案：${plugin.name} · 作者：${plugin.author?.name ?? "未注明"}`;
 
   const description = document.createElement("p");
   description.className = "description";
@@ -158,14 +159,14 @@ function render() {
   elements.grid.hidden = plugins.length === 0;
 
   if (!state.plugins.length) {
-    elements.count.textContent = "等待首批认证插件";
-    elements.emptyTitle.textContent = "目录正在等待第一批认证插件";
-    elements.emptyDescription.textContent = "插件通过 dsh.so 安全检测并由社区核验后，会以卡片形式展示在这里。";
-    elements.clear.textContent = "前往 dsh.so 检测";
+    elements.count.textContent = "等待首批方案";
+    elements.emptyTitle.textContent = "目录正在等待第一批需求方案";
+    elements.emptyDescription.textContent = "社区复核通过后，会以「需求描述」为标题展示在这里。";
+    elements.clear.textContent = "去提 Issue";
   } else {
     elements.count.textContent = hasFilters
       ? `找到 ${plugins.length} / ${state.plugins.length} 个插件`
-      : `共收录 ${state.plugins.length} 个插件`;
+      : `共 ${state.plugins.length} 个需求方案`;
     elements.emptyTitle.textContent = "没有找到匹配的插件";
     elements.emptyDescription.textContent = "换个关键词或筛选条件试试。";
     elements.clear.textContent = "清除筛选";
@@ -195,7 +196,7 @@ function resetFilters() {
 
   if (!state.plugins.length) {
     window.open(
-      "https://www.dsh.so/zh/submit/",
+      "https://github.com/dshoneys/awesome-dshoneys/issues/new/choose",
       "_blank",
       "noopener,noreferrer",
     );

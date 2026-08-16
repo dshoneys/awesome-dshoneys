@@ -2,16 +2,55 @@
   "$schema": "./plugins.schema.json",
   "plugins": [
     {
+      "id": "dsh-launcher",
+      "name": "dsh-launcher",
+      "version": "0.3.5",
+      "demandTitle": "Windows 双击启动，不用敲命令",
+      "author": {
+        "name": "@Ruler4396",
+        "url": "https://github.com/Ruler4396"
+      },
+      "url": "https://github.com/Ruler4396/dsh-launcher",
+      "description": "Windows 轻量启动器：MSI/便携包、开机自启、WebView2 小窗，自动拉起 dsh 并给出诊断。",
+      "details": "对应目录里最热的「桌面 / Windows 体验」需求：把 DeepSeek Harness 包成可双击的 Windows 壳，而不是再教用户敲 CLI。\n\n安装包约 1.4MB，不内置 dsh；缺失 Node / WebView2 等依赖可按提示补齐。出错有错误码与诊断包导出。\n\n社区复核说明：产品路径包含本机进程拉起与依赖安装，属预期能力；请只从 GitHub Releases 安装，并阅读仓库安全说明。",
+      "install": {
+        "summary": "从 Releases 下载 MSI（新手）或 ZIP 便携版。",
+        "commands": [
+          "https://github.com/Ruler4396/dsh-launcher/releases"
+        ],
+        "notes": [
+          "MSI 可勾选开机自启；ZIP 解压后运行 DshWeb.exe。",
+          "双击无反应时先跑 check-prereq.cmd；仍失败用 DshWeb.exe --diagnose。",
+          "可选配套：dsh plugin add dsh-launcher-lifetime。"
+        ]
+      },
+      "category": "productivity",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["Windows", "启动器", "桌面", "WebView2"],
+      "searchTerms": ["launcher", "msi", "autostart", "桌面"],
+      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-launcher/",
+      "feedback": {
+        "content": "社区先收录（⚠️）：覆盖 Windows/桌面热需求。dsh.so 仍显示未扫描；含本机进程与依赖安装路径，请从官方 Releases 获取。",
+        "from": "@维护者，2026-08-16"
+      }
+    },
+    {
       "id": "modsearch",
       "name": "ModSearch",
       "version": "5.4.2",
+      "demandTitle": "给文本模型补上联网搜索",
       "author": {
         "name": "@liustack",
         "url": "https://github.com/liustack"
       },
       "url": "https://github.com/liustack/modsearch",
       "description": "多引擎联网搜索与网页读取，支持故障转移；默认免 key 路径依赖第三方 CLI，更稳妥请用 Tavily/Exa/Firecrawl 密钥。",
-      "details": "ModSearch 为 DeepSeek Harness 提供更强的联网能力：补强内置 web_search，并增加 X（Twitter）搜索与单页读取。\n\n默认走 Antigravity CLI（免费、需本机登录），也可配置 Tavily / Exa / Firecrawl / Grok，引擎失败时自动切换。适合需要引用来源、又不想给模型直连外网权限的场景。\n\n使用前请阅读维护者审核说明：默认路径可能涉及第三方 CLI 与安装脚本，建议优先配置密钥引擎。",
+      "details": "对应「联网搜索」需求：补强 dsh 内置 web_search，并增加 X 搜索与单页读取。\n\n默认走 Antigravity CLI，也可配置 Tavily / Exa / Firecrawl / Grok，失败自动切换。\n\n社区复核：须披露默认 CLI 路径与文档中的安装脚本风险；更稳妥请改用密钥引擎。",
       "install": {
         "summary": "用 dsh 一键安装到 web profile，再按需配置搜索引擎。",
         "commands": [
@@ -19,12 +58,12 @@
         ],
         "notes": [
           "默认引擎 Antigravity CLI 需要本机浏览器登录；也可改用 Tavily / Exa / Firecrawl 密钥。",
-          "更完整的安装与排障见仓库 INSTALL.md 与 harness-setup 文档。"
+          "更完整安装见仓库 INSTALL.md。"
         ]
       },
       "category": "productivity",
       "security": {
-        "provider": "dsh.so",
+        "provider": "community",
         "status": "warning",
         "reportUrl": "https://www.dsh.so/zh/plugins/modsearch/",
         "scannedAt": "2026-08-16"
@@ -33,7 +72,122 @@
       "searchTerms": ["modsearch", "搜索", "tavily", "exa", "agy"],
       "dshUrl": "https://www.dsh.so/zh/plugins/modsearch/",
       "feedback": {
-        "content": "维护者正式审核：dsh.so Low、critical 0；须披露默认 agy --dangerously-skip-permissions 与文档中的 curl|bash 安装建议。审核 commit e1dba224。",
+        "content": "社区复核 ⚠️：dsh.so Low、critical 0；须披露默认 agy 权限跳过与 curl|bash 安装建议。",
+        "from": "@维护者，2026-08-16"
+      }
+    },
+    {
+      "id": "dsh-tesseract-ocr",
+      "name": "dsh-tesseract-ocr",
+      "version": "0.2.1",
+      "demandTitle": "本地 OCR，让文本模型看图",
+      "author": {
+        "name": "@maxwell-feng",
+        "url": "https://github.com/maxwell-feng"
+      },
+      "url": "https://github.com/maxwell-feng/dsh-tesseract-ocr",
+      "description": "本地 Tesseract OCR：文本模型可收图，仅把识别文字发给模型；默认不透传原图，视觉透传需显式开启。",
+      "details": "对应「视觉 / OCR」需求：图片在本机用 Tesseract 识别，只把文字发给模型。默认不透传原图。\n\n需安装 tesseract CLI 与语言包。勿与 windows-ocr 同时启用。\n\n社区复核：dsh.so code-exec 判定为必要 spawn 误报，已按 ⚠️ 披露。",
+      "install": {
+        "summary": "先安装本机 Tesseract，再加载插件。",
+        "commands": [
+          "sudo apt install -y tesseract-ocr tesseract-ocr-chi-sim",
+          "dsh plugin --profile web add github:maxwell-feng/dsh-tesseract-ocr"
+        ],
+        "notes": [
+          "Windows 可用安装版 Tesseract；路径含空格时请给 tesseractBin 加引号。",
+          "仓库含 agents-install.md，可交给 AI agent 安装验证。"
+        ]
+      },
+      "category": "local",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/1",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["OCR", "Tesseract", "图片", "隐私", "本地"],
+      "searchTerms": ["tesseract", "ocr", "看图", "image", "chi_sim"],
+      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-tesseract-ocr/",
+      "feedback": {
+        "content": "社区复核通过（⚠️）：源码整改 4678c8f 已关闭阻断；tesseract spawn 按必要能力披露。",
+        "from": "@维护者，2026-08-16"
+      }
+    },
+    {
+      "id": "pi2dsh",
+      "name": "pi2dsh",
+      "version": "0.12.2",
+      "demandTitle": "接入 Pi 插件生态与订阅登录",
+      "author": {
+        "name": "@weijiafu14",
+        "url": "https://github.com/weijiafu14"
+      },
+      "url": "https://github.com/weijiafu14/pi2dsh",
+      "description": "在 DeepSeek Harness 上原样运行 Pi 生态插件；并补齐订阅制 OAuth 登录与大量现成能力。",
+      "details": "对应「模型接入 / OAuth / 路由」以及生态扩展需求：一次安装引擎后，可用 `dsh plugin add` 直接挂载未修改的 Pi npm 包。\n\n也覆盖订阅登录（Codex / Anthropic / Copilot / Kimi 等 Pi OAuth 流）与大量现成插件（视觉桥、子代理、记忆等）。这是桥梁，不是终点——有更好的原生插件时应切换。\n\n社区复核（⚠️ 高披露）：dsh.so 曾报 high-risk / 多项 critical。能力面积极大（动态加载第三方包、凭据、工具桥）。请只安装你明确需要的 Pi 包，并阅读仓库能力矩阵与安全说明。",
+      "install": {
+        "summary": "先装引擎，再按需加 Pi 插件，然后重启 dsh。",
+        "commands": [
+          "dsh plugin --profile web add pi2dsh",
+          "dsh plugin --profile web add @kassing/pi-vision"
+        ],
+        "notes": [
+          "profile 请用 web 或 headless；自定义空 profile 可能无界面且无诊断。",
+          "需要 Node.js 22.19+。遇到 ERR_PNPM_IGNORED_BUILDS 时在 profile 内 approve-builds。",
+          "vision 示例需另配多模态模型环境变量，见仓库 examples/vision-bridge。"
+        ]
+      },
+      "category": "development",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["Pi", "OAuth", "生态桥", "插件"],
+      "searchTerms": ["pi2dsh", "oauth", "codex", "anthropic", "vision"],
+      "dshUrl": "https://www.dsh.so/zh/plugins/pi2dsh/",
+      "feedback": {
+        "content": "社区先收录（⚠️ 高披露）：覆盖模型/OAuth 热需求。dsh.so high-risk·critical 多条，使用前务必收敛依赖包集合。",
+        "from": "@维护者，2026-08-16"
+      }
+    },
+    {
+      "id": "dsh-goodmemory",
+      "name": "dsh-goodmemory",
+      "version": "0.1.0",
+      "demandTitle": "跨会话自动记忆与召回",
+      "author": {
+        "name": "@hjqcan",
+        "url": "https://github.com/hjqcan"
+      },
+      "url": "https://github.com/hjqcan/dsh-goodmemory",
+      "description": "基于 GoodMemory 的跨会话记忆：回合前召回、成功回合后写回，数据默认落在本机 SQLite。",
+      "details": "对应「长期记忆 / 会话连续性」需求：在模型步进前召回相关记忆，在成功回合后写回人类/助手文本。\n\n默认 managed 模式会在本机 loopback 拉起 goodmemory-http-bridge，SQLite 存于 $DSH_HOME/goodmemory/。也可接外部 bridge。\n\n社区复核（⚠️）：dsh.so 详情页曾 404；会处理会话文本并依赖 sidecar。请确认隐私预期，并用 GoodMemory Inspector 管理遗忘与导出。",
+      "install": {
+        "summary": "安装插件前先准备 Bun（managed 模式需要）。",
+        "commands": [
+          "dsh plugin --profile web add dsh-goodmemory@0.1.0",
+          "dsh --profile web"
+        ],
+        "notes": [
+          "兼容声明针对 dsh 0.1.0-rc.6 与 goodmemory 0.7.4。",
+          "managed 模式需 Bun；也可用 external 模式连接已有 bridge。",
+          "管理记忆请用 goodmemory inspector serve。"
+        ]
+      },
+      "category": "local",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["记忆", "GoodMemory", "召回", "本地"],
+      "searchTerms": ["memory", "goodmemory", "recall", "记忆"],
+      "feedback": {
+        "content": "社区先收录（⚠️）：覆盖长期记忆热需求。dsh.so 入库未完成；默认本机 sidecar + SQLite，请自行管理遗忘。",
         "from": "@维护者，2026-08-16"
       }
     },
@@ -41,28 +195,29 @@
       "id": "dsh-import-agents",
       "name": "dsh-import-agents",
       "version": "0.2.3",
+      "demandTitle": "把旧会话一键迁进 Harness",
       "author": {
         "name": "@Chang-Tong",
         "url": "https://github.com/Chang-Tong"
       },
       "url": "https://github.com/Chang-Tong/dsh-import-agents",
       "description": "把 Pi / OpenCode / Codex / Claude Code 本地会话与 agents 导入 DeepSeek Harness；会批量读取本机会话目录。",
-      "details": "把本机已有的 agent 会话迁入 DeepSeek Harness：支持 pi、OpenCode、Codex、Claude Code。导入后可在会话列表继续聊，历史文本、推理与工具调用会尽量保留。\n\n同时可以把源工具里的 agents / prompts 转成 dsh skills，并在输入框提供一键 Sync。导入是幂等的，重复执行会跳过已存在条目。\n\n请注意：插件会批量读取本机会话目录；只在你信任的机器上使用。",
+      "details": "对应「会话连续性 / 迁移」需求：导入后可继续聊，并尽量保留历史与工具轨迹；也可把 agents 转成 skills。\n\n社区复核：会批量读取本机会话目录；只在信任的机器使用。",
       "install": {
-        "summary": "安装到 web profile，写入 cordis 补丁后重启 dsh web。",
+        "summary": "安装到 web profile，写入补丁后重启。",
         "commands": [
           "cd ~/.dsh/profiles/web && pnpm add dsh-import-agents",
           "dsh web"
         ],
         "notes": [
-          "在 ~/.dsh/profiles/web/cordis.patch.yml 追加：id 为 import-pi-opencode，name 为 dsh-import-agents。",
-          "重启后请刷新页面；可用输入框 Sync 按钮或 /import-all 验证。",
+          "cordis.patch.yml 追加 id: import-pi-opencode，name: dsh-import-agents。",
+          "重启后刷新页面，用 Sync 或 /import-all 验证。",
           "需要 Node ≥ 22.19。"
         ]
       },
       "category": "local",
       "security": {
-        "provider": "dsh.so",
+        "provider": "community",
         "status": "warning",
         "reportUrl": "https://www.dsh.so/zh/plugins/dsh-import-agents/",
         "scannedAt": "2026-08-16"
@@ -71,45 +226,81 @@
       "searchTerms": ["import", "session", "pi", "opencode", "codex", "claude"],
       "dshUrl": "https://www.dsh.so/zh/plugins/dsh-import-agents/",
       "feedback": {
-        "content": "维护者正式审核：dsh.so Medium、critical 0、warning 3；插件路径未见出网。/import-all 与 CLI all 语义及 README 版本号待对齐。审核 commit 9aa7dfb9。",
+        "content": "社区复核 ⚠️：dsh.so Medium；插件路径未见出网，但会读本机会话目录。",
         "from": "@维护者，2026-08-16"
       }
     },
     {
-      "id": "dsh-tesseract-ocr",
-      "name": "dsh-tesseract-ocr",
-      "version": "0.2.1",
+      "id": "dsh-voice-input",
+      "name": "dsh-voice-input-plugin",
+      "version": "0.1.0",
+      "demandTitle": "语音输入，边说边写进草稿",
       "author": {
-        "name": "@maxwell-feng",
-        "url": "https://github.com/maxwell-feng"
+        "name": "@Zhangbo-cn",
+        "url": "https://github.com/Zhangbo-cn"
       },
-      "url": "https://github.com/maxwell-feng/dsh-tesseract-ocr",
-      "description": "本地 Tesseract OCR：文本模型可收图，仅把识别文字发给模型；默认不透传原图，视觉透传需显式开启。",
-      "details": "让纯文本模型也能处理图片附件：图片在本机用 Tesseract 识别，只把文字发给模型 API。默认不向视觉模型透传原图；需要透传时显式设置 passthrough: true。\n\n适用于重视隐私、又想给 DeepSeek 等文本模型「看图」的场景。系统需安装 tesseract CLI 与语言包（如简体中文 chi_sim）。\n\n请勿与 windows-ocr 同时启用，否则同一张图会被重复 OCR。",
+      "url": "https://github.com/Zhangbo-cn/dsh-voice-input-plugin",
+      "description": "Web 输入框麦克风：点按持续听写、长按语音对话并朗读回复；识别走浏览器 Web Speech，朗读可走宿主 /api/tts。",
+      "details": "补齐语音交互方案：tap 流式进草稿，hold 松开发送并朗读回复。\n\n重要披露：识别使用浏览器 Web Speech API，Chrome/Edge 通常会把音频交给厂商云端服务，不是离线本地 ASR。回复朗读可能经同源 /api/tts 转发文本。\n\n社区复核：源码网络面主要为同源 TTS；dsh.so 详情页已对齐本仓库，但扫描仍可能显示未扫描。",
       "install": {
-        "summary": "先安装本机 Tesseract，再用 dsh 加载插件包。",
+        "summary": "安装 npm 包到 web 客户端组合。",
         "commands": [
-          "sudo apt install -y tesseract-ocr tesseract-ocr-chi-sim",
-          "dsh plugin --profile web add github:maxwell-feng/dsh-tesseract-ocr"
+          "dsh plugin --profile web add @zhangbo-cn/dsh-client-ui-voice-input"
         ],
         "notes": [
-          "也可用绝对路径指向本地 checkout 的 lib/index.js；Windows 路径须写成 file:// URL。",
-          "默认 language 可用 eng+chi_sim；Windows 若路径含空格，请给 tesseractBin 加引号。",
-          "仓库含 agents-install.md，可交给 AI agent 完成安装与验证。"
+          "可靠朗读建议同时安装宿主 @deepseek-ai/dsh-tts-edge。",
+          "Firefox 无 SpeechRecognition，按钮会禁用。",
+          "npm 包名与仓库名不同，请以包名为准。"
         ]
       },
-      "category": "local",
+      "category": "productivity",
       "security": {
-        "provider": "dsh.so",
+        "provider": "community",
         "status": "warning",
-        "reportUrl": "https://www.dsh.so/zh/plugins/dsh-tesseract-ocr/",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/3",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["OCR", "Tesseract", "图片", "隐私", "本地"],
-      "searchTerms": ["tesseract", "ocr", "看图", "image", "chi_sim"],
-      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-tesseract-ocr/",
+      "tags": ["语音", "听写", "TTS", "Web Speech"],
+      "searchTerms": ["voice", "speech", "mic", "语音", "听写"],
+      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-voice-input-plugin/",
       "feedback": {
-        "content": "维护者正式审核通过（⚠️）：源码整改 commit 4678c8f 已关闭 6 项阻断。dsh.so high-risk/code-exec 判定为调用本机 tesseract 的必要 spawn（argv 数组、无 shell）误报，须向用户披露需安装 Tesseract CLI。",
+        "content": "社区先收录（⚠️）：须披露 Web Speech 可能出网；dsh.so 扫描待完成。",
+        "from": "@维护者，2026-08-16"
+      }
+    },
+    {
+      "id": "dsh-board",
+      "name": "dsh-board",
+      "version": "0.1.0",
+      "demandTitle": "看清这轮 AI 花了多少钱",
+      "author": {
+        "name": "@dfkai",
+        "url": "https://github.com/dfkai"
+      },
+      "url": "https://github.com/dfkai/dsh-board",
+      "description": "侧栏用量与成本面板：官方价目、峰谷计价、推理 token 计入、图表与日热力图。",
+      "details": "补齐成本可见性：徽章常驻侧栏底部，点击展开实时仪表盘，不是定时日报。\n\n价目硬编码，用量来自宿主 sessions.history；localStorage 只存折叠状态。\n\n社区复核：源码静态面未见第三方外发；dsh.so 详情页尚未就绪，按社区复核先收录。",
+      "install": {
+        "summary": "通过 GitHub 安装到 web profile。",
+        "commands": [
+          "dsh plugin --profile web add github:dfkai/dsh-board"
+        ],
+        "notes": [
+          "作者计划发布 npm 时改用 @dfkai/dsh-board。",
+          "重启 dsh web 并刷新页面后，侧栏底部应出现用量入口。"
+        ]
+      },
+      "category": "productivity",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/4",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["用量", "成本", "仪表盘", "侧栏"],
+      "searchTerms": ["board", "usage", "cost", "billing", "费用"],
+      "feedback": {
+        "content": "社区先收录（⚠️）：源码未见外发；等待作者补齐 dsh.so 页面后可再核验。",
         "from": "@维护者，2026-08-16"
       }
     }

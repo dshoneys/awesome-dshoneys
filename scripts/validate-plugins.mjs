@@ -11,7 +11,16 @@ const allowedCategories = new Set([
   "other",
 ]);
 const allowedStatuses = new Set(["passed", "warning"]);
-const requiredTextFields = ["id", "name", "version", "url", "description", "category"];
+const allowedProviders = new Set(["community", "dsh.so"]);
+const requiredTextFields = [
+  "id",
+  "name",
+  "demandTitle",
+  "version",
+  "url",
+  "description",
+  "category",
+];
 
 const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
 const plugins = catalog.plugins;
@@ -52,28 +61,26 @@ for (const [index, plugin] of plugins.entries()) {
     throw new Error(`${location}.security.status 必须为 passed 或 warning。`);
   }
 
-  if (plugin.security.provider !== "dsh.so") {
-    throw new Error(`${location}.security.provider 必须为 dsh.so。`);
+  if (!allowedProviders.has(plugin.security.provider)) {
+    throw new Error(`${location}.security.provider 必须为 community 或 dsh.so。`);
   }
 
-  for (const [field, value] of [
-    ["security.reportUrl", plugin.security.reportUrl],
-    ["dshUrl", plugin.dshUrl],
-  ]) {
-    let url;
+  try {
+    new URL(plugin.security.reportUrl);
+  } catch {
+    throw new TypeError(`${location}.security.reportUrl 必须是有效网址。`);
+  }
+
+  if (plugin.dshUrl !== undefined) {
+    let dshUrl;
     try {
-      url = new URL(value);
+      dshUrl = new URL(plugin.dshUrl);
     } catch {
-      throw new TypeError(`${location}.${field} 必须是有效网址。`);
+      throw new TypeError(`${location}.dshUrl 必须是有效网址。`);
     }
-
-    if (!["dsh.so", "www.dsh.so"].includes(url.hostname.toLowerCase())) {
-      throw new Error(`${location}.${field} 必须指向 dsh.so。`);
+    if (!["dsh.so", "www.dsh.so"].includes(dshUrl.hostname.toLowerCase())) {
+      throw new Error(`${location}.dshUrl 若存在必须指向 dsh.so。`);
     }
-  }
-
-  if (!new URL(plugin.dshUrl).pathname.startsWith("/zh/plugins/")) {
-    throw new Error(`${location}.dshUrl 必须是 dsh.so 中文插件详情页。`);
   }
 
   if (!Array.isArray(plugin.tags) || plugin.tags.some((tag) => typeof tag !== "string")) {
