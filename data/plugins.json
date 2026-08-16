@@ -233,24 +233,27 @@
     {
       "id": "dsh-voice-input",
       "name": "dsh-voice-input-plugin",
-      "version": "0.1.0",
+      "version": "0.1.1-hotfix",
       "demandTitle": "语音输入，边说边写进草稿",
       "author": {
         "name": "@Zhangbo-cn",
         "url": "https://github.com/Zhangbo-cn"
       },
-      "url": "https://github.com/Zhangbo-cn/dsh-voice-input-plugin",
+      "url": "https://github.com/shinjiyu/dsh-voice-input-plugin",
       "description": "Web 输入框麦克风：点按持续听写、长按语音对话并朗读回复；识别走浏览器 Web Speech，朗读可走宿主 /api/tts。",
-      "details": "补齐语音交互方案：tap 流式进草稿，hold 松开发送并朗读回复。\n\n重要披露：识别使用浏览器 Web Speech API，Chrome/Edge 通常会把音频交给厂商云端服务，不是离线本地 ASR。回复朗读可能经同源 /api/tts 转发文本。\n\n社区复核：源码网络面主要为同源 TTS；dsh.so 详情页已对齐本仓库，但扫描仍可能显示未扫描。",
+      "details": "补齐语音交互方案：tap 流式进草稿，hold 松开发送并朗读回复。\n\n重要披露：识别使用浏览器 Web Speech API，Chrome/Edge 通常会把音频交给厂商云端服务，不是离线本地 ASR。回复朗读可能经同源 /api/tts 转发文本。\n\n紧急说明（2026-08-17）：npm `@zhangbo-cn/dsh-client-ui-voice-input@0.1.0` 的 client.js 把 ModuleLoader id 误写成 `@deepseek-ai/...`，安装后 Harness 会 Failed to load plugins。目录安装源临时改为已修复的社区 fork（与上游 PR #1 同内容）；原作者发 0.1.1+ 后再切回官方包。\n\n社区复核：源码网络面主要为同源 TTS；dsh.so 详情页已对齐本仓库，但扫描仍可能显示未扫描。",
       "install": {
-        "summary": "安装 npm 包到 web 客户端组合。",
+        "summary": "临时安装已修复的 GitHub fork（勿装 npm 0.1.0）。",
         "commands": [
-          "dsh plugin --profile web add @zhangbo-cn/dsh-client-ui-voice-input"
+          "dsh plugin --profile web remove @zhangbo-cn/dsh-client-ui-voice-input",
+          "dsh plugin --profile web add github:shinjiyu/dsh-voice-input-plugin"
         ],
         "notes": [
+          "若已装坏掉的 npm 0.1.0：先 remove 再 add fork，然后重启 dsh web 并硬刷新。",
+          "上游修复跟踪：https://github.com/Zhangbo-cn/dsh-voice-input-plugin/pull/1",
+          "原作者发布 npm 0.1.1+ 后，本条目会改回官方包。",
           "可靠朗读建议同时安装宿主 @deepseek-ai/dsh-tts-edge。",
-          "Firefox 无 SpeechRecognition，按钮会禁用。",
-          "npm 包名与仓库名不同，请以包名为准。"
+          "Firefox 无 SpeechRecognition，按钮会禁用。"
         ]
       },
       "category": "productivity",
@@ -260,12 +263,12 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/3",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["语音", "听写", "TTS", "Web Speech"],
-      "searchTerms": ["voice", "speech", "mic", "语音", "听写"],
+      "tags": ["语音", "听写", "TTS", "Web Speech", "hotfix"],
+      "searchTerms": ["voice", "speech", "mic", "语音", "听写", "ModuleLoader"],
       "dshUrl": "https://www.dsh.so/zh/plugins/dsh-voice-input-plugin/",
       "feedback": {
-        "content": "社区先收录（⚠️）：须披露 Web Speech 可能出网；dsh.so 扫描待完成。",
-        "from": "@维护者，2026-08-16"
+        "content": "紧急热修：npm 0.1.0 ModuleLoader id 错配会导致整页 Failed to load plugins。安装源临时指向 shinjiyu fork（对齐上游 PR #1）；作者发版后换回。",
+        "from": "@维护者，2026-08-17"
       }
     },
     {
