@@ -52,6 +52,8 @@ test("识别 dsh.so 风险和扫描数据", () => {
       <div>critical 2 warning 3</div>
       <p>扫描版本: abc123</p><p>当前版本: abc123</p>
       <p>扫描时间: 2026-08-16</p>
+      <a href="/zh/plugins/compare/">compare</a>
+      <a href="/zh/plugins/collections/">collections</a>
       <a href="/zh/plugins/another-ocr/">another</a>
     </main>
   `;

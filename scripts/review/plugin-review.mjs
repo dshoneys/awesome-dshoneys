@@ -8,6 +8,7 @@ const MANAGED_LABELS = new Set([
   "changes-requested",
   "review-ready",
 ]);
+const RESERVED_DSH_PLUGIN_SLUGS = new Set(["compare", "collections"]);
 
 const LABELS = {
   plugin: { color: "0E8A16", description: "插件收录提交" },
@@ -185,6 +186,7 @@ export function parseDshPage(html, url) {
       [...html.matchAll(/href=["'](?:https:\/\/www\.dsh\.so)?(\/zh\/plugins\/[a-z0-9-]+\/?)["']/gi)]
         .map((match) => match[1].replace(/\/+$/, ""))
         .filter((path) => path !== currentPath)
+        .filter((path) => !RESERVED_DSH_PLUGIN_SLUGS.has(path.split("/").filter(Boolean).at(-1)))
         .map((path) => `https://www.dsh.so${path}/`),
     ),
   ].slice(0, 6);
