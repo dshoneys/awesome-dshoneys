@@ -109,3 +109,5 @@
 ---
 
 本仓库由 DeepSeek Honeys 微信群社区共建 · 遵循 [MIT License](LICENSE) · 有任何问题欢迎在群里 @维护者
+
+此外，dsh.so 提供官方安全扫描（先在 [dsh.so/zh/submit](https://www.dsh.so/zh/submit/) 提交插件收录）。建议 PR 一并提供 **dsh.so 插件条目链接（含 slug，`https://www.dsh.so/zh/plugins/<slug>/`）** 与 **dsh.so 扫描报告/扫描结果链接**（建议项，规则与 dsh.so 作者确认中）；dsh.so 扫描结论可用时，安全徽章以其为准，社区自检模板（`docs/security-report-template.md`）作为补充与内部复核使用。

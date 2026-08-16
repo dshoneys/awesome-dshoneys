@@ -27,7 +27,7 @@
 
 ---
 
-## ③ 条目字段要求
+### dsh.so 安全扫描（建议项，规则与作者确认中）建议先到 [dsh.so 提交页](https://www.dsh.so/zh/submit/) 提交插件（粘贴公开仓库地址，检查器自动拉取仓库并执行安全扫描），收录后在 PR 中附上：1. **dsh.so 插件条目链接（含 slug）**：`https://www.dsh.so/zh/plugins/<slug>/`2. **dsh.so 扫描报告/扫描结果链接**：插件详情页的扫描结论，或 [dsh.so 安全周报](https://www.dsh.so/zh/security-reports/)与 dsh.so 作者确认最终规则前以上为建议提供项；社区自检报告（`docs/security-report-template.md`，存 `docs/reports/`）继续有效，两者并行。## ③ 条目字段要求
 
 README 目录中的插件条目统一为 6 字段表格，与 [README.md](README.md) ② 的格式规范保持一致，一个都不能少：
 

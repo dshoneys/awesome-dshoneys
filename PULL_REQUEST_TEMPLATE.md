@@ -21,6 +21,12 @@
 
 > 说明：安全徽章（✅ / ⚠️ / ❌）由维护者依据检测报告填写，PR 作者无需自行添加。
 
+## dsh.so 插件登记信息（建议提供）
+dsh.so 可提供官方安全扫描（规则与 dsh.so 作者确认中，确认后拟升级为必填）。建议提供：
+- **dsh.so 插件条目链接（含 slug）**：`https://www.dsh.so/zh/plugins/<slug>/`（先到 <https://www.dsh.so/zh/submit/> 提交插件收录；尚未收录可先填「未收录」）
+- **dsh.so 扫描报告/扫描结果链接**：插件详情页展示的扫描结论，或安全周报 <https://www.dsh.so/zh/security-reports/>
+> 注：无需提交其他编号，dsh.so 以插件 slug 标识条目。
+
 ## 三、群友实测反馈（选填，建议提供）
 
 - 实测环境/场景：
