@@ -3,7 +3,13 @@ import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
 const catalogPath = resolve(root, "data/plugins.json");
-const allowedCategories = new Set(["productivity", "development", "data", "other"]);
+const allowedCategories = new Set([
+  "productivity",
+  "development",
+  "data",
+  "local",
+  "other",
+]);
 const allowedStatuses = new Set(["passed", "warning"]);
 const requiredTextFields = ["id", "name", "version", "url", "description", "category"];
 

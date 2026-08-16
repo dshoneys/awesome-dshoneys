@@ -68,7 +68,7 @@
           "minLength": 1
         },
         "category": {
-          "enum": ["productivity", "development", "data", "other"]
+          "enum": ["productivity", "development", "data", "local", "other"]
         },
         "security": {
           "type": "object",

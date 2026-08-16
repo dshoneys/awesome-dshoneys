@@ -2,6 +2,7 @@ const CATEGORY_LABELS = {
   productivity: "效率工具",
   development: "开发工具",
   data: "数据接入",
+  local: "本地化",
   other: "其他",
 };
 

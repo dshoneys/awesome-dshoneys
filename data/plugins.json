@@ -36,7 +36,7 @@
       },
       "url": "https://github.com/Chang-Tong/dsh-import-agents",
       "description": "把 Pi / OpenCode / Codex / Claude Code 本地会话与 agents 导入 DeepSeek Harness；会批量读取本机会话目录。",
-      "category": "productivity",
+      "category": "local",
       "security": {
         "provider": "dsh.so",
         "status": "warning",
