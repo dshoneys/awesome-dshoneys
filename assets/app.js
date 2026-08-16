@@ -11,6 +11,17 @@ const STATUS_LABELS = {
   warning: "⚠ 有警告",
 };
 
+/** 社区收录仓库：卡片主链先落到我们这边，再二链原仓库。 */
+const COMMUNITY_REPO_URL = "https://github.com/dshoneys/awesome-dshoneys";
+const COMMUNITY_CATALOG_URL = `${COMMUNITY_REPO_URL}/blob/main/data/plugins.json`;
+
+function getCommunityEntryUrl(plugin) {
+  const id = plugin?.id;
+  if (!id) return COMMUNITY_CATALOG_URL;
+  // 文本片段：支持的浏览器会滚到对应条目；不支持时仍打开目录文件。
+  return `${COMMUNITY_CATALOG_URL}#:~:text=${encodeURIComponent(`"id": "${id}"`)}`;
+}
+
 const state = {
   plugins: [],
   query: "",
@@ -96,13 +107,15 @@ function createPluginCard(plugin) {
   top.append(category, security);
 
   const title = document.createElement("h3");
-  title.append(createLink(plugin.name, plugin.url));
+  // 主链：社区收录条目（我们的 GIT），避免点标题落到作者主页。
+  title.append(createLink(plugin.name, getCommunityEntryUrl(plugin)));
 
   const author = document.createElement("p");
   author.className = "author";
   author.append("作者：");
   if (plugin.author?.url) {
-    author.append(createLink(plugin.author.name, plugin.author.url));
+    // 作者链仅指向个人主页，文案带「主页」降低误点成「仓库」的预期。
+    author.append(createLink(`${plugin.author.name} 主页`, plugin.author.url));
   } else {
     author.append(plugin.author?.name ?? "未注明");
   }
@@ -143,7 +156,9 @@ function createPluginCard(plugin) {
   if (plugin.dshUrl !== plugin.security.reportUrl) {
     links.append(" · ", createLink("插件档案", plugin.dshUrl));
   }
-  links.append(" · ", createLink("查看插件 →", plugin.url));
+  // 一链社区收录，二链对方原仓库（插件源码 GIT）。
+  links.append(" · ", createLink("社区收录 →", getCommunityEntryUrl(plugin)));
+  links.append(" · ", createLink("原仓库 →", plugin.url));
 
   const version = document.createElement("span");
   version.className = "version";
