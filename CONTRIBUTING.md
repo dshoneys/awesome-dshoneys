@@ -8,33 +8,33 @@
 
 **未经安全检测的插件，不会进入本目录。**
 
-- 这是本目录唯一不可协商的硬规则。没有检测报告 → 没有安全徽章 → 条目不合入 README 目录，没有例外。
-- 哪怕插件再好用、群里再多人推荐、作者再大牌，只要还没出检测报告，目录中就不会出现它的条目。
-- 提交 PR 时若插件尚未检测，**PR 依然欢迎**：你先提交条目草稿，检测完成后由维护者补上徽章与报告链接，再合并入库。
+- 这是本目录唯一不可协商的硬规则。没有 dsh.so 扫描结果 → 没有安全徽章 → 不进入公开目录，没有例外。
+- 哪怕插件再好用、群里再多人推荐、作者再大牌，只要还没有 dsh.so 结果，目录中就不会出现它的条目。
+- 尚未检测时可以先提 Issue 交流；完成 dsh.so 检测并补齐链接后，再进入合并与展示流程。
 - 结论为 ❌ 不通过、且作者未在合理期限内修复的插件，同样不收录（已在目录中的会被下架）。
 
 ---
 
 ## ② 安全检测流程
 
-提交（PR 或 Issue）之后，由**社区安全检测助手**按 [docs/security-report-template.md](docs/security-report-template.md) 出具标准化报告：
+本目录将 [dsh.so](https://www.dsh.so/) 指定为安全检测服务，正确顺序是先检测、后申请收录：
 
-1. **提交**：你交插件并在 PR / Issue 中勾选「同意安全检测」声明（见 `.github/ISSUE_TEMPLATE/submit-plugin.md`）。
-2. **检测**：安全检测助手逐项检查五类风险——权限滥用、恶意代码、数据外传、密钥窃取、依赖风险，记录复现方式、检测日期与检测者，给出结论分级：**通过 / 警告 / 不通过**。
-3. **先私聊、后公示（避免误伤）**：检测中一旦发现任何风险点，**不会直接公开挂人**——检测助手会先私聊插件作者，说明问题细节、给出修复建议；作者修复并复检确认后，才对外公示结论与报告。确属恶意的除外。
-4. **打标**：依据结论打上安全徽章（✅ 通过 / ⚠️ 警告 / ❌ 不通过，样式与判定标准见 [docs/badge-spec.md](docs/badge-spec.md)）。
-5. **归档**：检测报告存放于 `docs/reports/`，目录条目与报告一一对应，长期可查。
+1. **提交检测**：到 [dsh.so 提交页](https://www.dsh.so/zh/submit/) 粘贴插件的公开仓库地址。
+2. **等待结果**：取得 `https://www.dsh.so/zh/plugins/<slug>/` 插件详情页和可核验的安全扫描结果。
+3. **申请收录**：通过 Issue 或 PR 同时提交插件信息、dsh.so 详情页和扫描结果链接。
+4. **社区核验**：维护者确认链接、版本与结果一致，按 [徽章规范](docs/badge-spec.md) 映射展示状态。
+5. **持续更新**：插件版本或 dsh.so 结果发生变化时，重新核验并更新、降级或下架。
 
 ---
 
-### dsh.so 安全扫描（建议项，规则与作者确认中）
+### dsh.so 安全扫描（必填）
 
-建议先到 [dsh.so 提交页](https://www.dsh.so/zh/submit/) 提交插件。收录后在 PR 中附上：
+申请收录必须提供：
 
 1. **dsh.so 插件条目链接（含 slug）**：`https://www.dsh.so/zh/plugins/<slug>/`
-2. **dsh.so 扫描报告/扫描结果链接**：插件详情页的扫描结论，或 [dsh.so 安全周报](https://www.dsh.so/zh/security-reports/)
+2. **dsh.so 扫描结果链接**：插件详情页展示的安全结论或对应的公开报告链接
 
-与 dsh.so 作者确认最终规则前，以上为建议提供项；社区自检报告继续有效，两者并行。
+缺少任一链接时可以先提 Issue 交流，但不会写入 `data/plugins.json` 或公开展示。dsh.so 是独立服务，社区只核验和引用其结果。
 
 ## ③ 条目字段要求
 
@@ -43,11 +43,11 @@
 
 - 插件唯一 ID、名称、版本、作者与公开链接
 - 一到两句话的功能简介和所属分类
-- 安全等级、检测日期与检测报告链接
+- 固定为 `dsh.so` 的检测服务字段、安全等级、检测日期与扫描结果链接
 - 用于搜索的标签；必要时可添加同义词或拼音关键词
 - 可选的群友实测反馈和 dsh.so 页面
 
-仅允许 `passed`（通过）和 `warning`（警告）进入公开目录；未检测条目应先通过 Issue 或 PR 描述提交，检测完成后再写入 `plugins.json`。
+仅允许 `passed`（通过）和 `warning`（警告）进入公开目录；未取得 dsh.so 结果的条目应先通过 Issue 交流，完成检测后再写入 `plugins.json`。
 
 新增条目示例：
 
@@ -64,12 +64,14 @@
   "description": "一句话说明插件解决的问题。",
   "category": "development",
   "security": {
+    "provider": "dsh.so",
     "status": "passed",
-    "reportUrl": "./docs/reports/plugin-slug.md",
+    "reportUrl": "https://www.dsh.so/zh/plugins/plugin-slug/",
     "scannedAt": "2026-08-16"
   },
   "tags": ["自动化", "开发工具"],
   "searchTerms": ["automation"],
+  "dshUrl": "https://www.dsh.so/zh/plugins/plugin-slug/",
   "feedback": {
     "content": "真实使用反馈",
     "from": "@群友，2026-08"
@@ -82,7 +84,7 @@
 ## ④ PR 步骤（四步走）
 
 1. **Fork** 本仓库到你的账号，clone 到本地。
-2. **准备条目与报告**：按照安全报告模板完成检测，把报告放入 `docs/reports/`，并在 `data/plugins.json` 中追加条目。
+2. **准备检测结果**：先取得 dsh.so 插件详情页与扫描结果，再在 `data/plugins.json` 中追加条目。
 3. **按 [PULL_REQUEST_TEMPLATE.md](PULL_REQUEST_TEMPLATE.md) 填写** PR 描述：插件名、插件链接、简介、作者、是否已过安全检测（是|否，若否则等待检测）、群友实测反馈，一项不落。
 4. **提交 PR，等待检测与 review**：维护者会核对数据、徽章与报告链接；合并后 GitHub Pages 会自动更新在线目录。
 

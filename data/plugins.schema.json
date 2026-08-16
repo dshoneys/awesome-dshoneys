@@ -28,7 +28,8 @@
         "description",
         "category",
         "security",
-        "tags"
+        "tags",
+        "dshUrl"
       ],
       "additionalProperties": false,
       "properties": {
@@ -71,15 +72,19 @@
         },
         "security": {
           "type": "object",
-          "required": ["status", "reportUrl", "scannedAt"],
+          "required": ["provider", "status", "reportUrl", "scannedAt"],
           "additionalProperties": false,
           "properties": {
+            "provider": {
+              "const": "dsh.so"
+            },
             "status": {
               "enum": ["passed", "warning"]
             },
             "reportUrl": {
               "type": "string",
-              "minLength": 1
+              "format": "uri",
+              "pattern": "^https://(www\\.)?dsh\\.so/"
             },
             "scannedAt": {
               "type": "string",
@@ -117,7 +122,8 @@
         },
         "dshUrl": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "pattern": "^https://(www\\.)?dsh\\.so/zh/plugins/"
         }
       }
     }

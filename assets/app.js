@@ -138,9 +138,9 @@ function createPluginCard(plugin) {
 
   const links = document.createElement("span");
   links.className = "card-links";
-  links.append(createLink("安全报告", plugin.security.reportUrl));
-  if (plugin.dshUrl) {
-    links.append(" · ", createLink("dsh.so", plugin.dshUrl));
+  links.append(createLink("dsh.so 扫描结果", plugin.security.reportUrl));
+  if (plugin.dshUrl !== plugin.security.reportUrl) {
+    links.append(" · ", createLink("插件档案", plugin.dshUrl));
   }
   links.append(" · ", createLink("查看插件 →", plugin.url));
 
@@ -174,8 +174,8 @@ function render() {
   if (!state.plugins.length) {
     elements.count.textContent = "等待首批认证插件";
     elements.emptyTitle.textContent = "目录正在等待第一批认证插件";
-    elements.emptyDescription.textContent = "提交插件并通过安全检测后，它会以卡片形式展示在这里。";
-    elements.clear.textContent = "提交插件";
+    elements.emptyDescription.textContent = "插件通过 dsh.so 安全检测并由社区核验后，会以卡片形式展示在这里。";
+    elements.clear.textContent = "前往 dsh.so 检测";
   } else {
     elements.count.textContent = hasFilters
       ? `找到 ${plugins.length} / ${state.plugins.length} 个插件`
@@ -209,7 +209,7 @@ function resetFilters() {
 
   if (!state.plugins.length) {
     window.open(
-      "https://github.com/dshoneys/awesome-dshoneys/issues/new/choose",
+      "https://www.dsh.so/zh/submit/",
       "_blank",
       "noopener,noreferrer",
     );

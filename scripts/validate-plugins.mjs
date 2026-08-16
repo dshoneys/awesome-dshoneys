@@ -1,4 +1,4 @@
-import { access, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
@@ -46,15 +46,29 @@ for (const [index, plugin] of plugins.entries()) {
     throw new Error(`${location}.security.status 必须为 passed 或 warning。`);
   }
 
-  if (
-    typeof plugin.security.reportUrl !== "string" ||
-    !plugin.security.reportUrl.startsWith("./docs/reports/")
-  ) {
-    throw new Error(`${location}.security.reportUrl 必须指向 ./docs/reports/ 下的报告。`);
+  if (plugin.security.provider !== "dsh.so") {
+    throw new Error(`${location}.security.provider 必须为 dsh.so。`);
   }
 
-  const reportPath = resolve(root, plugin.security.reportUrl.replace(/^\.\//, ""));
-  await access(reportPath);
+  for (const [field, value] of [
+    ["security.reportUrl", plugin.security.reportUrl],
+    ["dshUrl", plugin.dshUrl],
+  ]) {
+    let url;
+    try {
+      url = new URL(value);
+    } catch {
+      throw new TypeError(`${location}.${field} 必须是有效网址。`);
+    }
+
+    if (!["dsh.so", "www.dsh.so"].includes(url.hostname.toLowerCase())) {
+      throw new Error(`${location}.${field} 必须指向 dsh.so。`);
+    }
+  }
+
+  if (!new URL(plugin.dshUrl).pathname.startsWith("/zh/plugins/")) {
+    throw new Error(`${location}.dshUrl 必须是 dsh.so 中文插件详情页。`);
+  }
 
   if (!Array.isArray(plugin.tags) || plugin.tags.some((tag) => typeof tag !== "string")) {
     throw new TypeError(`${location}.tags 必须是字符串数组。`);
