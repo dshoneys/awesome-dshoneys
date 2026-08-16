@@ -344,6 +344,45 @@
         "content": "社区复核通过（✅）。与 dsh-board 功能相近（成本可见），本方案侧重顶栏当前单价/峰谷，可并存。",
         "from": "@维护者，2026-08-16"
       }
+    },
+    {
+      "id": "dsh-plugins-finder",
+      "name": "dsh-plugins-finder",
+      "version": "0.1.8",
+      "demandTitle": "用自然语言找该装哪个插件",
+      "author": {
+        "name": "@ihuajiu",
+        "url": "https://github.com/ihuajiu"
+      },
+      "url": "https://github.com/ihuajiu/dsh-plugins-finder",
+      "description": "注册 find_plugin 工具：用自然语言查询 dsh.so 索引，返回匹配插件、验证等级、安全状态与安装命令。",
+      "details": "对应「插件太多不知道装哪个」：对话里直接说需求，Agent 调用 find_plugin，从 dsh.so 公开索引拉取候选并给出安装行。\n\n索引默认 https://www.dsh.so/plugins-index.json（可配置）；结果含 star、标签、L1–L5 与安全摘要。匹配为关键词加权，不是大模型重排。\n\n社区复核：dsh.so 已通过、critical 0 / warning 0。会出网拉索引属预期；包名未加 scope；Git 安装会跑 prepare 编译。",
+      "install": {
+        "summary": "安装到 web profile 后重启 dsh web。",
+        "commands": [
+          "dsh plugin --profile web add dsh-plugins-finder",
+          "dsh web"
+        ],
+        "notes": [
+          "建议装 ^0.1.1 及以上；0.1.0 有已知 prepare 相关问题。",
+          "pnpm 可能报 missing peer（cordis / dsh-tools / schemastery），一般可忽略，由 harness 统一提供。",
+          "也可用 dsh-plugins-finder@latest 升级。"
+        ]
+      },
+      "category": "productivity",
+      "security": {
+        "provider": "dsh.so",
+        "status": "passed",
+        "reportUrl": "https://www.dsh.so/zh/plugins/dsh-plugins-finder/",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["插件发现", "搜索", "find_plugin", "dsh.so"],
+      "searchTerms": ["finder", "find-plugin", "找插件", "marketplace", "registry"],
+      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-plugins-finder/",
+      "feedback": {
+        "content": "社区复核通过（✅）：Issue #7；审核 commit 43a23a42；dsh.so Pass 0/0。出网仅拉取公开索引。",
+        "from": "@维护者，2026-08-16"
+      }
     }
   ]
 }
