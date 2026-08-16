@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dshoneys.github.io/awesome-dshoneys/data/meme.schema.json",
+  "title": "DeepSeek Honeys 抽象区（整活）目录",
+  "type": "object",
+  "required": ["plugins"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "disclaimer": { "type": "string" },
+    "plugins": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/memePlugin" }
+    }
+  },
+  "$defs": {
+    "memePlugin": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "demandTitle",
+        "punchline",
+        "author",
+        "url",
+        "install",
+        "warning",
+        "tags",
+        "vibe"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "name": { "type": "string", "minLength": 1 },
+        "demandTitle": { "type": "string", "minLength": 1 },
+        "punchline": { "type": "string", "minLength": 1 },
+        "author": {
+          "type": "object",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "url": { "type": "string", "format": "uri" }
+          }
+        },
+        "url": { "type": "string", "format": "uri" },
+        "install": { "type": "string", "minLength": 1 },
+        "warning": { "type": "string", "minLength": 1 },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "vibe": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

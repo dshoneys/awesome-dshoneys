@@ -1,0 +1,81 @@
+{
+  "$schema": "./meme.schema.json",
+  "disclaimer": "整活区 · 不可供职推荐 · 默认不要开 · 别拿来给同事装",
+  "plugins": [
+    {
+      "id": "dsh-claude-ux",
+      "name": "dsh-claude-ux",
+      "demandTitle": "想体验被 Claude 区域风控的感觉",
+      "punchline": "工程写得比笑话还认真：默认关、有隐私文档、测 132 项——然后把你挡在门外（也可反向）。",
+      "author": {
+        "name": "@eri64",
+        "url": "https://github.com/eri64"
+      },
+      "url": "https://github.com/eri64/dsh-claude-ux",
+      "install": "npx -y @deepseek-ai/dsh plugin --profile web add github:eri64/dsh-claude-ux",
+      "warning": "默认 enabled=false。开错 target 可能把自己锁在外面。",
+      "tags": ["区域风控", "自主结束", "隐写", "黑色幽默"],
+      "vibe": "区域拒绝"
+    },
+    {
+      "id": "dsh-ads",
+      "name": "dsh-ads",
+      "demandTitle": "会话里突然弹出 2005 年中文站假广告",
+      "punchline": "不是增长黑客，是赛博乡愁。装完你会怀念还没被审核的互联网。",
+      "author": {
+        "name": "@Nagi-ovo",
+        "url": "https://github.com/Nagi-ovo"
+      },
+      "url": "https://github.com/Nagi-ovo/dsh-ads",
+      "install": "npx -y @deepseek-ai/dsh plugin --profile web add github:Nagi-ovo/dsh-ads",
+      "warning": "娱乐插件。可能打断正经工作流。",
+      "tags": ["假广告", "2005", "整活"],
+      "vibe": "入侵会话"
+    },
+    {
+      "id": "dsh-status-rotator",
+      "name": "dsh-status-rotator",
+      "demandTitle": "把「Deep diving…」换成更抽象的转场文案",
+      "punchline": "模型还在想，状态栏已经先活成了。",
+      "author": {
+        "name": "@01Virex",
+        "url": "https://github.com/01Virex"
+      },
+      "url": "https://github.com/01Virex/dsh-status-rotator",
+      "install": "npx -y @deepseek-ai/dsh plugin --profile web add github:01Virex/dsh-status-rotator",
+      "warning": "纯 UI 文案替换，仍请确认仓库来源。",
+      "tags": ["状态栏", "meme", "UI"],
+      "vibe": "文案整活"
+    },
+    {
+      "id": "whale-girl",
+      "name": "whale-girl",
+      "demandTitle": "桌面上养一只会动的鲸鱼娘",
+      "punchline": "生产力？没有。陪伴值？溢出。群友星标过的那种。",
+      "author": {
+        "name": "@vlln",
+        "url": "https://github.com/vlln"
+      },
+      "url": "https://github.com/vlln/whale-girl",
+      "install": "见仓库 README",
+      "warning": "桌宠类，占用注意力远大于占用 CPU。",
+      "tags": ["桌宠", "鲸鱼", "娱乐"],
+      "vibe": "陪伴型摸鱼"
+    },
+    {
+      "id": "dsh-deep-whale",
+      "name": "dsh-deep-whale",
+      "demandTitle": "整站换成鲸鱼娘皮肤系列",
+      "punchline": "正经目录不收皮肤包；抽象区收。因为好看也是刚需——大概。",
+      "author": {
+        "name": "@Small-tailqwq",
+        "url": "https://github.com/Small-tailqwq"
+      },
+      "url": "https://github.com/Small-tailqwq/dsh-deep-whale",
+      "install": "见仓库 README",
+      "warning": "主题/皮肤，与业务插件无关。",
+      "tags": ["主题", "皮肤", "鲸鱼娘"],
+      "vibe": "换皮仪式"
+    }
+  ]
+}

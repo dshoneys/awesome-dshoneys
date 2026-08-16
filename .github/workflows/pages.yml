@@ -28,6 +28,9 @@ jobs:
       - name: Validate plugin catalog
         run: node scripts/validate-plugins.mjs
 
+      - name: Validate meme catalog
+        run: node scripts/validate-meme.mjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

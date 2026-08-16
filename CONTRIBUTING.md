@@ -65,3 +65,11 @@
 3. 按 PR 模板说明需求覆盖、风险披露与复核依据。
 
 欢迎补充「群友实测备注」（注明昵称与日期）。
+
+## ⑤ 抽象区（B 面 · 整活）
+
+黑色幽默 / 娱乐插件**不进** `data/plugins.json`，写入 [`data/meme.json`](data/meme.json)，站点入口为顶栏「抽象区」→ [`meme.html`](meme.html)。
+
+- 不冒充社区复核通过；卡片强制「整活 · 勿生产」。
+- 本地校验：`node scripts/validate-meme.mjs`。
+- 提交流程可开 Issue 说明「投抽象区」，勿占用正经 PR 的需求叙事。

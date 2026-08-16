@@ -117,6 +117,15 @@ nav a:hover,
   color: var(--honey-dark);
 }
 
+nav a.nav-meme {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+nav a.nav-meme:hover {
+  color: var(--ink);
+}
+
 .hero {
   min-height: 580px;
   display: grid;
@@ -932,5 +941,288 @@ footer p {
 
   .copy-button {
     width: 100%;
+  }
+}
+
+/* ── B 面：抽象区 · 区域拒绝页 ───────────────────────────────── */
+
+body.side-b {
+  --ink: #161615;
+  --muted: #5e5e58;
+  --paper: #f4f3ef;
+  --paper-deep: #ebeae4;
+  --honey: #c94b3a;
+  --honey-dark: #9e3428;
+  --line: #dddcd4;
+  --refuse: #c94b3a;
+  --shadow: none;
+  font-family:
+    "Iowan Old Style", "Palatino Linotype", "Songti SC", "Noto Serif SC", Georgia, "Times New Roman",
+    serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body.side-b::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.4) 3px
+  );
+}
+
+body.side-b > * {
+  position: relative;
+  z-index: 1;
+}
+
+body.side-b .brand-mark {
+  background: var(--paper);
+  border-color: var(--refuse);
+  color: var(--refuse);
+  border-radius: 0;
+  box-shadow: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+body.side-b nav a:hover,
+body.side-b .footer-links a:hover {
+  color: var(--refuse);
+}
+
+body.side-b nav a[aria-current="page"] {
+  color: var(--refuse);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.refusal-hero {
+  max-width: 720px;
+  padding: 72px 0 48px;
+  animation: refusal-in 520ms ease-out both;
+}
+
+@keyframes refusal-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.refusal-kicker {
+  margin: 0 0 10px;
+  color: var(--refuse);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.refusal-date {
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+}
+
+body.side-b .refusal-hero h1 {
+  max-width: 18ch;
+  margin-bottom: 16px;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+}
+
+.refusal-en {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+  font-style: italic;
+}
+
+.refusal-attempt {
+  margin: 0 0 28px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--refuse);
+  background: rgba(201, 75, 58, 0.06);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.refusal-attempt-en {
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.refusal-lead {
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 38rem;
+}
+
+.refusal-lead strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.button-refuse {
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--refuse);
+  color: #fff;
+  box-shadow: none;
+  font-family: inherit;
+}
+
+.button-refuse:hover {
+  background: var(--honey-dark);
+  box-shadow: none;
+  transform: none;
+}
+
+.button-refuse-ghost {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.button-refuse-ghost:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.refusal-eyebrow {
+  color: var(--refuse) !important;
+  letter-spacing: 0.12em;
+}
+
+.meme-disclaimer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: baseline;
+  margin-bottom: 28px;
+  padding: 14px 16px;
+  border: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.meme-disclaimer strong {
+  color: var(--refuse);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.meme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+  margin-bottom: 64px;
+}
+
+.meme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #fffcf8;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.meme-card:hover {
+  border-color: var(--refuse);
+  background: #fff;
+}
+
+.meme-vibe {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.meme-badge {
+  border-radius: 0 !important;
+}
+
+.meme-punchline {
+  margin: 4px 0 0;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.meme-warning {
+  margin: 0;
+  color: var(--refuse);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.meme-install {
+  margin-top: 8px;
+}
+
+.meme-install-label {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+body.side-b .command-row pre {
+  border-radius: 0;
+  border-color: var(--line);
+  background: var(--paper-deep);
+  font-size: 12px;
+}
+
+body.side-b .copy-button {
+  border-radius: 0;
+}
+
+body.side-b .meme-card .demand-title a:hover {
+  color: var(--refuse);
+}
+
+body.side-b footer {
+  border-top: 1px solid var(--line);
+  padding-block: 36px 48px;
+}
+
+@media (max-width: 720px) {
+  .refusal-hero {
+    padding-top: 48px;
+  }
+
+  body.side-b .refusal-hero h1 {
+    max-width: none;
   }
 }
