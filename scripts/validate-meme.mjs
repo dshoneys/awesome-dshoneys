@@ -54,6 +54,18 @@ for (const [index, plugin] of plugins.entries()) {
   if (!Array.isArray(plugin.tags) || plugin.tags.some((tag) => typeof tag !== "string")) {
     throw new TypeError(`${location}.tags 必须是字符串数组。`);
   }
+
+  if (plugin.details !== undefined && (typeof plugin.details !== "string" || !plugin.details.trim())) {
+    throw new TypeError(`${location}.details 若存在必须是非空字符串。`);
+  }
+
+  if (plugin.listingIssue !== undefined) {
+    try {
+      new URL(plugin.listingIssue);
+    } catch {
+      throw new TypeError(`${location}.listingIssue 必须是有效网址。`);
+    }
+  }
 }
 
 console.log(`抽象区验证通过：${plugins.length} 个整活插件。`);

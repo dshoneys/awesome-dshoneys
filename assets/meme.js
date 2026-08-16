@@ -1,3 +1,9 @@
+import {
+  createInternalLink,
+  getMemePageUrl,
+  loadMemeCatalog,
+} from "./catalog.js?v=20260816-b3";
+
 const ATTEMPT_KEY = "dshoneys-meme-attempts";
 const ATTEMPT_MAX = 3;
 
@@ -15,7 +21,6 @@ function stegoDate(hit) {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
-  // 命中抽象区 → 斜杠日期（复刻区域隐写梗）
   return hit ? `${y}/${m}/${day}` : `${y}-${m}-${day}`;
 }
 
@@ -40,16 +45,6 @@ function renderAttempt(n) {
   elements.attempt.innerHTML = `${zh}<br /><span class="refusal-attempt-en">${en}</span>`;
 }
 
-function createExternalLink(text, href, className) {
-  const link = document.createElement("a");
-  link.textContent = text;
-  link.href = href;
-  link.target = "_blank";
-  link.rel = "noreferrer";
-  if (className) link.className = className;
-  return link;
-}
-
 async function copyText(text, button) {
   try {
     await navigator.clipboard.writeText(text);
@@ -64,8 +59,22 @@ async function copyText(text, button) {
 }
 
 function createCard(plugin) {
+  const detailUrl = getMemePageUrl(plugin);
   const card = document.createElement("article");
   card.className = "meme-card";
+  card.tabIndex = 0;
+  card.setAttribute("role", "link");
+  card.setAttribute("aria-label", `查看展品：${plugin.demandTitle}`);
+  card.addEventListener("click", (event) => {
+    if (event.target.closest("a, button")) return;
+    location.href = detailUrl;
+  });
+  card.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      location.href = detailUrl;
+    }
+  });
 
   const top = document.createElement("div");
   top.className = "card-top";
@@ -85,7 +94,7 @@ function createCard(plugin) {
 
   const title = document.createElement("h3");
   title.className = "demand-title";
-  title.append(createExternalLink(plugin.demandTitle || plugin.name, plugin.url));
+  title.append(createInternalLink(plugin.demandTitle || plugin.name, detailUrl));
 
   const author = document.createElement("p");
   author.className = "author";
@@ -127,14 +136,17 @@ function createCard(plugin) {
   copy.type = "button";
   copy.className = "button button-secondary copy-button";
   copy.textContent = "复制";
-  copy.addEventListener("click", () => copyText(plugin.install, copy));
+  copy.addEventListener("click", (event) => {
+    event.stopPropagation();
+    copyText(plugin.install, copy);
+  });
 
   row.append(pre, copy);
   installBlock.append(installLabel, row);
 
   const footer = document.createElement("div");
   footer.className = "card-footer";
-  footer.append(createExternalLink("打开仓库 →", plugin.url, "card-links"));
+  footer.append(createInternalLink("查看展品 →", detailUrl, "card-links"));
 
   card.append(top, demand, title, author, punchline, warning, tags, installBlock, footer);
   return card;
@@ -149,11 +161,7 @@ async function loadMeme() {
   renderAttempt(attempt);
 
   try {
-    const response = await fetch(`./data/meme.json?t=${Date.now()}`, { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    const plugins = Array.isArray(data.plugins) ? data.plugins : [];
-
+    const plugins = await loadMemeCatalog();
     elements.grid.replaceChildren(...plugins.map(createCard));
     elements.empty.hidden = plugins.length > 0;
     elements.grid.hidden = plugins.length === 0;

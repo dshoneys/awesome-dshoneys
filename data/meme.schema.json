@@ -37,6 +37,7 @@
         "name": { "type": "string", "minLength": 1 },
         "demandTitle": { "type": "string", "minLength": 1 },
         "punchline": { "type": "string", "minLength": 1 },
+        "details": { "type": "string", "minLength": 1 },
         "author": {
           "type": "object",
           "required": ["name"],
@@ -54,7 +55,12 @@
           "items": { "type": "string" },
           "uniqueItems": true
         },
-        "vibe": { "type": "string", "minLength": 1 }
+        "vibe": { "type": "string", "minLength": 1 },
+        "listingIssue": {
+          "type": "string",
+          "format": "uri",
+          "description": "首次收录时向原仓库开的通知 Issue"
+        }
       }
     }
   }

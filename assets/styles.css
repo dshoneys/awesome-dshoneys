@@ -1288,6 +1288,38 @@ body.side-b footer strong {
   color: var(--ink);
 }
 
+body.side-b .breadcrumb {
+  color: var(--muted);
+}
+
+body.side-b .breadcrumb a {
+  color: var(--honey-dark);
+}
+
+body.side-b .plugin-detail h1 {
+  color: var(--ink);
+}
+
+body.side-b .plugin-meta,
+body.side-b .detail-lead,
+body.side-b .detail-copy,
+body.side-b .detail-copy p {
+  color: var(--muted);
+}
+
+body.side-b .detail-section {
+  border-top-color: var(--line);
+}
+
+body.side-b .detail-section h2 {
+  color: var(--ink);
+}
+
+body.side-b .detail-warning {
+  margin: 0 0 8px;
+  max-width: 40rem;
+}
+
 @media (max-width: 720px) {
   .refusal-hero {
     padding-top: 48px;

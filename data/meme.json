@@ -7,6 +7,7 @@
       "name": "dsh-claude-ux",
       "demandTitle": "想体验被 Claude 区域风控的感觉",
       "punchline": "工程写得比笑话还认真：默认关、有隐私文档、测 132 项——然后把你挡在门外（也可反向）。",
+      "details": "DeepSeek Harness web 插件，复刻 Claude 式区域风控与对话自主结束。\n\n区域目标可选 cn / non-cn；命中后拒绝阶梯 → 结束会话，并可在系统提示词里做日期/撇号隐写标记。辱骂与严重有害内容有独立结束文案；自伤风险不触发结束。\n\n抽象区收录理由：产品叙事是黑色幽默，但工程完成度（默认关闭、隐私文档、单元测试）反而很正经——适合作为「整活也要写对」的展品。",
       "author": {
         "name": "@eri64",
         "url": "https://github.com/eri64"
@@ -15,13 +16,15 @@
       "install": "npx -y @deepseek-ai/dsh plugin --profile web add github:eri64/dsh-claude-ux",
       "warning": "默认 enabled=false。开错 target 可能把自己锁在外面。",
       "tags": ["区域风控", "自主结束", "隐写", "黑色幽默"],
-      "vibe": "区域拒绝"
+      "vibe": "区域拒绝",
+      "listingIssue": "https://github.com/eri64/dsh-claude-ux/issues/8"
     },
     {
       "id": "dsh-ads",
       "name": "dsh-ads",
       "demandTitle": "会话里突然弹出 2005 年中文站假广告",
       "punchline": "不是增长黑客，是赛博乡愁。装完你会怀念还没被审核的互联网。",
+      "details": "在 DSH 会话界面插入早期中文互联网风格的假广告模块，属于娱乐向 UI 整活。\n\n抽象区收录：明确不是生产力工具，但完成度与社区传播度都够格当展品。使用前请确认会打断正经工作流。",
       "author": {
         "name": "@Nagi-ovo",
         "url": "https://github.com/Nagi-ovo"
@@ -30,13 +33,15 @@
       "install": "npx -y @deepseek-ai/dsh plugin --profile web add github:Nagi-ovo/dsh-ads",
       "warning": "娱乐插件。可能打断正经工作流。",
       "tags": ["假广告", "2005", "整活"],
-      "vibe": "入侵会话"
+      "vibe": "入侵会话",
+      "listingIssue": "https://github.com/Nagi-ovo/dsh-ads/issues/12"
     },
     {
       "id": "dsh-status-rotator",
       "name": "dsh-status-rotator",
       "demandTitle": "把「Deep diving…」换成更抽象的转场文案",
       "punchline": "模型还在想，状态栏已经先活成了。",
+      "details": "替换回合状态文案（如 Deep diving…）为可配置的 meme 短句，可带打字机/渐变等效果。\n\n抽象区收录：几乎不改业务逻辑，只改「等待时的气氛」——典型轻量整活。",
       "author": {
         "name": "@01Virex",
         "url": "https://github.com/01Virex"
@@ -45,7 +50,8 @@
       "install": "npx -y @deepseek-ai/dsh plugin --profile web add github:01Virex/dsh-status-rotator",
       "warning": "纯 UI 文案替换，仍请确认仓库来源。",
       "tags": ["状态栏", "meme", "UI"],
-      "vibe": "文案整活"
+      "vibe": "文案整活",
+      "listingIssue": "https://github.com/01Virex/dsh-status-rotator/issues/3"
     }
   ]
 }

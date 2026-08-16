@@ -3,37 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="DeepSeek Honeys 需求方案详情：介绍、安装方式与社区复核入口。" />
-    <meta name="theme-color" content="#fff8e7" />
-    <title>插件详情 · DeepSeek Honeys</title>
+    <meta name="description" content="DeepSeek Honeys 抽象区展品详情：整活插件，不可供职推荐。" />
+    <meta name="theme-color" content="#201b12" />
+    <meta name="robots" content="noindex" />
+    <title>展品详情 · 抽象区</title>
     <link rel="stylesheet" href="./assets/styles.css?v=20260816-b3" />
-    <script type="module" src="./assets/plugin.js?v=20260816-demand"></script>
+    <script type="module" src="./assets/meme-plugin.js?v=20260816-b3"></script>
   </head>
-  <body>
+  <body class="side-b">
     <header class="site-header">
-      <a class="brand" href="./" aria-label="DeepSeek Honeys 插件目录首页">
-        <span class="brand-mark" aria-hidden="true">DSH</span>
+      <a class="brand" href="./meme.html" aria-label="返回抽象区">
+        <span class="brand-mark" aria-hidden="true">B</span>
         <span>
           <strong>DeepSeek Honeys</strong>
-          <small>按需求找方案</small>
+          <small>抽象区 · 不可供职</small>
         </span>
       </a>
       <nav aria-label="主导航">
-        <a href="./#directory">找插件</a>
-        <a href="./#how-it-works">收录规则</a>
-        <a class="nav-meme" href="./meme.html">抽象区</a>
+        <a href="./">返回 A 面</a>
+        <a href="./meme.html" aria-current="page">抽象区</a>
         <a href="https://github.com/dshoneys/awesome-dshoneys" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
     </header>
 
     <main class="plugin-page">
-      <p id="plugin-loading" class="result-count">正在载入插件详情…</p>
+      <p id="plugin-loading" class="result-count">正在载入展品…</p>
 
       <div id="plugin-missing" class="empty-state" hidden>
-        <span aria-hidden="true">⌕</span>
-        <h3>未找到该插件</h3>
-        <p>请返回目录重新选择。</p>
-        <a class="button button-secondary" href="./#directory">返回目录</a>
+        <h3>未找到该展品</h3>
+        <p>请返回抽象区重新选择。</p>
+        <a class="button button-secondary button-refuse-ghost" href="./meme.html">返回抽象区</a>
       </div>
 
       <article id="plugin-article" class="plugin-detail" hidden>
@@ -42,24 +41,22 @@
         <h1 id="plugin-title"></h1>
         <p id="plugin-meta" class="plugin-meta"></p>
         <p id="plugin-description" class="hero-description detail-lead"></p>
+        <p id="plugin-warning" class="meme-warning detail-warning"></p>
 
         <section class="detail-section" aria-labelledby="about-title">
-          <h2 id="about-title">详细介绍</h2>
+          <h2 id="about-title">展品说明</h2>
           <div id="plugin-details" class="detail-copy"></div>
         </section>
 
         <section class="detail-section" aria-labelledby="install-title">
-          <h2 id="install-title">安装方式</h2>
-          <p id="install-summary" class="detail-copy"></p>
+          <h2 id="install-title">安装（自负）</h2>
+          <p id="install-summary" class="detail-copy">复制命令前请确认：这是抽象区展品，默认不要往生产环境塞。</p>
           <div id="install-commands" class="install-commands"></div>
-          <div id="install-notes" class="install-notes"></div>
         </section>
-
-        <section id="plugin-feedback" class="detail-section" aria-label="社区审核说明" hidden></section>
 
         <section class="detail-section" aria-labelledby="actions-title">
           <h2 id="actions-title">下一步</h2>
-          <p class="detail-copy">确认适合后再跳转到外部页面。</p>
+          <p class="detail-copy">笑完可以走。要装请自负。</p>
           <div id="plugin-actions" class="hero-actions"></div>
         </section>
       </article>
@@ -67,13 +64,13 @@
 
     <footer>
       <div>
-        <strong>DeepSeek Honeys</strong>
-        <p>由中文开发者社区共建维护。</p>
+        <strong>DeepSeek Honeys · B</strong>
+        <p>整活展区 · 不冒充社区复核通过</p>
       </div>
       <div class="footer-links">
-        <a href="https://www.dsh.so/zh/submit/">dsh.so 安全检测</a>
+        <a href="./meme.html">抽象区目录</a>
+        <a href="./">正经目录</a>
         <a href="https://github.com/dshoneys/awesome-dshoneys">项目仓库</a>
-        <a href="./#directory">返回目录</a>
       </div>
     </footer>
   </body>

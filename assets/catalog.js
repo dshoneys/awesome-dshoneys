@@ -17,6 +17,12 @@ export function getPluginPageUrl(pluginOrId) {
   return `./plugin.html?id=${encodeURIComponent(id)}`;
 }
 
+export function getMemePageUrl(pluginOrId) {
+  const id = typeof pluginOrId === "string" ? pluginOrId : pluginOrId?.id;
+  if (!id) return "./meme.html";
+  return `./meme-plugin.html?id=${encodeURIComponent(id)}`;
+}
+
 export function normalize(value) {
   return String(value ?? "")
     .normalize("NFKC")
@@ -44,6 +50,15 @@ export function createInternalLink(text, href, className) {
 
 export async function loadCatalog() {
   const response = await fetch(`./data/plugins.json?t=${Date.now()}`, {
+    cache: "no-store",
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const data = await response.json();
+  return Array.isArray(data.plugins) ? data.plugins : [];
+}
+
+export async function loadMemeCatalog() {
+  const response = await fetch(`./data/meme.json?t=${Date.now()}`, {
     cache: "no-store",
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);

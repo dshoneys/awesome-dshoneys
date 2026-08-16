@@ -68,8 +68,9 @@
 
 ## ⑤ 抽象区（B 面 · 整活）
 
-黑色幽默 / 娱乐插件**不进** `data/plugins.json`，写入 [`data/meme.json`](data/meme.json)，站点入口为顶栏「抽象区」→ [`meme.html`](meme.html)。
+黑色幽默 / 娱乐插件**不进** `data/plugins.json`，写入 [`data/meme.json`](data/meme.json)，站点入口为顶栏「抽象区」→ [`meme.html`](meme.html)；每件展品有独立详情页 [`meme-plugin.html?id=…`](meme-plugin.html)。
 
 - 不冒充社区复核通过；卡片强制「整活 · 勿生产」。
+- **首次收录必须向原仓库开 Issue** 通知作者，并把 Issue URL 写入条目的 `listingIssue` 字段。
 - 本地校验：`node scripts/validate-meme.mjs`。
 - 提交流程可开 Issue 说明「投抽象区」，勿占用正经 PR 的需求叙事。
