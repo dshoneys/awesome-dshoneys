@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DeepSeek Honeys 认证插件详情：介绍、安装方式与安全扫描入口。" />
+    <meta name="theme-color" content="#fff8e7" />
+    <title>插件详情 · DeepSeek Honeys</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script type="module" src="./assets/plugin.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="DeepSeek Honeys 插件目录首页">
+        <span class="brand-mark" aria-hidden="true">DSH</span>
+        <span>
+          <strong>DeepSeek Honeys</strong>
+          <small>认证插件目录</small>
+        </span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="./#directory">找插件</a>
+        <a href="./#how-it-works">收录规则</a>
+        <a href="https://github.com/dshoneys/awesome-dshoneys" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main class="plugin-page">
+      <p id="plugin-loading" class="result-count">正在载入插件详情…</p>
+
+      <div id="plugin-missing" class="empty-state" hidden>
+        <span aria-hidden="true">⌕</span>
+        <h3>未找到该插件</h3>
+        <p>请返回目录重新选择。</p>
+        <a class="button button-secondary" href="./#directory">返回目录</a>
+      </div>
+
+      <article id="plugin-article" class="plugin-detail" hidden>
+        <p id="plugin-breadcrumb" class="breadcrumb"></p>
+        <div id="plugin-badges" class="card-top detail-badges"></div>
+        <h1 id="plugin-title"></h1>
+        <p id="plugin-meta" class="plugin-meta"></p>
+        <p id="plugin-description" class="hero-description detail-lead"></p>
+
+        <section class="detail-section" aria-labelledby="about-title">
+          <h2 id="about-title">详细介绍</h2>
+          <div id="plugin-details" class="detail-copy"></div>
+        </section>
+
+        <section class="detail-section" aria-labelledby="install-title">
+          <h2 id="install-title">安装方式</h2>
+          <p id="install-summary" class="detail-copy"></p>
+          <div id="install-commands" class="install-commands"></div>
+          <div id="install-notes" class="install-notes"></div>
+        </section>
+
+        <section id="plugin-feedback" class="detail-section" aria-label="社区审核说明" hidden></section>
+
+        <section class="detail-section" aria-labelledby="actions-title">
+          <h2 id="actions-title">下一步</h2>
+          <p class="detail-copy">确认适合后再跳转到外部页面。</p>
+          <div id="plugin-actions" class="hero-actions"></div>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <div>
+        <strong>DeepSeek Honeys</strong>
+        <p>由中文开发者社区共建维护。</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.dsh.so/zh/submit/">dsh.so 安全检测</a>
+        <a href="https://github.com/dshoneys/awesome-dshoneys">项目仓库</a>
+        <a href="./#directory">返回目录</a>
+      </div>
+    </footer>
+  </body>
+</html>

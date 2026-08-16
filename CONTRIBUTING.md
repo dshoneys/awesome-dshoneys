@@ -43,6 +43,7 @@
 
 - 插件唯一 ID、名称、版本、作者与公开链接
 - 一到两句话的功能简介和所属分类
+- 建议补充 `details`（详情介绍）与 `install`（安装摘要、命令、注意事项），用于独立展示页
 - 固定为 `dsh.so` 的检测服务字段、安全等级、检测日期与扫描结果链接
 - 用于搜索的标签；必要时可添加同义词或拼音关键词
 - 可选的群友实测反馈和 dsh.so 页面
@@ -62,6 +63,12 @@
   },
   "url": "https://github.com/author/plugin",
   "description": "一句话说明插件解决的问题。",
+  "details": "更完整的介绍，可用空行分段。",
+  "install": {
+    "summary": "推荐安装方式一句话说明。",
+    "commands": ["dsh plugin --profile web add github:author/plugin"],
+    "notes": ["重启 dsh web 后刷新页面验证。"]
+  },
   "category": "development",
   "security": {
     "provider": "dsh.so",
@@ -79,6 +86,7 @@
 }
 ```
 
+独立展示页地址为 `plugin.html?id=<插件id>`；目录卡片只进入该页，外链按钮放在详情页内。
 ---
 
 ## ④ PR 步骤（四步走）

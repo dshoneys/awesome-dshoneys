@@ -428,16 +428,23 @@ kbd {
   border: 1px solid var(--line);
   border-radius: 19px;
   background: #fff;
+  cursor: pointer;
   transition:
     transform 180ms ease,
     border-color 180ms ease,
     box-shadow 180ms ease;
 }
 
-.plugin-card:hover {
+.plugin-card:hover,
+.plugin-card:focus-visible {
   border-color: #d6bd7d;
   transform: translateY(-4px);
   box-shadow: 0 18px 45px rgba(90, 60, 10, 0.1);
+  outline: none;
+}
+
+.plugin-card h3 a:hover {
+  color: var(--honey-dark);
 }
 
 .card-top,
@@ -789,5 +796,130 @@ footer p {
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
+  }
+}
+
+.plugin-page {
+  padding: 28px 0 88px;
+}
+
+.breadcrumb {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.breadcrumb a:hover {
+  color: var(--honey-dark);
+}
+
+.plugin-detail {
+  max-width: 820px;
+}
+
+.detail-badges {
+  justify-content: flex-start;
+  margin-bottom: 18px;
+}
+
+.plugin-detail h1 {
+  margin-bottom: 12px;
+  font-size: clamp(36px, 6vw, 58px);
+}
+
+.plugin-meta {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.detail-lead {
+  margin-bottom: 36px;
+  font-size: 17px;
+}
+
+.detail-section {
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+}
+
+.detail-section h2 {
+  margin-bottom: 14px;
+  font-size: 24px;
+  letter-spacing: -0.03em;
+}
+
+.detail-copy,
+.detail-copy p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.detail-copy p {
+  margin: 0 0 14px;
+}
+
+.detail-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.install-commands {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.command-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.command-row pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.command-row code {
+  white-space: pre;
+}
+
+.copy-button {
+  min-width: 72px;
+  padding-inline: 14px;
+}
+
+.install-notes ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.install-notes li + li {
+  margin-top: 8px;
+}
+
+.detail-feedback {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .command-row {
+    grid-template-columns: 1fr;
+  }
+
+  .copy-button {
+    width: 100%;
   }
 }

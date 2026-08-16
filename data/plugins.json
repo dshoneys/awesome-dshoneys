@@ -11,6 +11,17 @@
       },
       "url": "https://github.com/liustack/modsearch",
       "description": "多引擎联网搜索与网页读取，支持故障转移；默认免 key 路径依赖第三方 CLI，更稳妥请用 Tavily/Exa/Firecrawl 密钥。",
+      "details": "ModSearch 为 DeepSeek Harness 提供更强的联网能力：补强内置 web_search，并增加 X（Twitter）搜索与单页读取。\n\n默认走 Antigravity CLI（免费、需本机登录），也可配置 Tavily / Exa / Firecrawl / Grok，引擎失败时自动切换。适合需要引用来源、又不想给模型直连外网权限的场景。\n\n使用前请阅读维护者审核说明：默认路径可能涉及第三方 CLI 与安装脚本，建议优先配置密钥引擎。",
+      "install": {
+        "summary": "用 dsh 一键安装到 web profile，再按需配置搜索引擎。",
+        "commands": [
+          "npx -y @deepseek-ai/dsh plugin --profile web add @liustack/modsearch@latest"
+        ],
+        "notes": [
+          "默认引擎 Antigravity CLI 需要本机浏览器登录；也可改用 Tavily / Exa / Firecrawl 密钥。",
+          "更完整的安装与排障见仓库 INSTALL.md 与 harness-setup 文档。"
+        ]
+      },
       "category": "productivity",
       "security": {
         "provider": "dsh.so",
@@ -36,6 +47,19 @@
       },
       "url": "https://github.com/Chang-Tong/dsh-import-agents",
       "description": "把 Pi / OpenCode / Codex / Claude Code 本地会话与 agents 导入 DeepSeek Harness；会批量读取本机会话目录。",
+      "details": "把本机已有的 agent 会话迁入 DeepSeek Harness：支持 pi、OpenCode、Codex、Claude Code。导入后可在会话列表继续聊，历史文本、推理与工具调用会尽量保留。\n\n同时可以把源工具里的 agents / prompts 转成 dsh skills，并在输入框提供一键 Sync。导入是幂等的，重复执行会跳过已存在条目。\n\n请注意：插件会批量读取本机会话目录；只在你信任的机器上使用。",
+      "install": {
+        "summary": "安装到 web profile，写入 cordis 补丁后重启 dsh web。",
+        "commands": [
+          "cd ~/.dsh/profiles/web && pnpm add dsh-import-agents",
+          "dsh web"
+        ],
+        "notes": [
+          "在 ~/.dsh/profiles/web/cordis.patch.yml 追加：id 为 import-pi-opencode，name 为 dsh-import-agents。",
+          "重启后请刷新页面；可用输入框 Sync 按钮或 /import-all 验证。",
+          "需要 Node ≥ 22.19。"
+        ]
+      },
       "category": "local",
       "security": {
         "provider": "dsh.so",
@@ -61,6 +85,19 @@
       },
       "url": "https://github.com/maxwell-feng/dsh-tesseract-ocr",
       "description": "本地 Tesseract OCR：文本模型可收图，仅把识别文字发给模型；默认不透传原图，视觉透传需显式开启。",
+      "details": "让纯文本模型也能处理图片附件：图片在本机用 Tesseract 识别，只把文字发给模型 API。默认不向视觉模型透传原图；需要透传时显式设置 passthrough: true。\n\n适用于重视隐私、又想给 DeepSeek 等文本模型「看图」的场景。系统需安装 tesseract CLI 与语言包（如简体中文 chi_sim）。\n\n请勿与 windows-ocr 同时启用，否则同一张图会被重复 OCR。",
+      "install": {
+        "summary": "先安装本机 Tesseract，再用 dsh 加载插件包。",
+        "commands": [
+          "sudo apt install -y tesseract-ocr tesseract-ocr-chi-sim",
+          "dsh plugin --profile web add github:maxwell-feng/dsh-tesseract-ocr"
+        ],
+        "notes": [
+          "也可用绝对路径指向本地 checkout 的 lib/index.js；Windows 路径须写成 file:// URL。",
+          "默认 language 可用 eng+chi_sim；Windows 若路径含空格，请给 tesseractBin 加引号。",
+          "仓库含 agents-install.md，可交给 AI agent 完成安装与验证。"
+        ]
+      },
       "category": "local",
       "security": {
         "provider": "dsh.so",

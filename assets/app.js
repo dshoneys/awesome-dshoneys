@@ -1,26 +1,11 @@
-const CATEGORY_LABELS = {
-  productivity: "效率工具",
-  development: "开发工具",
-  data: "数据接入",
-  local: "本地化",
-  other: "其他",
-};
-
-const STATUS_LABELS = {
-  passed: "✓ 已通过",
-  warning: "⚠ 有警告",
-};
-
-/** 社区收录仓库：卡片主链先落到我们这边，再二链原仓库。 */
-const COMMUNITY_REPO_URL = "https://github.com/dshoneys/awesome-dshoneys";
-const COMMUNITY_CATALOG_URL = `${COMMUNITY_REPO_URL}/blob/main/data/plugins.json`;
-
-function getCommunityEntryUrl(plugin) {
-  const id = plugin?.id;
-  if (!id) return COMMUNITY_CATALOG_URL;
-  // 文本片段：支持的浏览器会滚到对应条目；不支持时仍打开目录文件。
-  return `${COMMUNITY_CATALOG_URL}#:~:text=${encodeURIComponent(`"id": "${id}"`)}`;
-}
+import {
+  CATEGORY_LABELS,
+  STATUS_LABELS,
+  createInternalLink,
+  getPluginPageUrl,
+  loadCatalog,
+  normalize,
+} from "./catalog.js";
 
 const state = {
   plugins: [],
@@ -42,13 +27,6 @@ const elements = {
   clear: document.querySelector("#clear-filters"),
 };
 
-function normalize(value) {
-  return String(value ?? "")
-    .normalize("NFKC")
-    .toLocaleLowerCase("zh-CN")
-    .trim();
-}
-
 function getSearchText(plugin) {
   return normalize(
     [
@@ -56,6 +34,7 @@ function getSearchText(plugin) {
       plugin.version,
       plugin.author?.name,
       plugin.description,
+      plugin.details,
       CATEGORY_LABELS[plugin.category],
       ...(plugin.tags ?? []),
       ...(plugin.searchTerms ?? []),
@@ -80,19 +59,23 @@ function getFilteredPlugins() {
   });
 }
 
-function createLink(text, href, className) {
-  const link = document.createElement("a");
-  link.textContent = text;
-  link.href = href;
-  link.target = "_blank";
-  link.rel = "noreferrer";
-  if (className) link.className = className;
-  return link;
-}
-
 function createPluginCard(plugin) {
+  const detailUrl = getPluginPageUrl(plugin);
   const card = document.createElement("article");
   card.className = "plugin-card";
+  card.tabIndex = 0;
+  card.setAttribute("role", "link");
+  card.setAttribute("aria-label", `查看 ${plugin.name} 详情`);
+  card.addEventListener("click", (event) => {
+    if (event.target.closest("a")) return;
+    location.href = detailUrl;
+  });
+  card.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      location.href = detailUrl;
+    }
+  });
 
   const top = document.createElement("div");
   top.className = "card-top";
@@ -107,18 +90,11 @@ function createPluginCard(plugin) {
   top.append(category, security);
 
   const title = document.createElement("h3");
-  // 主链：社区收录条目（我们的 GIT），避免点标题落到作者主页。
-  title.append(createLink(plugin.name, getCommunityEntryUrl(plugin)));
+  title.append(createInternalLink(plugin.name, detailUrl));
 
   const author = document.createElement("p");
   author.className = "author";
-  author.append("作者：");
-  if (plugin.author?.url) {
-    // 作者链仅指向个人主页，文案带「主页」降低误点成「仓库」的预期。
-    author.append(createLink(`${plugin.author.name} 主页`, plugin.author.url));
-  } else {
-    author.append(plugin.author?.name ?? "未注明");
-  }
+  author.textContent = `作者：${plugin.author?.name ?? "未注明"}`;
 
   const description = document.createElement("p");
   description.className = "description";
@@ -152,13 +128,7 @@ function createPluginCard(plugin) {
 
   const links = document.createElement("span");
   links.className = "card-links";
-  links.append(createLink("dsh.so 扫描结果", plugin.security.reportUrl));
-  if (plugin.dshUrl !== plugin.security.reportUrl) {
-    links.append(" · ", createLink("插件档案", plugin.dshUrl));
-  }
-  // 一链社区收录，二链对方原仓库（插件源码 GIT）。
-  links.append(" · ", createLink("社区收录 →", getCommunityEntryUrl(plugin)));
-  links.append(" · ", createLink("原仓库 →", plugin.url));
+  links.append(createInternalLink("查看详情 →", detailUrl));
 
   const version = document.createElement("span");
   version.className = "version";
@@ -292,14 +262,7 @@ function bindEvents() {
 
 async function loadPlugins() {
   try {
-    // Bypass stale browser/CDN caches after catalog updates on GitHub Pages.
-    const response = await fetch(`./data/plugins.json?t=${Date.now()}`, {
-      cache: "no-store",
-    });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const data = await response.json();
-    state.plugins = Array.isArray(data.plugins) ? data.plugins : [];
+    state.plugins = await loadCatalog();
     render();
   } catch (error) {
     console.error("无法载入插件目录：", error);

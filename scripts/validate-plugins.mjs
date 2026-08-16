@@ -79,6 +79,32 @@ for (const [index, plugin] of plugins.entries()) {
   if (!Array.isArray(plugin.tags) || plugin.tags.some((tag) => typeof tag !== "string")) {
     throw new TypeError(`${location}.tags 必须是字符串数组。`);
   }
+
+  if (plugin.details !== undefined && (typeof plugin.details !== "string" || !plugin.details.trim())) {
+    throw new TypeError(`${location}.details 若存在必须是非空字符串。`);
+  }
+
+  if (plugin.install !== undefined) {
+    if (!plugin.install || typeof plugin.install.summary !== "string" || !plugin.install.summary.trim()) {
+      throw new TypeError(`${location}.install.summary 必须是非空字符串。`);
+    }
+    if (plugin.install.commands !== undefined) {
+      if (
+        !Array.isArray(plugin.install.commands) ||
+        plugin.install.commands.some((item) => typeof item !== "string" || !item.trim())
+      ) {
+        throw new TypeError(`${location}.install.commands 必须是非空字符串数组。`);
+      }
+    }
+    if (plugin.install.notes !== undefined) {
+      if (
+        !Array.isArray(plugin.install.notes) ||
+        plugin.install.notes.some((item) => typeof item !== "string" || !item.trim())
+      ) {
+        throw new TypeError(`${location}.install.notes 必须是非空字符串数组。`);
+      }
+    }
+  }
 }
 
 console.log(`插件目录验证通过：${plugins.length} 个认证插件。`);

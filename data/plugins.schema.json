@@ -67,6 +67,37 @@
           "type": "string",
           "minLength": 1
         },
+        "details": {
+          "type": "string",
+          "minLength": 1,
+          "description": "详情页正文，可用空行分段"
+        },
+        "install": {
+          "type": "object",
+          "required": ["summary"],
+          "additionalProperties": false,
+          "properties": {
+            "summary": {
+              "type": "string",
+              "minLength": 1
+            },
+            "commands": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
         "category": {
           "enum": ["productivity", "development", "data", "local", "other"]
         },
