@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 日志与临时文件
+*.log
+*.tmp
+*.swp
+*~
+
+# 编辑器/IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Node（如后续引入自动化脚本）
+node_modules/
+package-lock.json
+
+# Python（如后续引入安全检测脚本）
+__pycache__/
+*.pyc
+.venv/
+
+# 本地草稿，不入库
+drafts-local/

@@ -1,0 +1,9 @@
+# GitHub Issue 选择器配置
+# 关闭「空白 Issue」入口：所有 Issue 必须走模板，方便分类归档与安全检测跟踪
+blank_issues_enabled: false
+
+contact_links:
+  # TODO: 群二维码/邀请链接待替换（url 当前为 # 占位，拿到正式链接后更新）
+  - name: 微信群·DeepSeek Honeys 用户反馈群
+    url: "#"
+    about: 加群交流插件使用心得、反馈问题、参与每周精选讨论（约 270 位开发者群友）

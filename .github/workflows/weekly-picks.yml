@@ -1,0 +1,49 @@
+# =====================================================================
+# weekly-picks —— 每周精选提醒（占位 workflow）
+#
+# 说明：
+# - cron 使用 UTC 时间；"0 3 * * 5" = 每周五 UTC 03:00 = 北京时间周五 11:00
+# - 本仓库当前为本地骨架，尚未接入 GitHub 远端；
+#   【拿到仓库权限（push 权限 / Actions 启用）后，本文件提交上去即自动生效】
+# - 现阶段为占位：只 echo 提醒，不执行任何写操作。
+#   需要真正自动建提醒 Issue 时，把下面「方式二」的注释解开，
+#   并在仓库 Settings > Secrets 中配置 PAT（GH_TOKEN / GITHUB_TOKEN 需 issues 写权限）。
+# =====================================================================
+name: weekly-picks
+
+on:
+  schedule:
+    # 每周五 UTC 03:00 触发（= 北京时间周五 11:00）
+    - cron: "0 3 * * 5"
+  # 允许手动触发，方便调试
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  weekly-pick-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 提醒生成本周精选周报
+        run: |
+          echo "⏰ 到点啦：今天是周报日，请生成本周《每周精选》"
+          echo "1. 从本周合入的插件中挑 3-5 个写入 docs/weekly-pick-template.md 模板"
+          echo "2. 每个精选条目附一句话点评"
+          echo "3. 更新需求墙（Issues）进展：新增求插件 / 已认领 / 已收录"
+          echo "4. 周报存放路径建议：docs/weekly/YYYY-WW.md（年第几周）"
+
+      # ---------- 方式二：用 gh 命令自动创建提醒 Issue（解开注释即可启用） ----------
+      # - name: 创建周报提醒 Issue
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     WEEK: $(date +'%Y 第 %V 周')
+      #   run: |
+      #     gh issue create \
+      #       --title "📌 每周精选待生成（$WEEK）" \
+      #       --body "本周五到期，请按 docs/weekly-pick-template.md 生成本周精选：
+      #         - [ ] 挑选本周 3-5 个精选插件
+      #         - [ ] 每条附一句话点评
+      #         - [ ] 汇总需求墙进展（新增/认领/已收录）
+      #         - [ ] 发布到 docs/weekly/ 并在群里同步" \
+      #       --label "weekly-pick"
