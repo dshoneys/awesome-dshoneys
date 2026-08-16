@@ -27,35 +27,64 @@
 
 ---
 
-### dsh.so 安全扫描（建议项，规则与作者确认中）建议先到 [dsh.so 提交页](https://www.dsh.so/zh/submit/) 提交插件（粘贴公开仓库地址，检查器自动拉取仓库并执行安全扫描），收录后在 PR 中附上：1. **dsh.so 插件条目链接（含 slug）**：`https://www.dsh.so/zh/plugins/<slug>/`2. **dsh.so 扫描报告/扫描结果链接**：插件详情页的扫描结论，或 [dsh.so 安全周报](https://www.dsh.so/zh/security-reports/)与 dsh.so 作者确认最终规则前以上为建议提供项；社区自检报告（`docs/security-report-template.md`，存 `docs/reports/`）继续有效，两者并行。## ③ 条目字段要求
+### dsh.so 安全扫描（建议项，规则与作者确认中）
 
-README 目录中的插件条目统一为 6 字段表格，与 [README.md](README.md) ② 的格式规范保持一致，一个都不能少：
+建议先到 [dsh.so 提交页](https://www.dsh.so/zh/submit/) 提交插件。收录后在 PR 中附上：
 
-| 字段 | 填写要求 |
-| --- | --- |
-| **名称** | 插件名 + 版本号（如 `快捷剪贴板 v0.9.0`），便于对照检测报告 |
-| **作者** | 群昵称 / GitHub ID / 主页均可，须可联系到本人（便于私聊修复） |
-| **链接** | 源码或发布页地址，必须是可公开访问的稳定链接，不接受网盘闪链 |
-| **简介** | 一到两句话说清「解决什么问题、怎么用」，不写营销话术 |
-| **安全徽章** | ✅ 通过 / ⚠️ 警告 / ❌ 不通过；未检测的条目 PR 阶段先写「⏳ 待检测」 |
-| **群友实测备注** | 真实使用反馈，注明反馈人昵称与日期；暂无实测就写「暂无」，不编造 |
+1. **dsh.so 插件条目链接（含 slug）**：`https://www.dsh.so/zh/plugins/<slug>/`
+2. **dsh.so 扫描报告/扫描结果链接**：插件详情页的扫描结论，或 [dsh.so 安全周报](https://www.dsh.so/zh/security-reports/)
 
-**示例条目**（⚠️ 以下为虚构演示条目，仅展示格式，正式目录中将被真实条目替换）：
+与 dsh.so 作者确认最终规则前，以上为建议提供项；社区自检报告继续有效，两者并行。
 
-| 名称 | 作者 | 链接 | 简介 | 安全徽章 | 群友实测备注 |
-| --- | --- | --- | --- | --- | --- |
-| 快捷剪贴板 v0.9.0（虚构示例，待替换） | @example-dev（示例作者） | `https://github.com/example-dev/demo-clipboard`（示例链接） | 把常用提示词固定在剪贴板侧栏，一键粘贴到对话框，支持自定义分组 | ✅ 通过（示例） | 「分组功能好用，长提示词效率明显提升」——@群友A，2026-08（示例备注） |
+## ③ 条目字段要求
 
-> 提醒：示例中所有名称、作者、链接、备注均为虚构标注，PR 时请替换为真实信息；PR 中出现的示例占位内容若未替换，会被 review 退回。
+在线目录的数据统一保存在 [`data/plugins.json`](data/plugins.json)，结构由
+[`data/plugins.schema.json`](data/plugins.schema.json) 约束。每个条目至少包含：
+
+- 插件唯一 ID、名称、版本、作者与公开链接
+- 一到两句话的功能简介和所属分类
+- 安全等级、检测日期与检测报告链接
+- 用于搜索的标签；必要时可添加同义词或拼音关键词
+- 可选的群友实测反馈和 dsh.so 页面
+
+仅允许 `passed`（通过）和 `warning`（警告）进入公开目录；未检测条目应先通过 Issue 或 PR 描述提交，检测完成后再写入 `plugins.json`。
+
+新增条目示例：
+
+```json
+{
+  "id": "plugin-slug",
+  "name": "插件名称",
+  "version": "v1.0.0",
+  "author": {
+    "name": "@author",
+    "url": "https://github.com/author"
+  },
+  "url": "https://github.com/author/plugin",
+  "description": "一句话说明插件解决的问题。",
+  "category": "development",
+  "security": {
+    "status": "passed",
+    "reportUrl": "./docs/reports/plugin-slug.md",
+    "scannedAt": "2026-08-16"
+  },
+  "tags": ["自动化", "开发工具"],
+  "searchTerms": ["automation"],
+  "feedback": {
+    "content": "真实使用反馈",
+    "from": "@群友，2026-08"
+  }
+}
+```
 
 ---
 
 ## ④ PR 步骤（四步走）
 
 1. **Fork** 本仓库到你的账号，clone 到本地。
-2. **编辑 [README.md](README.md)**：在「③ 分类目录」下对应的分类表格（效率工具 / 开发工具 / 数据接入 / 其他）中追加一行条目，严格按「③ 条目字段要求」填写；未出报告的条目安全徽章一栏先写「⏳ 待检测」。
+2. **准备条目与报告**：按照安全报告模板完成检测，把报告放入 `docs/reports/`，并在 `data/plugins.json` 中追加条目。
 3. **按 [PULL_REQUEST_TEMPLATE.md](PULL_REQUEST_TEMPLATE.md) 填写** PR 描述：插件名、插件链接、简介、作者、是否已过安全检测（是|否，若否则等待检测）、群友实测反馈，一项不落。
-4. **提交 PR，等待检测与 review**：安全检测助手出报告后，维护者会核对条目字段、徽章与报告链接，确认无误后合并；发现问题会在 PR 下留言或私聊你修复。
+4. **提交 PR，等待检测与 review**：维护者会核对数据、徽章与报告链接；合并后 GitHub Pages 会自动更新在线目录。
 
 ---
 

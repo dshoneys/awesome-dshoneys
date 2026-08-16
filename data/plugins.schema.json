@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dshoneys.github.io/awesome-dshoneys/data/plugins.schema.json",
+  "title": "DeepSeek Honeys 认证插件目录",
+  "type": "object",
+  "required": ["plugins"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "plugins": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/plugin"
+      }
+    }
+  },
+  "$defs": {
+    "plugin": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "version",
+        "author",
+        "url",
+        "description",
+        "category",
+        "security",
+        "tags"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string"
+        },
+        "author": {
+          "type": "object",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "enum": ["productivity", "development", "data", "other"]
+        },
+        "security": {
+          "type": "object",
+          "required": ["status", "reportUrl", "scannedAt"],
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": ["passed", "warning"]
+            },
+            "reportUrl": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scannedAt": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "searchTerms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "feedback": {
+          "type": "object",
+          "required": ["content"],
+          "additionalProperties": false,
+          "properties": {
+            "content": {
+              "type": "string",
+              "minLength": 1
+            },
+            "from": {
+              "type": "string"
+            }
+          }
+        },
+        "dshUrl": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    }
+  }
+}

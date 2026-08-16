@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DeepSeek Honeys 社区维护的认证插件目录：先检测、后收录，每个插件都有安全结论与检测报告。"
+    />
+    <meta name="theme-color" content="#fff8e7" />
+    <title>DeepSeek Honeys 认证插件目录</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script src="./assets/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="DeepSeek Honeys 插件目录首页">
+        <span class="brand-mark" aria-hidden="true">DSH</span>
+        <span>
+          <strong>DeepSeek Honeys</strong>
+          <small>认证插件目录</small>
+        </span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="#directory">找插件</a>
+        <a href="#how-it-works">收录规则</a>
+        <a href="https://github.com/dshoneys/awesome-dshoneys" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">社区共建 · 安全优先 · 长期可查</p>
+          <h1>放心寻找真正<br /><span>经过检测的插件</span></h1>
+          <p class="hero-description">
+            每个收录条目都附有安全结论、检测报告和群友实测反馈。没有检测报告，就不会进入目录。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#directory">浏览插件</a>
+            <a
+              class="button button-secondary"
+              href="https://github.com/dshoneys/awesome-dshoneys/issues/new/choose"
+              target="_blank"
+              rel="noreferrer"
+            >
+              提交或求插件
+            </a>
+          </div>
+        </div>
+
+        <aside class="trust-panel" aria-label="目录原则">
+          <div class="trust-icon" aria-hidden="true">✓</div>
+          <p>唯一硬规则</p>
+          <h2>未检测，不收录</h2>
+          <ul>
+            <li>权限与数据流向检查</li>
+            <li>恶意代码与密钥风险检查</li>
+            <li>依赖漏洞与异常行为检查</li>
+          </ul>
+          <a href="https://github.com/dshoneys/awesome-dshoneys/blob/main/docs/badge-spec.md">
+            查看安全等级标准 →
+          </a>
+        </aside>
+      </section>
+
+      <section class="directory" id="directory" aria-labelledby="directory-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">PLUGIN DIRECTORY</p>
+            <h2 id="directory-title">认证插件</h2>
+          </div>
+          <p id="result-count" class="result-count" aria-live="polite">正在载入目录…</p>
+        </div>
+
+        <div class="search-panel">
+          <label class="search-box" for="search-input">
+            <span aria-hidden="true">⌕</span>
+            <input
+              id="search-input"
+              type="search"
+              autocomplete="off"
+              placeholder="搜索插件名称、作者、功能或标签…"
+            />
+            <kbd>/</kbd>
+          </label>
+          <div class="filter-row">
+            <div class="filter-group" aria-label="按分类筛选">
+              <button class="filter-chip is-active" type="button" data-category="all">全部</button>
+              <button class="filter-chip" type="button" data-category="productivity">效率工具</button>
+              <button class="filter-chip" type="button" data-category="development">开发工具</button>
+              <button class="filter-chip" type="button" data-category="data">数据接入</button>
+              <button class="filter-chip" type="button" data-category="other">其他</button>
+            </div>
+            <label class="status-filter">
+              <span>安全等级</span>
+              <select id="status-select">
+                <option value="all">全部等级</option>
+                <option value="passed">✅ 通过</option>
+                <option value="warning">⚠️ 警告</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div id="plugin-grid" class="plugin-grid" aria-live="polite"></div>
+
+        <div id="empty-state" class="empty-state" hidden>
+          <span aria-hidden="true">⌕</span>
+          <h3 id="empty-title">没有找到匹配的插件</h3>
+          <p id="empty-description">换个关键词或筛选条件试试。</p>
+          <button id="clear-filters" class="button button-secondary" type="button">清除筛选</button>
+        </div>
+      </section>
+
+      <section class="how-it-works" id="how-it-works" aria-labelledby="process-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">HOW IT WORKS</p>
+            <h2 id="process-title">从提交到收录</h2>
+          </div>
+        </div>
+        <ol class="steps">
+          <li><span>01</span><strong>提交插件</strong><p>通过 Issue 或 Pull Request 提供公开链接与基本信息。</p></li>
+          <li><span>02</span><strong>安全检测</strong><p>检查权限、代码、数据、密钥和第三方依赖风险。</p></li>
+          <li><span>03</span><strong>作者修复</strong><p>发现问题先联系作者，完成修复后再进行复检。</p></li>
+          <li><span>04</span><strong>认证收录</strong><p>展示安全徽章、检测报告与真实使用反馈。</p></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <strong>DeepSeek Honeys</strong>
+        <p>由中文开发者社区共建维护。</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/dshoneys/awesome-dshoneys">项目仓库</a>
+        <a href="https://github.com/dshoneys/awesome-dshoneys/blob/main/CONTRIBUTING.md">贡献指南</a>
+        <a href="https://github.com/dshoneys/awesome-dshoneys/issues">需求墙</a>
+      </div>
+    </footer>
+  </body>
+</html>
