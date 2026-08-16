@@ -1,4 +1,55 @@
 {
   "$schema": "./plugins.schema.json",
-  "plugins": []
+  "plugins": [
+    {
+      "id": "modsearch",
+      "name": "ModSearch",
+      "version": "5.4.2",
+      "author": {
+        "name": "@liustack",
+        "url": "https://github.com/liustack"
+      },
+      "url": "https://github.com/liustack/modsearch",
+      "description": "多引擎联网搜索与网页读取，支持故障转移；默认免 key 路径依赖第三方 CLI，更稳妥请用 Tavily/Exa/Firecrawl 密钥。",
+      "category": "productivity",
+      "security": {
+        "provider": "dsh.so",
+        "status": "warning",
+        "reportUrl": "https://www.dsh.so/zh/plugins/modsearch/",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["联网搜索", "web_search", "多引擎"],
+      "searchTerms": ["modsearch", "搜索", "tavily", "exa", "agy"],
+      "dshUrl": "https://www.dsh.so/zh/plugins/modsearch/",
+      "feedback": {
+        "content": "维护者正式审核：dsh.so Low、critical 0；须披露默认 agy --dangerously-skip-permissions 与文档中的 curl|bash 安装建议。审核 commit e1dba224。",
+        "from": "@维护者，2026-08-16"
+      }
+    },
+    {
+      "id": "dsh-import-agents",
+      "name": "dsh-import-agents",
+      "version": "0.2.3",
+      "author": {
+        "name": "@Chang-Tong",
+        "url": "https://github.com/Chang-Tong"
+      },
+      "url": "https://github.com/Chang-Tong/dsh-import-agents",
+      "description": "把 Pi / OpenCode / Codex / Claude Code 本地会话与 agents 导入 DeepSeek Harness；会批量读取本机会话目录。",
+      "category": "productivity",
+      "security": {
+        "provider": "dsh.so",
+        "status": "warning",
+        "reportUrl": "https://www.dsh.so/zh/plugins/dsh-import-agents/",
+        "scannedAt": "2026-08-16"
+      },
+      "tags": ["会话迁移", "导入", "备份"],
+      "searchTerms": ["import", "session", "pi", "opencode", "codex", "claude"],
+      "dshUrl": "https://www.dsh.so/zh/plugins/dsh-import-agents/",
+      "feedback": {
+        "content": "维护者正式审核：dsh.so Medium、critical 0、warning 3；插件路径未见出网。/import-all 与 CLI all 语义及 README 版本号待对齐。审核 commit 9aa7dfb9。",
+        "from": "@维护者，2026-08-16"
+      }
+    }
+  ]
 }

@@ -64,4 +64,32 @@
 
 ---
 
+---
+
+## ⑤ 收录徽章（供作者挂到 README）
+
+插件被本目录收录后，作者可在仓库 README 挂载下列徽章，链回目录首页或本仓库。安全结论仍以 dsh.so 原文为准；本目录徽章只表示「当前已被 DeepSeek Honeys 收录及目录侧展示状态」。
+
+| 文件 | 含义 | 何时使用 |
+| --- | --- | --- |
+| [`assets/badges/listed.svg`](../assets/badges/listed.svg) | 已收录 | 任意已公开条目 |
+| [`assets/badges/warning.svg`](../assets/badges/warning.svg) | 目录侧为 ⚠️ | `security.status = warning` |
+| [`assets/badges/passed.svg`](../assets/badges/passed.svg) | 目录侧为 ✅ | `security.status = passed` |
+
+Markdown 示例（Pages 部署后生效）：
+
+```markdown
+[![DeepSeek Honeys](https://dshoneys.github.io/awesome-dshoneys/assets/badges/warning.svg)](https://dshoneys.github.io/awesome-dshoneys/)
+```
+
+也可临时使用 shields.io 文本徽章：
+
+```markdown
+[![DeepSeek Honeys](https://img.shields.io/badge/DeepSeek%20Honeys-listed-0B6E4F)](https://dshoneys.github.io/awesome-dshoneys/)
+```
+
+挂载徽章为自愿；不挂载不影响收录。作者升级版本后，请确认 dsh.so 已重扫，并与维护者同步目录状态。
+
+---
+
 *本规范由 DeepSeek Honeys 社区维护 · 修改请提 PR · 遵循 [MIT License](../LICENSE)*
