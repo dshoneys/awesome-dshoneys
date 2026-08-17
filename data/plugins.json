@@ -667,6 +667,59 @@
         "linux",
         "macos"
       ]
+    },
+    {
+      "id": "kurenai",
+      "name": "Kurenai Studio",
+      "version": "0.0.2",
+      "demandTitle": "不用安装 Cocos Creator，在 DSH 里生成和预览 Cocos 项目",
+      "author": {
+        "name": "Kurenai Studio",
+        "url": "https://github.com/kurenai-studio"
+      },
+      "url": "https://github.com/kurenai-studio/kurenai",
+      "description": "DSH 原生 Cocos 工作台：初始化标准 2D/3D 工程，启动 Headless Cocos 实时预览，并把运行时节点选择同步进 Agent 上下文。",
+      "details": "对应「不用安装 Cocos Creator，也能用 AI 创建 Cocos 项目」需求：Kurenai 直接使用当前 DSH 会话工作目录，提供 2D/3D 模板初始化、Headless Cocos 预览、节点树和运行时选择上下文。\n\n当前 MVP 不内置引擎与 Runtime Kit，需要另外准备 headless-cocos，并设置 KURENAI_HEADLESS_ROOT。插件会读取项目配置与 AGENT_AUTHORING.md、在空 Workspace 中创建工程，并启动/终止本机 Node 预览子进程。\n\n社区复核（⚠️）：本机控制服务默认仅监听 127.0.0.1，但当前无鉴权且允许 CORS；不要把 controlHost 暴露到局域网或公网。未发现插件自身读取凭据、遥测或向第三方上传工程内容。",
+      "install": {
+        "summary": "从 GitHub 安装到 web profile，配置 Headless Cocos 根目录后重启 DSH。",
+        "commands": [
+          "dsh plugin --profile web add \"https://github.com/kurenai-studio/kurenai.git#main\""
+        ],
+        "notes": [
+          "当前版本需自行准备 headless-cocos，并设置 KURENAI_HEADLESS_ROOT。",
+          "已实测 Windows 与 DSH 0.1.0-rc.6；安装后重启 dsh web。",
+          "只在可信本机环境使用，不要把 Kurenai 控制端口暴露到局域网或公网。"
+        ]
+      },
+      "category": "development",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/15",
+        "scannedAt": "2026-08-17"
+      },
+      "tags": [
+        "Cocos",
+        "游戏开发",
+        "Headless",
+        "实时预览",
+        "Inspector"
+      ],
+      "searchTerms": [
+        "kurenai",
+        "cocos",
+        "game",
+        "游戏",
+        "无头引擎",
+        "vibe coding"
+      ],
+      "feedback": {
+        "content": "社区先收录（⚠️）：Issue #15；审核 commit ab54e71。已完成干净 DSH Profile 安装和 Windows 实测；当前仍需外部 headless-cocos，且 loopback 控制 API 无鉴权，只适合可信本机环境。",
+        "from": "@维护者，2026-08-17"
+      },
+      "platforms": [
+        "windows"
+      ]
     }
   ]
 }
