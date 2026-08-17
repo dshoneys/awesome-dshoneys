@@ -326,7 +326,7 @@
     {
       "id": "dsh-import-agents",
       "name": "dsh-import-agents",
-      "version": "0.2.5",
+      "version": "0.2.6",
       "demandTitle": "把旧会话一键迁进 Harness",
       "author": {
         "name": "@Chang-Tong",
@@ -334,7 +334,7 @@
       },
       "url": "https://github.com/Chang-Tong/dsh-import-agents",
       "description": "把 Pi / OpenCode / Codex / Claude Code 本地会话与 agents 导入 DeepSeek Harness；会批量读取本机会话目录。",
-      "details": "对应「会话连续性 / 迁移」需求：导入后可继续聊，并尽量保留历史与工具轨迹；也可把 agents 转成 skills。0.2.4 起声明 dsh.bundle，官方一键安装会自动激活。0.2.5 起 CLI all 与 /import-all 均覆盖四源 + agents。\n\n社区复核：会批量读取本机会话目录；只在信任的机器使用。dsh.so 当前扫描仍绑定含 restart-dsh-web.sh 的旧 commit（3 warning）；该脚本已移出仓库且不进 npm 包，待每日重扫后再升 ✅。",
+      "details": "对应「会话连续性 / 迁移」需求：导入后可继续聊，并尽量保留历史与工具轨迹；也可把 agents 转成 skills。0.2.4 起声明 dsh.bundle，官方一键安装会自动激活。0.2.5 起 CLI all 与 /import-all 均覆盖四源 + agents。0.2.6 起 README 只保留官方一键安装。\n\n社区复核：会批量读取本机会话目录；只在信任的机器使用。dsh.so 公开页仍绑定含 restart-dsh-web.sh 的旧扫描（3 warning）；该脚本已移出仓库且不进 npm 包，待公开页清零后再升 ✅。",
       "install": {
         "summary": "官方一键安装到 web profile，自动激活后重启。",
         "commands": [
@@ -368,7 +368,7 @@
       ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-import-agents/",
       "feedback": {
-        "content": "社区复核 ⚠️：dsh.so 仍显示 Medium / 3 warning（旧扫描绑定已删除的 restart-dsh-web.sh）；插件路径未见出网，但会读本机会话目录。目录已同步 0.2.5。",
+        "content": "社区复核 ⚠️：dsh.so 公开页仍显示 Medium / 3 warning（旧扫描绑定已删除的 restart-dsh-web.sh）；插件路径未见出网，但会读本机会话目录。目录已同步 0.2.6。",
         "from": "@维护者，2026-08-17"
       },
       "platforms": [
