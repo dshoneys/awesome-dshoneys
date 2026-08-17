@@ -439,22 +439,23 @@
     {
       "id": "dsh-board",
       "name": "dsh-board",
-      "version": "0.1.0",
+      "version": "0.2.4",
       "demandTitle": "看清 DeepSeek API 成本",
       "author": {
         "name": "@dfkai",
         "url": "https://github.com/dfkai"
       },
       "url": "https://github.com/dfkai/dsh-board",
-      "description": "侧栏方案：用量与已花费用仪表盘（价目、峰谷、推理 token、图表与日热力图）。同类还有顶栏单价徽标 dsh-client-pricing、余额对账面板 dsh-balance-stats。",
-      "details": "与 dsh-client-pricing、dsh-balance-stats 同属「API 成本可见」需求：本插件偏「已经花了多少」——侧栏底部徽章展开实时仪表盘，读宿主 sessions.history。\n\n若只想在顶栏看到当前高峰/空闲单价，见 dsh-client-pricing；若要官方余额、每日预算和对账单逐步对账，见 dsh-balance-stats（可并存）。\n\n价目硬编码；localStorage 只存折叠状态。社区复核：源码未见第三方外发；dsh.so 详情页尚未就绪，按 ⚠️ 披露。",
+      "description": "侧栏方案：用量与已花费用仪表盘（价目、峰谷、词勋段位、成就与日热力图）。同类还有顶栏单价徽标 dsh-client-pricing、余额对账面板 dsh-balance-stats。",
+      "details": "与 dsh-client-pricing、dsh-balance-stats 同属「API 成本可见」需求：本插件偏「已经花了多少」——侧栏底部徽章展开实时仪表盘，读宿主 sessions.history。0.2.4 起声明 dsh.bundle，可用官方一键安装；含实时费率角标、按会话主导模型计价、词勋段位与成就。作者明确不与另外两家合并，目录继续独立收录。\n\n若只想在顶栏看到当前高峰/空闲单价，见 dsh-client-pricing；若要官方余额、每日预算和对账单逐步对账，见 dsh-balance-stats（可并存）。\n\n价目硬编码；localStorage 只存折叠状态。面板是估算不是账单。社区复核 ✅；dsh.so low-risk、0/0（公开扫描绑定 42d22c）。",
       "install": {
-        "summary": "通过 GitHub 安装到 web profile。",
+        "summary": "官方一键安装到 web profile，自动激活后重启。",
         "commands": [
+          "dsh plugin --profile web add dsh-board",
           "dsh plugin --profile web add github:dfkai/dsh-board"
         ],
         "notes": [
-          "作者计划发布 npm 时改用 @dfkai/dsh-board。",
+          "0.2.4 声明 dsh.bundle，无需手改 cordis.patch.yml。",
           "重启 dsh web 并刷新页面后，侧栏底部应出现用量入口。",
           "可与 dsh-client-pricing、dsh-balance-stats 同时安装：已花 / 当前单价 / 余额对账。"
         ]
@@ -462,9 +463,9 @@
       "category": "productivity",
       "security": {
         "provider": "community",
-        "status": "warning",
-        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/4",
-        "scannedAt": "2026-08-16"
+        "status": "passed",
+        "reportUrl": "https://www.dsh.so/zh/artifact/dsh-board/",
+        "scannedAt": "2026-08-17"
       },
       "tags": [
         "成本",
@@ -482,9 +483,10 @@
         "pricing",
         "单价"
       ],
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-board/",
       "feedback": {
-        "content": "社区先收录（⚠️）：源码未见外发。与 dsh-client-pricing、dsh-balance-stats 功能相近（成本可见），本方案侧重已花用量面板。",
-        "from": "@维护者，2026-08-16"
+        "content": "社区复核通过（✅）。dsh.so 0/0。与 pricing / balance-stats 功能相近（成本可见），本方案侧重侧栏已花用量，作者选择独立维护。",
+        "from": "@维护者，2026-08-17"
       },
       "platforms": [
         "windows",
