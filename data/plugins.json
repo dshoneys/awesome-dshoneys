@@ -326,7 +326,7 @@
     {
       "id": "dsh-import-agents",
       "name": "dsh-import-agents",
-      "version": "0.2.3",
+      "version": "0.2.5",
       "demandTitle": "把旧会话一键迁进 Harness",
       "author": {
         "name": "@Chang-Tong",
@@ -334,16 +334,15 @@
       },
       "url": "https://github.com/Chang-Tong/dsh-import-agents",
       "description": "把 Pi / OpenCode / Codex / Claude Code 本地会话与 agents 导入 DeepSeek Harness；会批量读取本机会话目录。",
-      "details": "对应「会话连续性 / 迁移」需求：导入后可继续聊，并尽量保留历史与工具轨迹；也可把 agents 转成 skills。\n\n社区复核：会批量读取本机会话目录；只在信任的机器使用。",
+      "details": "对应「会话连续性 / 迁移」需求：导入后可继续聊，并尽量保留历史与工具轨迹；也可把 agents 转成 skills。0.2.4 起声明 dsh.bundle，官方一键安装会自动激活。0.2.5 起 CLI all 与 /import-all 均覆盖四源 + agents。\n\n社区复核：会批量读取本机会话目录；只在信任的机器使用。dsh.so 当前扫描仍绑定含 restart-dsh-web.sh 的旧 commit（3 warning）；该脚本已移出仓库且不进 npm 包，待每日重扫后再升 ✅。",
       "install": {
-        "summary": "安装到 web profile，写入补丁后重启。",
+        "summary": "官方一键安装到 web profile，自动激活后重启。",
         "commands": [
-          "cd ~/.dsh/profiles/web && pnpm add dsh-import-agents",
-          "dsh web"
+          "dsh plugin --profile web add dsh-import-agents"
         ],
         "notes": [
-          "cordis.patch.yml 追加 id: import-pi-opencode，name: dsh-import-agents。",
-          "重启后刷新页面，用 Sync 或 /import-all 验证。",
+          "0.2.4+ 声明 dsh.bundle，无需再手改 cordis.patch.yml。",
+          "重启 dsh web 后刷新页面，用 Sync 或 /import-all 验证。",
           "需要 Node ≥ 22.19。"
         ]
       },
@@ -352,7 +351,7 @@
         "provider": "community",
         "status": "warning",
         "reportUrl": "https://www.dsh.so/zh/artifact/dsh-import-agents/",
-        "scannedAt": "2026-08-16"
+        "scannedAt": "2026-08-17"
       },
       "tags": [
         "会话迁移",
@@ -369,8 +368,8 @@
       ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-import-agents/",
       "feedback": {
-        "content": "社区复核 ⚠️：dsh.so Medium；插件路径未见出网，但会读本机会话目录。",
-        "from": "@维护者，2026-08-16"
+        "content": "社区复核 ⚠️：dsh.so 仍显示 Medium / 3 warning（旧扫描绑定已删除的 restart-dsh-web.sh）；插件路径未见出网，但会读本机会话目录。目录已同步 0.2.5。",
+        "from": "@维护者，2026-08-17"
       },
       "platforms": [
         "windows",
