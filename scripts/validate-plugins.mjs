@@ -10,6 +10,7 @@ const allowedCategories = new Set([
   "local",
   "other",
 ]);
+const allowedPlatforms = new Set(["windows", "linux", "macos"]);
 const allowedStatuses = new Set(["passed", "warning"]);
 const allowedProviders = new Set(["community", "dsh.so"]);
 const requiredTextFields = [
@@ -51,6 +52,17 @@ for (const [index, plugin] of plugins.entries()) {
 
   if (!allowedCategories.has(plugin.category)) {
     throw new Error(`${location}.category 不是支持的分类。`);
+  }
+
+  if (
+    !Array.isArray(plugin.platforms) ||
+    !plugin.platforms.length ||
+    plugin.platforms.some((item) => !allowedPlatforms.has(item))
+  ) {
+    throw new Error(`${location}.platforms 必须是 windows/linux/macos 的非空数组。`);
+  }
+  if (new Set(plugin.platforms).size !== plugin.platforms.length) {
+    throw new Error(`${location}.platforms 不能重复。`);
   }
 
   if (!plugin.author || typeof plugin.author.name !== "string" || !plugin.author.name.trim()) {

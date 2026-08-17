@@ -28,6 +28,7 @@
         "url",
         "description",
         "category",
+        "platforms",
         "security",
         "tags"
       ],
@@ -104,6 +105,15 @@
         },
         "category": {
           "enum": ["productivity", "development", "data", "local", "other"]
+        },
+        "platforms": {
+          "type": "array",
+          "description": "适用平台；跨平台插件列出全部目标平台",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["windows", "linux", "macos"]
+          }
         },
         "security": {
           "type": "object",

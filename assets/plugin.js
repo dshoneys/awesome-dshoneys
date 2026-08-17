@@ -3,9 +3,10 @@ import {
   STATUS_LABELS,
   createExternalLink,
   createInternalLink,
+  formatPlatforms,
   loadCatalog,
   paragraphsFromText,
-} from "./catalog.js?v=20260816-demand";
+} from "./catalog.js?v=20260817-platform";
 
 const elements = {
   loading: document.querySelector("#plugin-loading"),
@@ -157,10 +158,14 @@ function renderPlugin(plugin) {
   category.className = "category-label";
   category.textContent = CATEGORY_LABELS[plugin.category] ?? CATEGORY_LABELS.other;
 
+  const platform = document.createElement("span");
+  platform.className = "platform-label";
+  platform.textContent = formatPlatforms(plugin.platforms) || "平台未注明";
+
   const security = document.createElement("span");
   security.className = `security-badge ${plugin.security.status}`;
   security.textContent = STATUS_LABELS[plugin.security.status] ?? plugin.security.status;
-  elements.badges.replaceChildren(category, security);
+  elements.badges.replaceChildren(category, platform, security);
 
   elements.title.textContent = demandTitle;
   elements.meta.textContent = [

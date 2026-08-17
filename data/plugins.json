@@ -31,13 +31,26 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["Windows", "启动器", "桌面", "WebView2"],
-      "searchTerms": ["launcher", "msi", "autostart", "桌面"],
+      "tags": [
+        "Windows",
+        "启动器",
+        "桌面",
+        "WebView2"
+      ],
+      "searchTerms": [
+        "launcher",
+        "msi",
+        "autostart",
+        "桌面"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-launcher/",
       "feedback": {
         "content": "社区先收录（⚠️）：覆盖 Windows/桌面热需求。dsh.so 仍显示未扫描；含本机进程与依赖安装路径，请从官方 Releases 获取。",
         "from": "@维护者，2026-08-16"
-      }
+      },
+      "platforms": [
+        "windows"
+      ]
     },
     {
       "id": "modsearch",
@@ -68,19 +81,34 @@
         "reportUrl": "https://www.dsh.so/zh/artifact/modsearch/",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["联网搜索", "web_search", "多引擎"],
-      "searchTerms": ["modsearch", "搜索", "tavily", "exa", "agy"],
+      "tags": [
+        "联网搜索",
+        "web_search",
+        "多引擎"
+      ],
+      "searchTerms": [
+        "modsearch",
+        "搜索",
+        "tavily",
+        "exa",
+        "agy"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/modsearch/",
       "feedback": {
         "content": "社区复核 ⚠️：dsh.so Low、critical 0；须披露默认 agy 权限跳过与 curl|bash 安装建议。",
         "from": "@维护者，2026-08-16"
-      }
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     },
     {
       "id": "dsh-tesseract-ocr",
       "name": "dsh-tesseract-ocr",
       "version": "0.2.1",
-      "demandTitle": "Linux / 跨平台：本地 OCR 让文本模型看图",
+      "demandTitle": "本地 OCR，让文本模型看图（Tesseract）",
       "author": {
         "name": "@maxwell-feng",
         "url": "https://github.com/maxwell-feng"
@@ -107,19 +135,37 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/1",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["OCR", "Tesseract", "Linux", "图片", "隐私", "本地"],
-      "searchTerms": ["tesseract", "ocr", "看图", "image", "chi_sim", "linux"],
+      "tags": [
+        "OCR",
+        "Tesseract",
+        "Linux",
+        "图片",
+        "隐私",
+        "本地"
+      ],
+      "searchTerms": [
+        "tesseract",
+        "ocr",
+        "看图",
+        "image",
+        "chi_sim",
+        "linux"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-tesseract-ocr/",
       "feedback": {
         "content": "社区复核通过（⚠️）：源码整改 4678c8f 已关闭阻断；tesseract spawn 按必要能力披露。与 windows-ocr 为同需求两条平台线。",
         "from": "@维护者，2026-08-17"
-      }
+      },
+      "platforms": [
+        "linux",
+        "macos"
+      ]
     },
     {
       "id": "dsh-windows-ocr",
       "name": "dsh-windows-ocr",
       "version": "0.2.1",
-      "demandTitle": "Windows：本地 OCR 让文本模型看图",
+      "demandTitle": "本地 OCR，让文本模型看图（Windows 系统 OCR）",
       "author": {
         "name": "@maxwell-feng",
         "url": "https://github.com/maxwell-feng"
@@ -145,13 +191,29 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/1",
         "scannedAt": "2026-08-17"
       },
-      "tags": ["OCR", "Windows", "图片", "隐私", "本地"],
-      "searchTerms": ["windows-ocr", "ocr", "看图", "image", "windows", "WinRT"],
+      "tags": [
+        "OCR",
+        "Windows",
+        "图片",
+        "隐私",
+        "本地"
+      ],
+      "searchTerms": [
+        "windows-ocr",
+        "ocr",
+        "看图",
+        "image",
+        "windows",
+        "WinRT"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-windows-ocr/",
       "feedback": {
         "content": "同作者 OCR 双轨：Windows 系统 OCR；与 tesseract 互斥。dsh.so 页已存在；社区 ⚠️ 披露本机 PowerShell OCR。",
         "from": "@维护者，2026-08-17"
-      }
+      },
+      "platforms": [
+        "windows"
+      ]
     },
     {
       "id": "pi2dsh",
@@ -184,13 +246,29 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["Pi", "OAuth", "生态桥", "插件"],
-      "searchTerms": ["pi2dsh", "oauth", "codex", "anthropic", "vision"],
+      "tags": [
+        "Pi",
+        "OAuth",
+        "生态桥",
+        "插件"
+      ],
+      "searchTerms": [
+        "pi2dsh",
+        "oauth",
+        "codex",
+        "anthropic",
+        "vision"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/pi2dsh/",
       "feedback": {
         "content": "社区先收录（⚠️ 高披露）：覆盖模型/OAuth 热需求。dsh.so high-risk·critical 多条，使用前务必收敛依赖包集合。",
         "from": "@维护者，2026-08-16"
-      }
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     },
     {
       "id": "dsh-goodmemory",
@@ -223,12 +301,27 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["记忆", "GoodMemory", "召回", "本地"],
-      "searchTerms": ["memory", "goodmemory", "recall", "记忆"],
+      "tags": [
+        "记忆",
+        "GoodMemory",
+        "召回",
+        "本地"
+      ],
+      "searchTerms": [
+        "memory",
+        "goodmemory",
+        "recall",
+        "记忆"
+      ],
       "feedback": {
         "content": "社区先收录（⚠️）：覆盖长期记忆热需求。dsh.so 入库未完成；默认本机 sidecar + SQLite，请自行管理遗忘。",
         "from": "@维护者，2026-08-16"
-      }
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     },
     {
       "id": "dsh-import-agents",
@@ -261,13 +354,29 @@
         "reportUrl": "https://www.dsh.so/zh/artifact/dsh-import-agents/",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["会话迁移", "导入", "备份"],
-      "searchTerms": ["import", "session", "pi", "opencode", "codex", "claude"],
+      "tags": [
+        "会话迁移",
+        "导入",
+        "备份"
+      ],
+      "searchTerms": [
+        "import",
+        "session",
+        "pi",
+        "opencode",
+        "codex",
+        "claude"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-import-agents/",
       "feedback": {
         "content": "社区复核 ⚠️：dsh.so Medium；插件路径未见出网，但会读本机会话目录。",
         "from": "@维护者，2026-08-16"
-      }
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     },
     {
       "id": "dsh-voice-input",
@@ -302,13 +411,31 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/3",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["语音", "听写", "TTS", "Web Speech", "hotfix"],
-      "searchTerms": ["voice", "speech", "mic", "语音", "听写", "ModuleLoader"],
+      "tags": [
+        "语音",
+        "听写",
+        "TTS",
+        "Web Speech",
+        "hotfix"
+      ],
+      "searchTerms": [
+        "voice",
+        "speech",
+        "mic",
+        "语音",
+        "听写",
+        "ModuleLoader"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-voice-input-plugin/",
       "feedback": {
         "content": "紧急热修：npm 0.1.0 ModuleLoader id 错配会导致整页 Failed to load plugins。安装源临时指向 shinjiyu fork（对齐上游 PR #1）；作者发版后换回。",
         "from": "@维护者，2026-08-17"
-      }
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     },
     {
       "id": "dsh-board",
@@ -340,12 +467,31 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/4",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["成本", "用量", "仪表盘", "侧栏", "峰谷"],
-      "searchTerms": ["board", "usage", "cost", "billing", "费用", "pricing", "单价"],
+      "tags": [
+        "成本",
+        "用量",
+        "仪表盘",
+        "侧栏",
+        "峰谷"
+      ],
+      "searchTerms": [
+        "board",
+        "usage",
+        "cost",
+        "billing",
+        "费用",
+        "pricing",
+        "单价"
+      ],
       "feedback": {
         "content": "社区先收录（⚠️）：源码未见外发。与 dsh-client-pricing 功能相近（成本可见），本方案侧重已花用量面板。",
         "from": "@维护者，2026-08-16"
-      }
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     },
     {
       "id": "dsh-client-pricing",
@@ -379,13 +525,33 @@
         "reportUrl": "https://www.dsh.so/zh/artifact/dsh-client-pricing/",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["成本", "价格", "峰谷", "顶栏", "DeepSeek API"],
-      "searchTerms": ["pricing", "peak", "off-peak", "单价", "高峰", "空闲", "board", "费用"],
+      "tags": [
+        "成本",
+        "价格",
+        "峰谷",
+        "顶栏",
+        "DeepSeek API"
+      ],
+      "searchTerms": [
+        "pricing",
+        "peak",
+        "off-peak",
+        "单价",
+        "高峰",
+        "空闲",
+        "board",
+        "费用"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-client-pricing/",
       "feedback": {
         "content": "社区复核通过（✅）。与 dsh-board 功能相近（成本可见），本方案侧重顶栏当前单价/峰谷，可并存。",
         "from": "@维护者，2026-08-16"
-      }
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     },
     {
       "id": "dsh-plugins-finder",
@@ -418,13 +584,29 @@
         "reportUrl": "https://www.dsh.so/zh/artifact/dsh-plugins-finder/",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["插件发现", "搜索", "find_plugin", "dsh.so"],
-      "searchTerms": ["finder", "find-plugin", "找插件", "marketplace", "registry"],
+      "tags": [
+        "插件发现",
+        "搜索",
+        "find_plugin",
+        "dsh.so"
+      ],
+      "searchTerms": [
+        "finder",
+        "find-plugin",
+        "找插件",
+        "marketplace",
+        "registry"
+      ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-plugins-finder/",
       "feedback": {
         "content": "社区复核通过（✅）：Issue #7；审核 commit 43a23a42；dsh.so Pass 0/0。出网仅拉取公开索引。",
         "from": "@维护者，2026-08-16"
-      }
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     }
   ]
 }

@@ -377,6 +377,10 @@ kbd {
   padding-top: 16px;
 }
 
+.filter-row-secondary {
+  padding-top: 10px;
+}
+
 .filter-group {
   display: flex;
   flex-wrap: wrap;
@@ -465,6 +469,7 @@ kbd {
 }
 
 .category-label,
+.platform-label,
 .security-badge {
   display: inline-flex;
   align-items: center;
@@ -478,6 +483,11 @@ kbd {
 .category-label {
   color: var(--honey-dark);
   background: var(--orange-soft);
+}
+
+.platform-label {
+  color: #1f4b63;
+  background: #e7f3f8;
 }
 
 .security-badge.passed {

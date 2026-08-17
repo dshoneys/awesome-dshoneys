@@ -37,6 +37,7 @@
     "notes": ["可选注意点"]
   },
   "category": "productivity",
+  "platforms": ["windows", "linux", "macos"],
   "security": {
     "provider": "community",
     "status": "warning",
@@ -53,6 +54,7 @@
 ```
 
 - `demandTitle`：首页与详情页主标题，写需求而不是包名。
+- `platforms`：适用平台数组，取值 `windows` / `linux` / `macos`；跨平台请全部列出。站点默认按 **Windows** 筛选。
 - `security.provider`：`community`（社区复核）或 `dsh.so`（以扫描页为主报告）。
 - `security.reportUrl`：社区 Issue / 复核记录，或 dsh.so 页面。
 - `dshUrl`：可选；存在时须指向 `dsh.so`。

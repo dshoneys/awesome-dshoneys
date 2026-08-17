@@ -1,16 +1,20 @@
 import {
   CATEGORY_LABELS,
+  DEFAULT_PLATFORM,
+  PLATFORM_LABELS,
   STATUS_LABELS,
   createInternalLink,
+  formatPlatforms,
   getPluginPageUrl,
   loadCatalog,
   normalize,
-} from "./catalog.js?v=20260816-demand";
+} from "./catalog.js?v=20260817-platform";
 
 const state = {
   plugins: [],
   query: "",
   category: "all",
+  platform: DEFAULT_PLATFORM,
   status: "all",
   loadFailed: false,
 };
@@ -24,6 +28,7 @@ const elements = {
   search: document.querySelector("#search-input"),
   status: document.querySelector("#status-select"),
   categoryButtons: [...document.querySelectorAll("[data-category]")],
+  platformButtons: [...document.querySelectorAll("[data-platform]")],
   clear: document.querySelector("#clear-filters"),
 };
 
@@ -37,6 +42,8 @@ function getSearchText(plugin) {
       plugin.description,
       plugin.details,
       CATEGORY_LABELS[plugin.category],
+      formatPlatforms(plugin.platforms),
+      ...(plugin.platforms ?? []),
       ...(plugin.tags ?? []),
       ...(plugin.searchTerms ?? []),
       plugin.feedback?.content,
@@ -52,11 +59,16 @@ function matchesSearch(plugin) {
   return terms.every((term) => text.includes(term));
 }
 
+function matchesPlatform(plugin) {
+  if (state.platform === "all") return true;
+  return (plugin.platforms ?? []).includes(state.platform);
+}
+
 function getFilteredPlugins() {
   return state.plugins.filter((plugin) => {
     const categoryMatches = state.category === "all" || plugin.category === state.category;
     const statusMatches = state.status === "all" || plugin.security?.status === state.status;
-    return categoryMatches && statusMatches && matchesSearch(plugin);
+    return categoryMatches && statusMatches && matchesPlatform(plugin) && matchesSearch(plugin);
   });
 }
 
@@ -85,10 +97,14 @@ function createPluginCard(plugin) {
   category.className = "category-label";
   category.textContent = CATEGORY_LABELS[plugin.category] ?? CATEGORY_LABELS.other;
 
+  const platform = document.createElement("span");
+  platform.className = "platform-label";
+  platform.textContent = formatPlatforms(plugin.platforms) || "平台未注明";
+
   const security = document.createElement("span");
   security.className = `security-badge ${plugin.security.status}`;
   security.textContent = STATUS_LABELS[plugin.security.status] ?? plugin.security.status;
-  top.append(category, security);
+  top.append(category, platform, security);
 
   const demand = document.createElement("p");
   demand.className = "demand-label";
@@ -149,6 +165,7 @@ function updateUrl() {
   const params = new URLSearchParams();
   if (state.query) params.set("q", state.query);
   if (state.category !== "all") params.set("category", state.category);
+  if (state.platform !== DEFAULT_PLATFORM) params.set("platform", state.platform);
   if (state.status !== "all") params.set("status", state.status);
 
   const query = params.toString();
@@ -159,9 +176,18 @@ function render() {
   const plugins = getFilteredPlugins();
   elements.grid.replaceChildren(...plugins.map(createPluginCard));
 
-  const hasFilters = Boolean(state.query) || state.category !== "all" || state.status !== "all";
+  const hasFilters =
+    Boolean(state.query) ||
+    state.category !== "all" ||
+    state.platform !== DEFAULT_PLATFORM ||
+    state.status !== "all";
   elements.empty.hidden = plugins.length > 0;
   elements.grid.hidden = plugins.length === 0;
+
+  const platformHint =
+    state.platform === "all"
+      ? "全部平台"
+      : PLATFORM_LABELS[state.platform] ?? state.platform;
 
   if (!state.plugins.length) {
     elements.count.textContent = "等待首批方案";
@@ -170,11 +196,11 @@ function render() {
     elements.clear.textContent = "去提 Issue";
   } else {
     elements.count.textContent = hasFilters
-      ? `找到 ${plugins.length} / ${state.plugins.length} 个插件`
-      : `共 ${state.plugins.length} 个需求方案`;
+      ? `${platformHint} · 找到 ${plugins.length} / ${state.plugins.length} 个`
+      : `${platformHint} · 共 ${plugins.length} 个需求方案`;
     elements.emptyTitle.textContent = "没有找到匹配的插件";
-    elements.emptyDescription.textContent = "换个关键词或筛选条件试试。";
-    elements.clear.textContent = "清除筛选";
+    elements.emptyDescription.textContent = "换个平台、关键词或分类试试。";
+    elements.clear.textContent = "恢复默认（Windows）";
   }
 
   updateUrl();
@@ -184,6 +210,15 @@ function setCategory(category) {
   state.category = category;
   elements.categoryButtons.forEach((button) => {
     const isActive = button.dataset.category === category;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
+function setPlatform(platform) {
+  state.platform = platform;
+  elements.platformButtons.forEach((button) => {
+    const isActive = button.dataset.platform === platform;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
@@ -213,21 +248,28 @@ function resetFilters() {
   elements.search.value = "";
   elements.status.value = "all";
   setCategory("all");
+  setPlatform(DEFAULT_PLATFORM);
   render();
 }
 
 function readInitialFilters() {
   const params = new URLSearchParams(location.search);
   const category = params.get("category");
+  const platform = params.get("platform");
   const status = params.get("status");
 
   state.query = params.get("q") ?? "";
   state.category = Object.hasOwn(CATEGORY_LABELS, category) ? category : "all";
+  state.platform =
+    platform === "all" || Object.hasOwn(PLATFORM_LABELS, platform)
+      ? platform
+      : DEFAULT_PLATFORM;
   state.status = Object.hasOwn(STATUS_LABELS, status) ? status : "all";
 
   elements.search.value = state.query;
   elements.status.value = state.status;
   setCategory(state.category);
+  setPlatform(state.platform);
 }
 
 function bindEvents() {
@@ -244,6 +286,13 @@ function bindEvents() {
   elements.categoryButtons.forEach((button) => {
     button.addEventListener("click", () => {
       setCategory(button.dataset.category);
+      render();
+    });
+  });
+
+  elements.platformButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setPlatform(button.dataset.platform);
       render();
     });
   });

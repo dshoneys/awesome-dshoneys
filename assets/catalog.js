@@ -6,10 +6,26 @@ export const CATEGORY_LABELS = {
   other: "其他",
 };
 
+export const PLATFORM_LABELS = {
+  windows: "Windows",
+  linux: "Linux",
+  macos: "macOS",
+};
+
 export const STATUS_LABELS = {
   passed: "✓ 已通过",
   warning: "⚠ 有警告",
 };
+
+/** Default catalog platform for first-time visitors. */
+export const DEFAULT_PLATFORM = "windows";
+
+export function formatPlatforms(platforms) {
+  if (!Array.isArray(platforms) || !platforms.length) return "";
+  const known = ["windows", "linux", "macos"];
+  if (known.every((p) => platforms.includes(p))) return "全平台";
+  return platforms.map((p) => PLATFORM_LABELS[p] ?? p).join(" · ");
+}
 
 export function getPluginPageUrl(pluginOrId) {
   const id = typeof pluginOrId === "string" ? pluginOrId : pluginOrId?.id;

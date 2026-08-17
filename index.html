@@ -9,8 +9,8 @@
     />
     <meta name="theme-color" content="#fff8e7" />
     <title>DeepSeek Honeys 插件目录</title>
-    <link rel="stylesheet" href="./assets/styles.css?v=20260817-nav" />
-    <script type="module" src="./assets/app.js?v=20260816-demand"></script>
+    <link rel="stylesheet" href="./assets/styles.css?v=20260817-platform" />
+    <script type="module" src="./assets/app.js?v=20260817-platform"></script>
   </head>
   <body>
     <header class="site-header">
@@ -94,13 +94,11 @@
             <kbd>/</kbd>
           </label>
           <div class="filter-row">
-            <div class="filter-group" aria-label="按分类筛选">
-              <button class="filter-chip is-active" type="button" data-category="all">全部</button>
-              <button class="filter-chip" type="button" data-category="productivity">效率工具</button>
-              <button class="filter-chip" type="button" data-category="development">开发工具</button>
-              <button class="filter-chip" type="button" data-category="data">数据接入</button>
-              <button class="filter-chip" type="button" data-category="local">本地化</button>
-              <button class="filter-chip" type="button" data-category="other">其他</button>
+            <div class="filter-group" aria-label="按平台筛选">
+              <button class="filter-chip is-active" type="button" data-platform="windows">Windows</button>
+              <button class="filter-chip" type="button" data-platform="linux">Linux</button>
+              <button class="filter-chip" type="button" data-platform="macos">macOS</button>
+              <button class="filter-chip" type="button" data-platform="all">全部平台</button>
             </div>
             <label class="status-filter">
               <span>安全等级</span>
@@ -110,6 +108,16 @@
                 <option value="warning">⚠️ 警告</option>
               </select>
             </label>
+          </div>
+          <div class="filter-row filter-row-secondary">
+            <div class="filter-group" aria-label="按分类筛选">
+              <button class="filter-chip is-active" type="button" data-category="all">全部分类</button>
+              <button class="filter-chip" type="button" data-category="productivity">效率工具</button>
+              <button class="filter-chip" type="button" data-category="development">开发工具</button>
+              <button class="filter-chip" type="button" data-category="data">数据接入</button>
+              <button class="filter-chip" type="button" data-category="local">本地化</button>
+              <button class="filter-chip" type="button" data-category="other">其他</button>
+            </div>
           </div>
         </div>
 
