@@ -80,22 +80,23 @@
       "id": "dsh-tesseract-ocr",
       "name": "dsh-tesseract-ocr",
       "version": "0.2.1",
-      "demandTitle": "本地 OCR，让文本模型看图",
+      "demandTitle": "Linux / 跨平台：本地 OCR 让文本模型看图",
       "author": {
         "name": "@maxwell-feng",
         "url": "https://github.com/maxwell-feng"
       },
       "url": "https://github.com/maxwell-feng/dsh-tesseract-ocr",
-      "description": "本地 Tesseract OCR：文本模型可收图，仅把识别文字发给模型；默认不透传原图，视觉透传需显式开启。",
-      "details": "对应「视觉 / OCR」需求：图片在本机用 Tesseract 识别，只把文字发给模型。默认不透传原图。\n\n需安装 tesseract CLI 与语言包。勿与 windows-ocr 同时启用。\n\n社区复核：dsh.so code-exec 判定为必要 spawn 误报，已按 ⚠️ 披露。",
+      "description": "本机 Tesseract OCR（适合 Linux）：文本模型可收图，仅把识别文字发给模型；默认不透传原图。",
+      "details": "「视觉 / OCR」的 **Linux / 跨平台** 方案：图片在本机用 Tesseract 识别，只把文字发给模型。默认不透传原图。\n\n需安装 tesseract CLI 与语言包。同作者还有 Windows 系统 OCR 版 `dsh-windows-ocr`——**二选一，勿同时启用**。\n\n社区复核：dsh.so code-exec 判定为必要 spawn 误报，已按 ⚠️ 披露。",
       "install": {
-        "summary": "先安装本机 Tesseract，再加载插件。",
+        "summary": "先装本机 Tesseract，再加载插件（Linux 示例）。",
         "commands": [
           "sudo apt install -y tesseract-ocr tesseract-ocr-chi-sim",
           "dsh plugin --profile web add github:maxwell-feng/dsh-tesseract-ocr"
         ],
         "notes": [
-          "Windows 可用安装版 Tesseract；路径含空格时请给 tesseractBin 加引号。",
+          "面向 Linux；macOS / 已装 Tesseract 的环境也可。",
+          "Windows 用户优先看同作者的 dsh-windows-ocr（系统自带 OCR，无需装 Tesseract）。",
           "仓库含 agents-install.md，可交给 AI agent 安装验证。"
         ]
       },
@@ -106,12 +107,50 @@
         "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/1",
         "scannedAt": "2026-08-16"
       },
-      "tags": ["OCR", "Tesseract", "图片", "隐私", "本地"],
-      "searchTerms": ["tesseract", "ocr", "看图", "image", "chi_sim"],
+      "tags": ["OCR", "Tesseract", "Linux", "图片", "隐私", "本地"],
+      "searchTerms": ["tesseract", "ocr", "看图", "image", "chi_sim", "linux"],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-tesseract-ocr/",
       "feedback": {
-        "content": "社区复核通过（⚠️）：源码整改 4678c8f 已关闭阻断；tesseract spawn 按必要能力披露。",
-        "from": "@维护者，2026-08-16"
+        "content": "社区复核通过（⚠️）：源码整改 4678c8f 已关闭阻断；tesseract spawn 按必要能力披露。与 windows-ocr 为同需求两条平台线。",
+        "from": "@维护者，2026-08-17"
+      }
+    },
+    {
+      "id": "dsh-windows-ocr",
+      "name": "dsh-windows-ocr",
+      "version": "0.2.1",
+      "demandTitle": "Windows：本地 OCR 让文本模型看图",
+      "author": {
+        "name": "@maxwell-feng",
+        "url": "https://github.com/maxwell-feng"
+      },
+      "url": "https://github.com/maxwell-feng/dsh-windows-ocr",
+      "description": "本机 Windows.Media.Ocr：文本模型可收图，仅把识别文字发给模型；默认不透传原图，无需安装 Tesseract。",
+      "details": "「视觉 / OCR」的 **Windows** 方案：用系统自带 `Windows.Media.Ocr` 在本机识别，只把文字发给模型。默认不透传原图；视觉透传需显式 `passthrough: true`。\n\n需要 Windows 10/11 及对应语言包（中文需装中文 OCR 语言包）。同作者 Linux / 跨平台版是 `dsh-tesseract-ocr`——**二选一，勿同时启用**。\n\n社区复核：能力面含本机 spawn PowerShell 跑 OCR；默认隐私友好（图不出机）。按 ⚠️ 披露必要本机执行。",
+      "install": {
+        "summary": "Windows 上直接加载；确保系统语言包带 OCR。",
+        "commands": [
+          "dsh plugin --profile web add github:maxwell-feng/dsh-windows-ocr"
+        ],
+        "notes": [
+          "仅 Windows。中文识别请在「设置 → 时间和语言 → 语言」安装中文语言包（含 OCR）。",
+          "勿与 dsh-tesseract-ocr 同时启用。",
+          "仓库含 agents-install.md，可交给 AI agent 安装验证。"
+        ]
+      },
+      "category": "local",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/1",
+        "scannedAt": "2026-08-17"
+      },
+      "tags": ["OCR", "Windows", "图片", "隐私", "本地"],
+      "searchTerms": ["windows-ocr", "ocr", "看图", "image", "windows", "WinRT"],
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-windows-ocr/",
+      "feedback": {
+        "content": "同作者 OCR 双轨：Windows 系统 OCR；与 tesseract 互斥。dsh.so 页已存在；社区 ⚠️ 披露本机 PowerShell OCR。",
+        "from": "@维护者，2026-08-17"
       }
     },
     {
