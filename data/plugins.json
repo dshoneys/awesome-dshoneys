@@ -447,8 +447,8 @@
         "url": "https://github.com/dfkai"
       },
       "url": "https://github.com/dfkai/dsh-board",
-      "description": "侧栏方案：用量与已花费用仪表盘（价目、峰谷、推理 token、图表与日热力图）。同类还有顶栏单价徽标 dsh-client-pricing。",
-      "details": "与 dsh-client-pricing 同属「API 成本可见」需求：本插件偏「已经花了多少」——侧栏底部徽章展开实时仪表盘，读宿主 sessions.history。\n\n若只想在顶栏看到当前高峰/空闲单价，见同目录 dsh-client-pricing（可并存）。\n\n价目硬编码；localStorage 只存折叠状态。社区复核：源码未见第三方外发；dsh.so 详情页尚未就绪，按 ⚠️ 披露。",
+      "description": "侧栏方案：用量与已花费用仪表盘（价目、峰谷、推理 token、图表与日热力图）。同类还有顶栏单价徽标 dsh-client-pricing、余额对账面板 dsh-balance-stats。",
+      "details": "与 dsh-client-pricing、dsh-balance-stats 同属「API 成本可见」需求：本插件偏「已经花了多少」——侧栏底部徽章展开实时仪表盘，读宿主 sessions.history。\n\n若只想在顶栏看到当前高峰/空闲单价，见 dsh-client-pricing；若要官方余额、每日预算和对账单逐步对账，见 dsh-balance-stats（可并存）。\n\n价目硬编码；localStorage 只存折叠状态。社区复核：源码未见第三方外发；dsh.so 详情页尚未就绪，按 ⚠️ 披露。",
       "install": {
         "summary": "通过 GitHub 安装到 web profile。",
         "commands": [
@@ -457,7 +457,7 @@
         "notes": [
           "作者计划发布 npm 时改用 @dfkai/dsh-board。",
           "重启 dsh web 并刷新页面后，侧栏底部应出现用量入口。",
-          "可与 dsh-client-pricing 同时安装：一个看已花，一个看当前单价。"
+          "可与 dsh-client-pricing、dsh-balance-stats 同时安装：已花 / 当前单价 / 余额对账。"
         ]
       },
       "category": "productivity",
@@ -484,7 +484,7 @@
         "单价"
       ],
       "feedback": {
-        "content": "社区先收录（⚠️）：源码未见外发。与 dsh-client-pricing 功能相近（成本可见），本方案侧重已花用量面板。",
+        "content": "社区先收录（⚠️）：源码未见外发。与 dsh-client-pricing、dsh-balance-stats 功能相近（成本可见），本方案侧重已花用量面板。",
         "from": "@维护者，2026-08-16"
       },
       "platforms": [
@@ -503,8 +503,8 @@
         "url": "https://github.com/Miyazawai"
       },
       "url": "https://github.com/Miyazawai/dsh-client-pricing",
-      "description": "顶栏方案：实时显示当前生效单价与峰谷徽标（flash/pro 自动切换）。同类还有侧栏用量面板 dsh-board。",
-      "details": "与 dsh-board 同属「API 成本可见」需求：本插件偏「现在什么价」——会话顶栏徽标 + hover 价目表，不统计本轮已花费。\n\n若要看历史用量、累计花费与热力图，见同目录 dsh-board（可并存）。\n\n价目硬编码于 src/pricing.ts（含 2026-08-17 峰谷切换），每 30s 重算；只读 modelDirectories，无外发。社区复核 ✅；dsh.so 0/0。包名未加 scope，请认准作者仓库。",
+      "description": "顶栏方案：实时显示当前生效单价与峰谷徽标（flash/pro 自动切换）。同类还有侧栏用量面板 dsh-board、余额对账面板 dsh-balance-stats。",
+      "details": "与 dsh-board、dsh-balance-stats 同属「API 成本可见」需求：本插件偏「现在什么价」——会话顶栏徽标 + hover 价目表，不统计本轮已花费。\n\n若要看历史用量与热力图，见 dsh-board；若要官方余额、每日预算和对账单逐步对账，见 dsh-balance-stats（可并存）。\n\n价目硬编码于 src/pricing.ts（含 2026-08-17 峰谷切换），每 30s 重算；只读 modelDirectories，无外发。社区复核 ✅；dsh.so 0/0。包名未加 scope，请认准作者仓库。",
       "install": {
         "summary": "安装到 web profile 后重启 dsh web。",
         "commands": [
@@ -515,7 +515,7 @@
           "也可用仓库自带 ./install.ps1。",
           "改完 loader 后必须重启 dsh web 再刷新页面。",
           "仅 deepseek-v4-flash / deepseek-v4-pro 会显示；其他模型整块隐藏。",
-          "可与 dsh-board 同时安装：一个看当前单价，一个看已花用量。"
+          "可与 dsh-board、dsh-balance-stats 同时安装：当前单价 / 已花用量 / 余额对账。"
         ]
       },
       "category": "productivity",
@@ -544,8 +544,67 @@
       ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-client-pricing/",
       "feedback": {
-        "content": "社区复核通过（✅）。与 dsh-board 功能相近（成本可见），本方案侧重顶栏当前单价/峰谷，可并存。",
+        "content": "社区复核通过（✅）。与 dsh-board、dsh-balance-stats 功能相近（成本可见），本方案侧重顶栏当前单价/峰谷，可并存。",
         "from": "@维护者，2026-08-16"
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
+    },
+    {
+      "id": "dsh-balance-stats",
+      "name": "dsh-balance-stats",
+      "version": "0.3.0",
+      "demandTitle": "看余额、预算，并和官方账单对账",
+      "author": {
+        "name": "@hhy66",
+        "url": "https://github.com/hhy66"
+      },
+      "url": "https://github.com/hhy66/dsh-balance-stats",
+      "description": "对账方案：侧栏/设置页常显余额与续航，按官方峰谷逐步计价，含每日预算制动和历史会话筛选。同类还有 dsh-board（已花用量）和 dsh-client-pricing（当前单价）。",
+      "details": "与 dsh-board、dsh-client-pricing 同属「API 成本可见」需求：本插件偏「账上还剩多少、每一分怎么算的」——读宿主凭据调官方 `/user/balance`，再按事件时刻的峰谷价对本机会话日志计价。\n\n审核 commit `42ad34e`。出网仅官方余额接口；密钥走配置 `apiKey`、`ctx.credentials` 或环境变量（默认 `DEEPSEEK_API_KEY`），浏览器只读缓存不直打 DeepSeek。作者自报与官方账单约 0.4% 差，来自标题生成/网页搜索等本地日志不落用量的调用。\n\n包名未加 scope，请认准作者仓库。dsh.so low-risk、critical 0 / warning 0。",
+      "install": {
+        "summary": "安装到 web profile 后重启 dsh web，并硬刷新浏览器。",
+        "commands": [
+          "dsh plugin --profile web add github:hhy66/dsh-balance-stats",
+          "dsh plugin --profile web add dsh-balance-stats"
+        ],
+        "notes": [
+          "个别安装方式需按 README 拷贝一份 zod。",
+          "可在 ~/.dsh/profiles/web/cordis.patch.yml 设 dailyBudget、warningThreshold、dangerThreshold。",
+          "可与 dsh-board、dsh-client-pricing 同时安装：余额对账 / 已花用量 / 当前单价。"
+        ]
+      },
+      "category": "productivity",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/11",
+        "scannedAt": "2026-08-17"
+      },
+      "tags": [
+        "余额",
+        "对账",
+        "预算",
+        "峰谷",
+        "DeepSeek API"
+      ],
+      "searchTerms": [
+        "balance",
+        "billing",
+        "budget",
+        "对账",
+        "余额",
+        "账单",
+        "board",
+        "pricing"
+      ],
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-balance-stats/",
+      "feedback": {
+        "content": "社区先收录（⚠️）：Issue #11；commit 42ad34e；dsh.so low-risk 0/0。会用宿主凭据调官方余额接口并读本机会话日志，无第三方外发。与 dsh-board / dsh-client-pricing 可并存。",
+        "from": "@维护者，2026-08-17"
       },
       "platforms": [
         "windows",
