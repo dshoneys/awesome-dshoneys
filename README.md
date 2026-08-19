@@ -4,6 +4,8 @@
 >
 > 按**热门需求**找方案：卡片标题是需求描述；**社区复核为主**，dsh.so 为可选参考。
 
+姊妹项目：[MCP Guard](https://github.com/dshoneys/mcp_guard)（本机 MCP 口审计）· [dsh-docker](https://github.com/dshoneys/dsh-docker)（隔离安装沙箱）
+
 [🌐 打开在线目录](https://dshoneys.github.io/awesome-dshoneys/) ·
 [🎭 抽象区（整活）](https://dshoneys.github.io/awesome-dshoneys/meme.html) ·
 [📮 提交或求插件](https://github.com/dshoneys/awesome-dshoneys/issues/new/choose) ·
