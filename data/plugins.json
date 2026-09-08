@@ -281,7 +281,7 @@
       },
       "url": "https://github.com/hjqcan/dsh-goodmemory",
       "description": "基于 GoodMemory 的跨会话记忆：回合前召回、成功回合后写回，数据默认落在本机 SQLite。",
-      "details": "对应「长期记忆 / 会话连续性」需求：在模型步进前召回相关记忆，在成功回合后写回人类/助手文本。\n\n默认 managed 模式会在本机 loopback 拉起 goodmemory-http-bridge，SQLite 存于 $DSH_HOME/goodmemory/。也可接外部 bridge。\n\n社区复核（⚠️）：dsh.so 详情页曾 404；会处理会话文本并依赖 sidecar。请确认隐私预期，并用 GoodMemory Inspector 管理遗忘与导出。",
+      "details": "对应「长期记忆 / 会话连续性」需求：在模型步进前召回相关记忆，在成功回合后写回人类/助手文本。\n\n默认 managed 模式会在本机 loopback 拉起 goodmemory-http-bridge，SQLite 存于 $DSH_HOME/goodmemory/。也可接外部 bridge。\n\n社区复核（⚠️）：会处理会话文本并依赖 sidecar。dsh.so 已有可核验页（VET PASSED、0/0/0、低风险；commit `5b80ddd`），但页面仍声明未完成 L3+ 隔离安装测试，兼容版本为 declared—not tested。请确认隐私预期，并用 GoodMemory Inspector 管理遗忘与导出。",
       "install": {
         "summary": "安装插件前先准备 Bun（managed 模式需要）。",
         "commands": [
@@ -298,8 +298,8 @@
       "security": {
         "provider": "community",
         "status": "warning",
-        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
-        "scannedAt": "2026-08-16"
+        "reportUrl": "https://www.dsh.so/zh/artifact/dsh-goodmemory/",
+        "scannedAt": "2026-08-22"
       },
       "tags": [
         "记忆",
@@ -313,9 +313,10 @@
         "recall",
         "记忆"
       ],
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-goodmemory/",
       "feedback": {
-        "content": "社区先收录（⚠️）：覆盖长期记忆热需求。dsh.so 入库未完成；默认本机 sidecar + SQLite，请自行管理遗忘。",
-        "from": "@维护者，2026-08-16"
+        "content": "社区先收录（⚠️）：覆盖长期记忆热需求。dsh.so 详情页已可核验（PASSED / 0 Critical·High·Medium）；仍未做 L3+ 隔离安装测试，不构成跨会话实测证明。默认本机 sidecar + SQLite，请自行管理遗忘。跟踪：Issue #5。",
+        "from": "@维护者，2026-09-08"
       },
       "platforms": [
         "windows",
@@ -779,6 +780,64 @@
       "feedback": {
         "content": "社区先收录（⚠️）：Issue #17；审核 commit d3003e6；npm 0.1.4。dsh.so 页面 vet low-risk PASSED；市场/注入器以宿主权限装第三方代码，须披露。npm 不含市场面板。质粒面板硬编码 Linux 路径。",
         "from": "@维护者，2026-08-26"
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
+    },
+    {
+      "id": "blue",
+      "name": "Blue",
+      "version": "0.1.1-rc.2",
+      "demandTitle": "不用浏览器，在终端里跑完整 Harness UI",
+      "author": {
+        "name": "@GeekCmore",
+        "url": "https://github.com/GeekCmore"
+      },
+      "url": "https://github.com/dsh-blue/blue",
+      "description": "DeepSeek Harness 的交互式终端 TUI：流式会话、工具卡片、审批与 dock 面板，不监听端口、不依赖浏览器，SSH/无头环境可用。",
+      "details": "对应「终端里也能用完整 agent UI」需求：以树外 Cordis 插件 bundle 挂在 dsh-base 上，与 Web UI 共用 profile / 模型 / 工具 / 沙箱。支持主题与中英界面热切换；官方文档中文优先。\n\n安装可用一体化 CLI，或把 `@dsh-blue/blue` 加进 blue profile。默认连 DeepSeek 官方 API（需 `DEEPSEEK_API_KEY`）。\n\n社区复核 ✅：自动门槛 `review-ready`（Issue #20）；审核 commit `2f0d0ce`；dsh.so low-risk、0 critical / 0 warning，L3 安装规范已验证。作为本机 dsh bundle 运行，不监听端口；出站仅按用户配置的 provider 访问模型 API。",
+      "install": {
+        "summary": "推荐装一体化 CLI，或把 Blue 加到 blue profile。",
+        "commands": [
+          "npm i -g @dsh-blue/blue-cli@rc",
+          "dsh plugin --profile blue add @dsh-blue/blue@rc"
+        ],
+        "notes": [
+          "需要 Node ^22.19 或 >=24；详见仓库 README。",
+          "文档：https://dsh-blue.dev/ ；讨论：deepseek-harness#5038。",
+          "npm 当前 @rc / latest 为 0.1.1-rc.2；默认分支审核点 `2f0d0ce`。"
+        ]
+      },
+      "category": "development",
+      "security": {
+        "provider": "dsh.so",
+        "status": "passed",
+        "reportUrl": "https://www.dsh.so/zh/artifact/blue/",
+        "scannedAt": "2026-09-08"
+      },
+      "tags": [
+        "TUI",
+        "终端",
+        "SSH",
+        "无头",
+        "UI"
+      ],
+      "searchTerms": [
+        "blue",
+        "tui",
+        "terminal",
+        "cli",
+        "ssh",
+        "终端",
+        "无头"
+      ],
+      "dshUrl": "https://www.dsh.so/zh/artifact/blue/",
+      "feedback": {
+        "content": "社区复核通过（✅）。Issue #20；dsh.so low-risk + L3；自动评审无高风险命中。适合不想常开浏览器 / 远程 Linux 场景。",
+        "from": "@维护者，2026-09-08"
       },
       "platforms": [
         "windows",
