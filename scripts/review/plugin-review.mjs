@@ -30,6 +30,9 @@ const SECTION_ALIASES = {
   category: ["分类", "插件分类"],
 };
 
+/** Repository paths that never ship to users unless a `files` whitelist says otherwise. */
+const DEV_ONLY_PREFIX = /^(?:scripts|tools|test|tests|e2e|examples?|benchmarks?|\.github)\//;
+
 const STATIC_RULES = [
   {
     id: "dynamic-eval",
@@ -249,6 +252,35 @@ export function parseDshPage(html, url) {
   };
 }
 
+/** Normalize a package.json `files` whitelist into plain path prefixes. */
+export function parsePublishedPrefixes(packageJsonContent) {
+  let entries;
+  try {
+    entries = JSON.parse(packageJsonContent).files;
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(entries)) return null;
+
+  return entries
+    .filter((entry) => typeof entry === "string" && !entry.startsWith("!"))
+    .map((entry) => entry.replace(/^\.\//, "").replace(/\/?\*.*$/, "").replace(/\/+$/, ""))
+    .filter(Boolean);
+}
+
+/**
+ * Decide whether a repository path reaches users. Build inputs such as `src/` stay on the
+ * published surface even when only compiled output ships, so findings there keep blocking.
+ */
+export function classifySurface(path, publishedPrefixes) {
+  if (!DEV_ONLY_PREFIX.test(path)) return "published";
+  if (!publishedPrefixes) return "published";
+  const published = publishedPrefixes.some(
+    (prefix) => path === prefix || path.startsWith(`${prefix}/`),
+  );
+  return published ? "published" : "repository";
+}
+
 export function scanSourceFiles(files) {
   const findings = [];
 
@@ -367,7 +399,9 @@ export function decideStatus({ submission, dsh, repository, findings }) {
     };
   }
 
-  const criticalFindings = findings.filter((finding) => finding.severity === "critical");
+  const criticalFindings = findings.filter(
+    (finding) => finding.severity === "critical" && finding.surface !== "repository",
+  );
   if (dsh.risk === "high" || dsh.critical > 0 || criticalFindings.length > 0) {
     return {
       label: "changes-requested",
@@ -390,14 +424,25 @@ function escapeMarkdown(value = "") {
 function renderFindings(findings) {
   if (!findings.length) return "未命中内置高风险规则。";
   const priority = { critical: 0, warning: 1, info: 2 };
+  const weigh = (finding) =>
+    priority[finding.severity] * 2 + (finding.surface === "repository" ? 1 : 0);
   return findings
-    .sort((a, b) => priority[a.severity] - priority[b.severity])
+    .sort((a, b) => weigh(a) - weigh(b))
     .slice(0, 12)
     .map(
       (finding) =>
-        `- **${finding.severity.toUpperCase()}** \`${finding.path}:${finding.line}\`：${finding.message}`,
+        `- **${finding.severity.toUpperCase()}** \`${finding.path}:${finding.line}\`：${finding.message}` +
+        (finding.surface === "repository" ? "（仓库开发面，未随包发布，不阻断）" : ""),
     )
     .join("\n");
+}
+
+function describeSurface(repository) {
+  if (!repository?.publishedPrefixes) return "未声明 `files` 白名单；全部命中按发布面计算";
+  const excluded = (repository.findings ?? []).filter(
+    (finding) => finding.surface === "repository",
+  ).length;
+  return `package.json 声明 \`files\` 白名单；${excluded} 项命中落在未发布的开发脚本上`;
 }
 
 export function renderReport({ submission, dsh, repository, findings, decision }) {
@@ -422,6 +467,7 @@ export function renderReport({ submission, dsh, repository, findings, decision }
 | dsh.so | ${submission.dshUrl ? `[扫描页面](${submission.dshUrl})` : "未提供"} |
 | 外部风险 | ${dsh?.risk ? `${dsh.risk}-risk` : "暂无结果"}；critical ${dsh?.critical ?? 0}；warning ${dsh?.warning ?? 0} |
 | 仓库状态 | ${repository?.summary ?? "无法核验"} |
+| 发布面 | ${describeSurface(repository)} |
 | 当前状态 | \`${decision.label}\` |
 
 ### 自动证据
@@ -538,6 +584,11 @@ async function fetchRepositoryEvidence(submission, token) {
       findings.push(...analyzePackageJson(packageFile.content, entries.map((entry) => entry.path)));
     }
 
+    const publishedPrefixes = packageFile ? parsePublishedPrefixes(packageFile.content) : null;
+    for (const finding of findings) {
+      finding.surface = classifySurface(finding.path, publishedPrefixes);
+    }
+
     const hasReadme = entries.some((entry) => /^readme(?:\.[^.]+)?$/i.test(entry.path));
     const hasLicense = entries.some((entry) => /^(?:license|copying)(?:\.[^.]+)?$/i.test(entry.path));
     const hasTests = entries.some((entry) => /^(?:test|tests)\//.test(entry.path));
@@ -548,6 +599,7 @@ async function fetchRepositoryEvidence(submission, token) {
       commit: commit.sha,
       files,
       findings,
+      publishedPrefixes,
       summary: [
         metadata.archived ? "已归档" : "活跃仓库",
         hasReadme ? "README" : "缺 README",
