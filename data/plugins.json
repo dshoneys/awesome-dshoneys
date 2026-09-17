@@ -844,6 +844,239 @@
         "linux",
         "macos"
       ]
+    },
+    {
+      "id": "dsh-agent-team",
+      "name": "@wowyuarm/dsh-agent-team",
+      "version": "0.1.12",
+      "demandTitle": "在一个项目里长期养一支各司其职的 agent 团队",
+      "author": {
+        "name": "@wowyuarm",
+        "url": "https://github.com/wowyuarm"
+      },
+      "url": "https://github.com/wowyuarm/dsh-agent-team",
+      "description": "用 Workspace / Channel / Task Thread 组织持续的多 agent 协作：成员是有独立 Session 与私有记忆的持久身份，任务保留上下文、交接与验收。",
+      "details": "对应「一个项目里有多个长期角色，任务散落在平行会话中」：Channel 承载职责，Thread 可先起普通讨论再按需提升为 Task，适合 human-in-the-loop 的协作管理。它不是自动 DAG / plan 执行器，也不替代 DSH 原生 subagent。\n\n审核版本 npm `0.1.12`；dsh.so 详情页 L4 · 安装已测、通过、低风险、信任银，索引对应 npm `0.1.11`，验证于 dsh 0.1.5-rc.2（09-13，沙盒安装通过、Web 冒烟 L5 未过）。\n\n自动评审此前因 5 条 `shell: true` 停在 `changes-requested`，复核后解除：这些命中全部在仓库 `scripts/` 开发脚本里，而 package.json 的 `files` 白名单只发布 `packages/*/lib`、preset、core-skills 与文档——实测 0.1.12 的 npm tarball 共 229 个文件、0 个 `scripts/`，运行时代码中搜不到 `shell: true`，也没有安装生命周期钩子。发布包里唯一一处 `new Function(\"\")` 是打包进来的依赖用来探测宿主是否允许 eval 的空函数。\n\n社区复核（⚠️）：Team 托管的成员会话使用 DSH 的 `danger-full-access` 预设，可访问其配置工作区的文件并运行相应工具；Team ledger 与成员私有记忆存在本机 `$DSH_HOME`。发布包中未见自有出站端点，模型请求走用户配置的 provider。Team 是 opt-in bundle，装到指定 profile 才启用，普通 profile / Session 与原生 subagent 工作流不受影响。请只在信任的 Workspace 使用。",
+      "install": {
+        "summary": "装到指定 profile，然后从导航进入 Team mode。",
+        "commands": [
+          "dsh plugin --profile web add @wowyuarm/dsh-agent-team@0.1.12",
+          "dsh --profile web"
+        ],
+        "notes": [
+          "已认证 DSH 基线 0.1.2-rc.1（硬切换 >=0.1.2-rc.1 <0.2.0）。",
+          "成员会话按 danger-full-access 预设运行，只在信任的 Workspace 启用。",
+          "dsh.so 索引当前对应 0.1.11；npm latest 已到 0.1.12。"
+        ]
+      },
+      "category": "development",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/21",
+        "scannedAt": "2026-09-17"
+      },
+      "tags": [
+        "多 agent",
+        "协作",
+        "任务管理",
+        "持久会话",
+        "私有记忆"
+      ],
+      "searchTerms": [
+        "agent team",
+        "multi-agent",
+        "workspace",
+        "channel",
+        "thread",
+        "团队",
+        "协作"
+      ],
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-agent-team/",
+      "feedback": {
+        "content": "社区复核先收录（⚠️）：Issue #21。原 changes-requested 的 shell:true 命中经核对全在仓库开发脚本，npm 0.1.12 tarball（229 文件）不含 scripts/，据此解除阻断。dsh.so L4 · 低风险 · 信任银。成员会话用 danger-full-access 预设，属必须披露项。",
+        "from": "@维护者，2026-09-17"
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
+    },
+    {
+      "id": "dsh-backup",
+      "name": "@xiaoyuyu6420/dsh-backup",
+      "version": "0.12.1",
+      "demandTitle": "一条命令备份和恢复整个 ~/.dsh",
+      "author": {
+        "name": "@xiaoyuyu6420",
+        "url": "https://github.com/xiaoyuyu6420"
+      },
+      "url": "https://github.com/xiaoyuyu6420/dsh-backup",
+      "description": "一条命令备份 / 恢复整个 ~/.dsh（会话、设置、技能、插件配置）：定时自动备份、sha256 校验、分级保留、升级前快照与会话日志体检修复。",
+      "details": "对应「升级怕翻车、误删找不回、换电脑搬家难」：`/backup` 一条命令归档与恢复，宿主起不来时还有备份目录里的零依赖 rescue 网页作为进程外救援通道；恢复失败自动回滚，Settings 里有可视化面板。\n\n审核版本 npm `0.12.1`。dsh.so 详情页为 **L5 · 运行已测、通过、低风险、信任金**，运行验证于 dsh 0.1.5-rc.2（09-13，对应 0.11.3），是目录中少见的 L5 条目。\n\n投稿期间长期卡在「详情页 404」，实为地址有误：正确页面是 `/zh/artifact/dsh-backup/`，而投稿反复引用的 `/artifact/xiaoyuyu6420/dsh-backup/` 带作者前缀，本就不存在。\n\n发布面核对：0.12.1 的 npm tarball 只含 `lib/`、`rescue/`、`cordis.patch.yml`、README×2、LICENSE 与 package.json，不含 `scripts/`，无安装生命周期钩子；自动评审那条 CRITICAL（`scripts/smoke-client.mjs` 的 `new Function`）确实只存在于仓库开发目录。\n\n需要知情的点：插件按设计要读写整个 `~/.dsh`，其中包含会话与凭据文件。作者披露凭据默认脱敏、明文只写本机 vault，`--types credentials` 产出的凭据档案不进 GitHub 同步；发布包中可见对应实现，但这不是独立安全审计结论。开启 GitHub 同步即产生出站，请自行确认目标仓库为私有。",
+      "install": {
+        "summary": "装完即可用 /backup；定时备份与同步在 Settings 面板里配置。",
+        "commands": [
+          "dsh plugin --profile web add @xiaoyuyu6420/dsh-backup",
+          "dsh --profile web"
+        ],
+        "notes": [
+          "Windows 10+ 使用系统自带 tar，救援启动器为 .bat。",
+          "npm latest 为 0.12.1；GitHub Releases 页最新仍是 v0.11.2，0.12.1 只有 tag。",
+          "GitHub 同步是可选功能，开启前请确认目标仓库私有。"
+        ]
+      },
+      "category": "data",
+      "security": {
+        "provider": "dsh.so",
+        "status": "passed",
+        "reportUrl": "https://www.dsh.so/zh/artifact/dsh-backup/",
+        "scannedAt": "2026-09-13"
+      },
+      "tags": [
+        "备份",
+        "恢复",
+        "迁移",
+        "救援",
+        "凭据脱敏"
+      ],
+      "searchTerms": [
+        "backup",
+        "restore",
+        "migrate",
+        "rescue",
+        "备份",
+        "恢复",
+        "搬家"
+      ],
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-backup/",
+      "feedback": {
+        "content": "社区复核通过（✅）：Issue #19。dsh.so 为 L5 · 运行已测 · 低风险 · 信任金，目录内最高一档验证。投稿长期卡的「详情页 404」是地址写错（多了作者前缀），真实页面一直存在。发布包不含 scripts/，原 CRITICAL 属开发期冒烟测试。插件按设计通读 ~/.dsh，凭据脱敏与同步排除为作者披露、非独立审计。",
+        "from": "@维护者，2026-09-17"
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
+    },
+    {
+      "id": "dsh-engineering-control-plane",
+      "name": "dsh-engineering-control-plane",
+      "version": "0.1.13",
+      "demandTitle": "把一次实现 / 修复 / 发布跑成可追踪可审计的流程",
+      "author": {
+        "name": "@bailong-Hakuryu",
+        "url": "https://github.com/bailong-Hakuryu"
+      },
+      "url": "https://github.com/bailong-Hakuryu/dsh-engineering-control-plane",
+      "description": "用 /mission 管理计划、执行、验证、Evidence 与质量门禁，把工程任务和发布变成有状态、可回溯的流程。",
+      "details": "对应「任务做到一半忘了验证到哪、发布前说不清依据」：维护 Mission、Attempt、策略快照、验证结果与 Evidence 索引，状态持久化在 `DSH_HOME` 下。\n\n审核版本 `v0.1.13`，commit `a8344f6`；dsh.so 详情页 L4 · 安装已测、通过、低风险、信任银，索引已对齐 v0.1.13，验证于 dsh 0.1.5-rc.2（09-13，沙盒安装通过、Web 冒烟 L5 未过）。作者提供的发布证据：release:check 33 个测试文件 / 154 项测试通过，跨平台工作流产物与 npm 下载件做过 SHA-256 字节级比对。\n\n发布面核对：0.1.13 的 npm tarball 共 70 个文件，只含 `lib/`、`profiles/`、`assets/`、`cordis.patch.yml` 与文档，不含 `scripts/`，无安装生命周期钩子；自动评审报告里的 WARNING 全部落在仓库内的开发脚本。\n\n社区复核（⚠️）：插件通过 DSH 宿主执行受治理的任务、验证命令与可选子代理流程，会读写当前工作区并运行**用户自己配置的**验证命令，不会额外获得宿主未授予的权限。请在启用前检查工作目录与权限预设；质量门禁的结论由证据决定，不要理解成自动批准变更。",
+      "install": {
+        "summary": "与 dsh-security-assurance 配套时，先装本插件。",
+        "commands": [
+          "dsh plugin --profile web add dsh-engineering-control-plane@0.1.13",
+          "dsh plugin --profile web add https://github.com/bailong-Hakuryu/dsh-engineering-control-plane/releases/download/v0.1.13/dsh-engineering-control-plane-0.1.13.tgz",
+          "dsh --profile web"
+        ],
+        "notes": [
+          "本插件提供共享不变量注册表，双插件安装时必须排在 dsh-security-assurance 之前。",
+          "0.1.13 精确绑定 dsh-security-assurance@0.1.0-rc.14。",
+          "会按配置运行验证命令并读写工作区，使用前先确认权限预设。"
+        ]
+      },
+      "category": "development",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/23",
+        "scannedAt": "2026-09-17"
+      },
+      "tags": [
+        "工程治理",
+        "任务编排",
+        "发布门禁",
+        "审计证据"
+      ],
+      "searchTerms": [
+        "mission",
+        "control plane",
+        "release gate",
+        "evidence",
+        "编排",
+        "门禁"
+      ],
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-engineering-control-plane/",
+      "feedback": {
+        "content": "社区复核先收录（⚠️）：Issue #23，审核 commit a8344f6 / v0.1.13。dsh.so L4 · 低风险 · 信任银，索引已对齐 v0.1.13。npm tarball 不含 scripts/，原报告 WARNING 全在仓库开发面。会按用户配置执行验证命令并读写工作区，属必须披露项。",
+        "from": "@维护者，2026-09-17"
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
+    },
+    {
+      "id": "dsh-security-assurance",
+      "name": "dsh-security-assurance",
+      "version": "0.1.0-rc.14",
+      "demandTitle": "给仓库做策略化安全评估并留下可复核证据",
+      "author": {
+        "name": "@bailong-Hakuryu",
+        "url": "https://github.com/bailong-Hakuryu"
+      },
+      "url": "https://github.com/bailong-Hakuryu/dsh-security-assurance",
+      "description": "策略驱动的仓库安全评估：冻结目录与 Subject，产出 Evidence、Findings、Coverage 与 Verdict，支持状态查询与导出。",
+      "details": "对应「想给仓库跑一次有结论、有证据链的安全评估」：从 Subject 冻结开始，逐步产出证据、发现、覆盖率与裁决，并可导出交付物。\n\n审核版本 `v0.1.0-rc.14`（预发布），commit `07af296`；dsh.so 详情页 L4 · 安装已测、通过、低风险、信任银，但索引安装版本仍停在 `v0.1.0-rc.9`，落后于本次审核版本——作者已在投稿中主动说明，未作虚假声明。作者提供的发布证据：release:check 89 个测试文件 / 480 项测试通过，跨平台工作流产物与 npm 下载件做过 SHA-256 字节级比对。\n\n发布面核对：rc.14 的 npm tarball 共 60 个文件，只含 `lib/`、`assets/`、`cordis.patch.yml` 与文档，不含 `scripts/`，无安装生命周期钩子；自动评审报告里的 WARNING 全部落在仓库内的开发脚本。\n\n能力边界（⚠️ 请勿高估）：内建 `node-package-manifest` 策略目前主要检查 `package.json` 安装生命周期键的存在性，**不是通用漏洞扫描器**；`REPOSITORY` 模式支持 `git_revision` / `workspace_snapshot`，其中 `workspace_snapshot` 会读取工作区内容，只应对可信仓库运行。Git Subject 冻结走 Harness 管理的 subprocess provider：固定 Git 可执行文件与参数、不启用 shell、清除会重定向仓库或对象库的环境变量。Registry / SQLite / Evidence 状态存在 `DSH_HOME` 下。\n\n本条目按预发布收录，不代表稳定版晋升。",
+      "install": {
+        "summary": "预发布版本在 npm 的 next 标签；请先装 dsh-engineering-control-plane。",
+        "commands": [
+          "dsh plugin --profile web add dsh-security-assurance@next",
+          "dsh plugin --profile web add https://github.com/bailong-Hakuryu/dsh-security-assurance/releases/download/v0.1.0-rc.14/dsh-security-assurance-0.1.0-rc.14.tgz",
+          "dsh --profile web"
+        ],
+        "notes": [
+          "npm latest 有意保留在 0.1.0-rc.12；rc.14 走 next 标签。",
+          "必须先安装 dsh-engineering-control-plane（提供共享不变量注册表）。",
+          "运行前请先读仓库中的 SECURITY.md 与 SECURITY-REVIEW.md。",
+          "dsh.so 索引的安装版本仍为 v0.1.0-rc.9，比本条目旧。"
+        ]
+      },
+      "category": "development",
+      "security": {
+        "provider": "community",
+        "status": "warning",
+        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/22",
+        "scannedAt": "2026-09-17"
+      },
+      "tags": [
+        "安全评估",
+        "供应链",
+        "证据链",
+        "审计报告",
+        "预发布"
+      ],
+      "searchTerms": [
+        "security",
+        "assurance",
+        "evidence",
+        "findings",
+        "verdict",
+        "安全",
+        "审计"
+      ],
+      "dshUrl": "https://www.dsh.so/zh/artifact/dsh-security-assurance/",
+      "feedback": {
+        "content": "社区复核先收录（⚠️）：Issue #22，审核 commit 07af296 / v0.1.0-rc.14 预发布。dsh.so L4 · 低风险 · 信任银，但索引仍指向 rc.9。npm tarball 不含 scripts/。内建策略只查 package.json 生命周期键，不是通用漏洞扫描器；workspace_snapshot 会读工作区，只对可信仓库运行。",
+        "from": "@维护者，2026-09-17"
+      },
+      "platforms": [
+        "windows",
+        "linux",
+        "macos"
+      ]
     }
   ]
 }
