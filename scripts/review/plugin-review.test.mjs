@@ -3,9 +3,11 @@ import test from "node:test";
 
 import {
   analyzePackageJson,
+  classifySurface,
   decideStatus,
   normalizeDshPluginUrl,
   parseDshPage,
+  parsePublishedPrefixes,
   parseSubmission,
   scanSourceFiles,
 } from "./plugin-review.mjs";
@@ -128,6 +130,54 @@ test("包配置识别安装脚本和缺少锁文件", () => {
   assert.ok(findings.some((finding) => finding.id === "install-script-postinstall"));
   assert.ok(findings.some((finding) => finding.id === "missing-lockfile"));
   assert.ok(findings.some((finding) => finding.id === "unscoped-package-name"));
+});
+
+test("files 白名单归一化为路径前缀", () => {
+  assert.deepEqual(
+    parsePublishedPrefixes(
+      JSON.stringify({
+        files: ["lib", "./rescue/", "packages/agent-team/lib/**/*", "assets/*.svg", "!lib/dev"],
+      }),
+    ),
+    ["lib", "rescue", "packages/agent-team/lib", "assets"],
+  );
+  assert.equal(parsePublishedPrefixes(JSON.stringify({ name: "demo" })), null);
+});
+
+test("未随包发布的开发脚本归入仓库面", () => {
+  const prefixes = ["lib", "cordis.patch.yml"];
+  assert.equal(classifySurface("scripts/build-client.mjs", prefixes), "repository");
+  assert.equal(classifySurface("tests/e2e.mjs", prefixes), "repository");
+  assert.equal(classifySurface("lib/index.js", prefixes), "published");
+  // 编译产物才进包时，源码仍按发布面计算。
+  assert.equal(classifySurface("src/index.ts", prefixes), "published");
+  // 没有 files 白名单就无法证明未发布，保守按发布面处理。
+  assert.equal(classifySurface("scripts/build-client.mjs", null), "published");
+});
+
+test("仓库开发脚本里的 critical 不阻断", () => {
+  const submission = parseSubmission(issue);
+  const dsh = { reachable: true, hasSecurityResult: true, risk: "low", critical: 0 };
+  const repository = { reachable: true };
+
+  assert.equal(
+    decideStatus({
+      submission,
+      dsh,
+      repository,
+      findings: [{ severity: "critical", surface: "repository" }],
+    }).label,
+    "review-ready",
+  );
+  assert.equal(
+    decideStatus({
+      submission,
+      dsh,
+      repository,
+      findings: [{ severity: "critical", surface: "published" }],
+    }).label,
+    "changes-requested",
+  );
 });
 
 test("高风险扫描进入整改状态", () => {
