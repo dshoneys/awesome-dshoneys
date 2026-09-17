@@ -4,7 +4,7 @@
     {
       "id": "dsh-launcher",
       "name": "dsh-launcher",
-      "version": "0.3.5",
+      "version": "0.4.5",
       "demandTitle": "Windows 双击启动，不用敲命令",
       "author": {
         "name": "@Ruler4396",
@@ -12,7 +12,7 @@
       },
       "url": "https://github.com/Ruler4396/dsh-launcher",
       "description": "Windows 轻量启动器：MSI/便携包、开机自启、WebView2 小窗，自动拉起 dsh 并给出诊断。",
-      "details": "对应目录里最热的「桌面 / Windows 体验」需求：把 DeepSeek Harness 包成可双击的 Windows 壳，而不是再教用户敲 CLI。\n\n安装包约 1.4MB，不内置 dsh；缺失 Node / WebView2 等依赖可按提示补齐。出错有错误码与诊断包导出。\n\n社区复核说明：产品路径包含本机进程拉起与依赖安装，属预期能力；请只从 GitHub Releases 安装，并阅读仓库安全说明。",
+      "details": "对应目录里最热的「桌面 / Windows 体验」需求：把 DeepSeek Harness 包成可双击的 Windows 壳，而不是再教用户敲 CLI。\n\n安装包约 1.4MB，不内置 dsh；缺失 Node / WebView2 等依赖可按提示补齐。出错有错误码与诊断包导出。\n\n**形态已确认（2026-09-17 复核）**：dsh.so 现把它归为**生态应用**而非插件，页面明写「不经 dsh plugin add 安装，L1-L5 插件安装验证阶梯不适用」——与作者 @Ruler4396 的说明一致。npm 上的 `dsh-launche` 与本项目无关。请只从 GitHub Releases 获取。\n\n社区复核（⚠️）：风险栏目前仍是**待扫描**（信任青铜），没有可核验的扫描报告。产品路径包含本机进程拉起与依赖安装，属预期能力，但请据此自行判断。",
       "install": {
         "summary": "从 Releases 下载 MSI（新手）或 ZIP 便携版。",
         "commands": [
@@ -21,6 +21,7 @@
         "notes": [
           "MSI 可勾选开机自启；ZIP 解压后运行 DshWeb.exe。",
           "双击无反应时先跑 check-prereq.cmd；仍失败用 DshWeb.exe --diagnose。",
+          "这是启动器，不是插件，无法用 dsh plugin add 安装。",
           "可选配套：dsh plugin add dsh-launcher-lifetime。"
         ]
       },
@@ -28,8 +29,8 @@
       "security": {
         "provider": "community",
         "status": "warning",
-        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
-        "scannedAt": "2026-08-16"
+        "reportUrl": "https://www.dsh.so/zh/artifact/dsh-launcher/",
+        "scannedAt": "2026-09-17"
       },
       "tags": [
         "Windows",
@@ -45,8 +46,8 @@
       ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-launcher/",
       "feedback": {
-        "content": "社区先收录（⚠️）：覆盖 Windows/桌面热需求。dsh.so 仍显示未扫描；含本机进程与依赖安装路径，请从官方 Releases 获取。",
-        "from": "@维护者，2026-08-16"
+        "content": "复核更新：dsh.so 已把本项目归类为生态应用，明示插件安装阶梯不适用，与作者说明一致；风险栏仍为待扫描（信任青铜），故继续 ⚠️。版本同步到 v0.4.5。只从 GitHub Releases 获取。跟踪：Issue #5（已结）。",
+        "from": "@维护者，2026-09-17"
       },
       "platforms": [
         "windows"
@@ -218,7 +219,7 @@
     {
       "id": "pi2dsh",
       "name": "pi2dsh",
-      "version": "0.12.2",
+      "version": "0.25.1",
       "demandTitle": "接入 Pi 插件生态与订阅登录",
       "author": {
         "name": "@weijiafu14",
@@ -226,11 +227,11 @@
       },
       "url": "https://github.com/weijiafu14/pi2dsh",
       "description": "在 DeepSeek Harness 上原样运行 Pi 生态插件；并补齐订阅制 OAuth 登录与大量现成能力。",
-      "details": "对应「模型接入 / OAuth / 路由」以及生态扩展需求：一次安装引擎后，可用 `dsh plugin add` 直接挂载未修改的 Pi npm 包。\n\n也覆盖订阅登录（Codex / Anthropic / Copilot / Kimi 等 Pi OAuth 流）与大量现成插件（视觉桥、子代理、记忆等）。这是桥梁，不是终点——有更好的原生插件时应切换。\n\n社区复核（⚠️ 高披露）：dsh.so 曾报 high-risk / 多项 critical。能力面积极大（动态加载第三方包、凭据、工具桥）。请只安装你明确需要的 Pi 包，并阅读仓库能力矩阵与安全说明。",
+      "details": "对应「模型接入 / OAuth / 路由」以及生态扩展需求：一次安装引擎后，可用 `dsh plugin add` 直接挂载未修改的 Pi npm 包。\n\n也覆盖订阅登录（Codex / Anthropic / Copilot / Kimi 等 Pi OAuth 流）与大量现成插件（视觉桥、子代理、记忆等）。这是桥梁，不是终点——有更好的原生插件时应切换。\n\n**扫描结论已更新（2026-09-17 复核）**：开帖时 dsh.so 报 high-risk / critical 7，作者整改后现为 **L5 · 运行已测、通过、低风险、信任金**，运行验证于 dsh 0.1.5-rc.2（09-11，对应 npm v0.25.1）。原「高风险」披露作废。\n\n社区复核（⚠️）仍保留，原因不是扫描结果，而是能力面本身：引擎会动态加载第三方 Pi npm 包、处理订阅 OAuth 凭据并桥接工具。请只安装你明确需要的 Pi 包，并阅读仓库能力矩阵与安全说明。",
       "install": {
         "summary": "先装引擎，再按需加 Pi 插件，然后重启 dsh。",
         "commands": [
-          "dsh plugin --profile web add pi2dsh",
+          "dsh plugin --profile web add pi2dsh@0.25.1",
           "dsh plugin --profile web add @kassing/pi-vision"
         ],
         "notes": [
@@ -243,8 +244,8 @@
       "security": {
         "provider": "community",
         "status": "warning",
-        "reportUrl": "https://github.com/dshoneys/awesome-dshoneys/issues/5",
-        "scannedAt": "2026-08-16"
+        "reportUrl": "https://www.dsh.so/zh/artifact/pi2dsh/",
+        "scannedAt": "2026-09-11"
       },
       "tags": [
         "Pi",
@@ -261,8 +262,8 @@
       ],
       "dshUrl": "https://www.dsh.so/zh/artifact/pi2dsh/",
       "feedback": {
-        "content": "社区先收录（⚠️ 高披露）：覆盖模型/OAuth 热需求。dsh.so high-risk·critical 多条，使用前务必收敛依赖包集合。",
-        "from": "@维护者，2026-08-16"
+        "content": "复核更新：dsh.so 已从 high-risk · critical 7 整改为 L5 · 运行已测 · 低风险 · 信任金（09-11，v0.25.1），原高风险披露作废。⚠️ 保留的原因是能力面——动态加载第三方 Pi 包、订阅 OAuth 凭据与工具桥接，请自行收敛依赖包集合。跟踪：Issue #5（已结）。",
+        "from": "@维护者，2026-09-17"
       },
       "platforms": [
         "windows",
@@ -273,7 +274,7 @@
     {
       "id": "dsh-goodmemory",
       "name": "dsh-goodmemory",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "demandTitle": "跨会话自动记忆与召回",
       "author": {
         "name": "@hjqcan",
@@ -281,11 +282,11 @@
       },
       "url": "https://github.com/hjqcan/dsh-goodmemory",
       "description": "基于 GoodMemory 的跨会话记忆：回合前召回、成功回合后写回，数据默认落在本机 SQLite。",
-      "details": "对应「长期记忆 / 会话连续性」需求：在模型步进前召回相关记忆，在成功回合后写回人类/助手文本。\n\n默认 managed 模式会在本机 loopback 拉起 goodmemory-http-bridge，SQLite 存于 $DSH_HOME/goodmemory/。也可接外部 bridge。\n\n社区复核（⚠️）：会处理会话文本并依赖 sidecar。dsh.so 已有可核验页（VET PASSED、0/0/0、低风险；commit `5b80ddd`），但页面仍声明未完成 L3+ 隔离安装测试，兼容版本为 declared—not tested。请确认隐私预期，并用 GoodMemory Inspector 管理遗忘与导出。",
+      "details": "对应「长期记忆 / 会话连续性」需求：在模型步进前召回相关记忆，在成功回合后写回人类/助手文本。\n\n默认 managed 模式会在本机 loopback 拉起 goodmemory-http-bridge，SQLite 存于 $DSH_HOME/goodmemory/。也可接外部 bridge。\n\n**验证等级已更新（2026-09-17 复核）**：dsh.so 现为 **L4 · 安装已测、通过、低风险、信任银**，沙盒安装通过、Web 冒烟 L5 未过，验证于 dsh 0.1.5-rc.2（09-11，对应 0.1.1）。此前「未完成 L3+ 隔离安装测试」的说明作废，但仍未有 L5 运行实测。\n\n社区复核（⚠️）：会处理会话文本并依赖本机 sidecar。请确认隐私预期，并用 GoodMemory Inspector 管理遗忘与导出。",
       "install": {
         "summary": "安装插件前先准备 Bun（managed 模式需要）。",
         "commands": [
-          "dsh plugin --profile web add dsh-goodmemory@0.1.0",
+          "dsh plugin --profile web add dsh-goodmemory@0.1.1",
           "dsh --profile web"
         ],
         "notes": [
@@ -299,7 +300,7 @@
         "provider": "community",
         "status": "warning",
         "reportUrl": "https://www.dsh.so/zh/artifact/dsh-goodmemory/",
-        "scannedAt": "2026-08-22"
+        "scannedAt": "2026-09-11"
       },
       "tags": [
         "记忆",
@@ -315,8 +316,8 @@
       ],
       "dshUrl": "https://www.dsh.so/zh/artifact/dsh-goodmemory/",
       "feedback": {
-        "content": "社区先收录（⚠️）：覆盖长期记忆热需求。dsh.so 详情页已可核验（PASSED / 0 Critical·High·Medium）；仍未做 L3+ 隔离安装测试，不构成跨会话实测证明。默认本机 sidecar + SQLite，请自行管理遗忘。跟踪：Issue #5。",
-        "from": "@维护者，2026-09-08"
+        "content": "复核更新：dsh.so 已做到 L4 · 安装已测（沙盒安装通过、Web 冒烟 L5 未过），低风险 · 信任银，原「未完成 L3+ 隔离安装测试」说明作废。仍无 L5 运行实测，不构成跨会话实测证明。默认本机 sidecar + SQLite，请自行管理遗忘。跟踪：Issue #5（已结）。",
+        "from": "@维护者，2026-09-17"
       },
       "platforms": [
         "windows",
